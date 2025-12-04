@@ -6,12 +6,12 @@ before:
     - go mod tidy
 
 builds:
-  - id:
+  - id: sfvbrr
     env:
       - CGO_ENABLED=0
       - BUILDER
-    flags:
-      - -pgo=cpu.pprof
+    # flags:
+    #   - -pgo=cpu.pprof
     goos:
       - linux
       - windows
