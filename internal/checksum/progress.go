@@ -90,7 +90,25 @@ func (pt *ProgressTracker) GetETA() time.Duration {
 	if remaining <= 0 {
 		return 0
 	}
-	rate := pt.GetRate()
+	
+	// Calculate rate inline to avoid deadlock (we already hold the lock)
+	elapsed := time.Since(pt.lastUpdate).Seconds()
+	var rate float64
+	if elapsed < 0.1 {
+		// Use overall rate if update was too recent
+		elapsed = time.Since(pt.StartTime).Seconds()
+		if elapsed < 0.1 {
+			return 0
+		}
+		rate = float64(pt.Current) / elapsed
+	} else {
+		delta := pt.Current - pt.lastCount
+		if delta <= 0 {
+			return 0
+		}
+		rate = float64(delta) / elapsed
+	}
+	
 	if rate <= 0 {
 		return 0
 	}
