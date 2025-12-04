@@ -19,7 +19,7 @@ var validateCmd = &cobra.Command{
 		release := rls.ParseString(folderName)
 
 		// Display the release type
-		fmt.Printf("Release Type: %s\n", release.Type)
+		fmt.Printf("Release Type: %s\n", release.Type.String())
 	},
 }
 
