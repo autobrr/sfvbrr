@@ -14,10 +14,10 @@ var validateCmd = &cobra.Command{
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		folderName := args[0]
-		
+
 		// Parse the release using the rls library
 		release := rls.ParseString(folderName)
-		
+
 		// Display the release type
 		fmt.Printf("Release Type: %s\n", release.Type)
 	},
@@ -26,4 +26,3 @@ var validateCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(validateCmd)
 }
-
