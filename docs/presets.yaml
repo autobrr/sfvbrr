@@ -27,8 +27,6 @@ rules:
     - pattern: "*.mp3"
       min: 1
       description: "Requires at least one .mp3 file"
-      min: 1
-      description: "Requires at least one .mp3 file"
   book:
     - pattern: "*.nfo"
       min: 1
