@@ -35,22 +35,23 @@ func FindSFVFilesRecursive(dir string) ([]string, error) {
 }
 
 // validateSingleSFV validates a single SFV file and displays results
-func validateSingleSFV(sfvPath string, opts Options) error {
+// Returns true if validation failed (has invalid or missing files)
+func validateSingleSFV(sfvPath string, opts Options) (bool, error) {
 	// Parse SFV file
 	sfv, err := ParseSFVFile(sfvPath)
 	if err != nil {
-		return fmt.Errorf("failed to parse SFV file %s: %w", sfvPath, err)
+		return false, fmt.Errorf("failed to parse SFV file %s: %w", sfvPath, err)
 	}
 
 	// Validate SFV
 	result, err := ValidateSFV(sfv, opts)
 	if err != nil {
-		return fmt.Errorf("failed to validate SFV: %w", err)
+		return false, fmt.Errorf("failed to validate SFV: %w", err)
 	}
 
-	// Display results
-	DisplayResult(result, opts)
-	return nil
+	// Display results and return validation status
+	failed := DisplayResult(result, opts)
+	return failed, nil
 }
 
 // ValidateFolders validates SFV files in multiple folders
@@ -99,8 +100,11 @@ func ValidateFolders(folders []string, opts Options) error {
 
 			// Validate each SFV file found
 			for _, sfvPath := range sfvFiles {
-				if err := validateSingleSFV(sfvPath, opts); err != nil {
+				failed, err := validateSingleSFV(sfvPath, opts)
+				if err != nil {
 					fmt.Fprintf(os.Stderr, "Error: %v\n", err)
+					hasErrors = true
+				} else if failed {
 					hasErrors = true
 				}
 			}
@@ -114,8 +118,11 @@ func ValidateFolders(folders []string, opts Options) error {
 			}
 
 			// Validate SFV
-			if err := validateSingleSFV(sfvPath, opts); err != nil {
+			failed, err := validateSingleSFV(sfvPath, opts)
+			if err != nil {
 				fmt.Fprintf(os.Stderr, "Error: %v\n", err)
+				hasErrors = true
+			} else if failed {
 				hasErrors = true
 			}
 		}

@@ -7,7 +7,8 @@ import (
 )
 
 // DisplayResult displays the validation results to the user
-func DisplayResult(result *ValidationResult, opts Options) {
+// Returns true if validation failed (has invalid or missing files)
+func DisplayResult(result *ValidationResult, opts Options) bool {
 	if opts.Quiet {
 		// In quiet mode, only show summary if there are errors
 		if result.InvalidFiles > 0 || result.MissingFiles > 0 {
@@ -16,7 +17,7 @@ func DisplayResult(result *ValidationResult, opts Options) {
 				result.InvalidFiles,
 				result.MissingFiles)
 		}
-		return
+		return result.InvalidFiles > 0 || result.MissingFiles > 0
 	}
 
 	// Show SFV file path
@@ -51,9 +52,6 @@ func DisplayResult(result *ValidationResult, opts Options) {
 		fmt.Printf("  Missing: %d\n", result.MissingFiles)
 	}
 
-	// Exit with error code if there are failures
-	if result.InvalidFiles > 0 || result.MissingFiles > 0 {
-		os.Exit(1)
-	}
+	// Return true if validation failed
+	return result.InvalidFiles > 0 || result.MissingFiles > 0
 }
-
