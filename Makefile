@@ -9,7 +9,7 @@ GOBIN=$(shell $(GO) env GOPATH)/bin
 BUILD_DIR=build
 VERSION=$(shell git describe --tags 2>/dev/null || echo "dev")
 BUILD_TIME=$(shell date +%FT%T%z)
-LDFLAGS=-ldflags "-X main.version=${VERSION} -X main.buildTime=${BUILD_TIME}"
+LDFLAGS=-ldflags "-X github.com/autobrr/sfvbrr/cmd.version=${VERSION} -X github.com/autobrr/sfvbrr/cmd.buildTime=${BUILD_TIME}"
 
 # race detector settings
 GORACE=log_path=./race_report.log \

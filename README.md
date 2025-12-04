@@ -22,7 +22,7 @@
 
 **sfvbrr** (pronounced "es-ef-wee-brrrrrr") is a simple yet powerful tool for:
 
-- Verifies your scene releases for consinstency and cleanliness
+- Verifies your scene releases for consistency and cleanliness
 - Validate checksums of scene release files (*.sfv)
 
 **Key Features:**
