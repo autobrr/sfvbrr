@@ -3,6 +3,7 @@ package cmd
 import (
 	"fmt"
 	"os"
+	"runtime/pprof"
 
 	"github.com/autobrr/sfvbrr/internal/checksum"
 	"github.com/spf13/cobra"
@@ -14,6 +15,7 @@ var (
 	sfvVerbose    bool
 	sfvQuiet      bool
 	sfvRecursive  bool
+	sfvCPUProfile string
 )
 
 var sfvCmd = &cobra.Command{
@@ -38,6 +40,13 @@ Examples:
   sfvbrr sfv -r /path/to/releases`,
 	Args: cobra.MinimumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
+		cleanup, err := setupProfiling(sfvCPUProfile)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "Error: %v\n", err)
+			os.Exit(1)
+		}
+		defer cleanup()
+
 		opts := checksum.Options{
 			Workers:    sfvWorkers,
 			BufferSize: sfvBufferSize,
@@ -61,4 +70,28 @@ func init() {
 	sfvCmd.Flags().BoolVarP(&sfvVerbose, "verbose", "v", false, "Show detailed validation results for each file")
 	sfvCmd.Flags().BoolVarP(&sfvQuiet, "quiet", "q", false, "Quiet mode - only show errors")
 	sfvCmd.Flags().BoolVarP(&sfvRecursive, "recursive", "r", false, "Recursively search for SFV files in subdirectories")
+	sfvCmd.Flags().StringVar(&sfvCPUProfile, "cpuprofile", "", "Write CPU profile to file")
+}
+
+// setupProfiling sets up CPU profiling if the cpuprofile path is provided.
+// It returns a cleanup function that should be deferred by the caller.
+func setupProfiling(cpuprofile string) (func(), error) {
+	if cpuprofile == "" {
+		return func() {}, nil
+	}
+
+	f, err := os.Create(cpuprofile)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create CPU profile file: %w", err)
+	}
+
+	if err := pprof.StartCPUProfile(f); err != nil {
+		f.Close()
+		return nil, fmt.Errorf("failed to start CPU profile: %w", err)
+	}
+
+	return func() {
+		pprof.StopCPUProfile()
+		f.Close()
+	}, nil
 }
