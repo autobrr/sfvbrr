@@ -110,7 +110,7 @@ func ValidateFolders(folders []string, opts Options) error {
 				if !opts.Quiet {
 					fmt.Fprintf(os.Stderr, "No valid release folders found in %s\n", folder)
 				}
-				hasErrors = true
+				// Finding zero folders is not an error, just continue
 				continue
 			}
 
