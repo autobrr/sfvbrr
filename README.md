@@ -20,6 +20,7 @@
 - [Quick Start](#quick-start)
 - [Installation](#installation)
 - [Usage](#usage)
+- [Test](test/TESTS_RUNSHEET.md)
 - [License](#license)
 
 ## Overview
@@ -41,6 +42,10 @@
 
 ## Quick Start
 
+After you download the single binary for your arch, store the default configuration/preset from [docs](docs/presets.yaml) in your `~/.config/sfvbrr/` folder:
+
+<details>
+
 ```yaml
 ---
 schema_version: 1
@@ -50,7 +55,7 @@ rules:
       min: 1
       max: 1
       description: "Requires only one .nfo file"
-    - pattern: "file_id.diz"
+    - pattern: "*.diz"
       min: 1
       max: 1
       description: "Requires only one file_id.diz file"
@@ -76,10 +81,10 @@ rules:
       min: 1
       max: 1
       description: "Requires only one .nfo file"
-    - pattern: "file_id.diz"
+    - pattern: "*.diz"
       min: 1
       max: 1
-      description: "Requires only one file_id.diz file"
+      description: "Requires only one .diz file"
     - pattern: "*.zip"
       min: 1
       description: "Requires at least one .zip file"
@@ -88,7 +93,7 @@ rules:
       min: 1
       max: 1
       description: "Requires only one .nfo file"
-    - pattern: "file_id.diz"
+    - pattern: "*.diz"
       min: 1
       max: 1
       description: "Requires only one file_id.diz file"
@@ -108,9 +113,10 @@ rules:
       min: 1
       max: 1
       description: "Requires only one .nfo file"
-    - pattern: "*.r???"
+    - pattern: ".*\\.r\\d{2}$"
+      regex: true
       min: 1
-      description: "It usually contains one or more .r??? files"
+      description: "It usually contains one or more .r?? files"
   episode:
     - pattern: "*.rar"
       min: 1
@@ -134,9 +140,10 @@ rules:
       min: 1
       max: 1
       description: "Requires only one *.{mkv,mp4} file inside the Sample folder"
-    - pattern: "*.r???"
+    - pattern: ".*\\.r\\d{2}$"
+      regex: true
       min: 1
-      description: "Requires at least one .r??? file"
+      description: "Requires at least one .r?? file"
   game:
     - pattern: "*.rar"
       min: 1
@@ -150,15 +157,16 @@ rules:
       min: 1
       max: 1
       description: "Requires only one .nfo file"
-    - pattern: "*.r???"
+    - pattern: ".*\\.r\\d{2}$"
+      regex: true
       min: 1
-      description: "Requires at least one .r??? file"
+      description: "Requires at least one .r?? file"
   magazine:
     - pattern: "*.nfo"
       min: 1
       max: 1
       description: "Requires only one .nfo file"
-    - pattern: "file_id.diz"
+    - pattern: "*.diz"
       min: 1
       max: 1
       description: "Requires only one file_id.diz file"
@@ -187,9 +195,10 @@ rules:
       min: 1
       max: 1
       description: "Requires only one *.{mkv,mp4} file inside the Sample folder"
-    - pattern: "*.r???"
+    - pattern: ".*\\.r\\d{2}$"
+      regex: true
       min: 1
-      description: "Requires at least one .r??? file"
+      description: "Requires at least one .r?? file"
   music:
     - pattern: "*.m3u"
       min: 1
@@ -201,15 +210,17 @@ rules:
       min: 1
       max: 1
       description: "Requires only one .nfo file"
-    - pattern: "*.mp3"
+    - pattern: "*.{mp3,flac}"
       min: 1
-      description: "Requires at least one .mp3 file"
+      description: "Requires at least one .mp3 or .flac file"
   series:
     - pattern: "*"
       type: dir
       min: 2
       description: "Requires at least two subfolders"
 ```
+
+</details>
 
 ## Installation
 
@@ -220,6 +231,8 @@ wget $(curl -s https://api.github.com/repos/autobrr/sfvbrr/releases/latest | gre
 ## Usage
 
 * Basic
+
+<details>
 
 ```bash
 $ sfvbrr
@@ -242,7 +255,11 @@ Flags:
 Use "sfvbrr [command] --help" for more information about a command.
 ```
 
+</details>
+
 * Subcommand - sfv
+
+<details>
 
 ```bash
 $ sfvbrr sfv --help
@@ -277,7 +294,11 @@ Flags:
   -w, --workers int         Number of parallel workers (0 = auto-detect)
 ```
 
+</details>
+
 * Subcommand - validate
+
+<details>
 
 ```bash
 $ sfvbrr validate --help
@@ -309,6 +330,8 @@ Flags:
   -r, --recursive       Recursively search for release folders in subdirectories
   -v, --verbose         Show detailed validation results for each rule
 ```
+
+</details>
 
 ## License
 
