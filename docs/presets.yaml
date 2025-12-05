@@ -64,9 +64,9 @@ rules:
       min: 1
       max: 1
       description: "Requires only one .nfo file"
-    - pattern: "*.r???"
+    - pattern: "*.r??"
       min: 1
-      description: "It usually contains one or more .r??? files"
+      description: "It usually contains one or more .r?? files"
   episode:
     - pattern: "*.rar"
       min: 1
@@ -90,9 +90,9 @@ rules:
       min: 1
       max: 1
       description: "Requires only one *.{mkv,mp4} file inside the Sample folder"
-    - pattern: "*.r???"
+    - pattern: "*.r??"
       min: 1
-      description: "Requires at least one .r??? file"
+      description: "Requires at least one .r?? file"
   game:
     - pattern: "*.rar"
       min: 1
@@ -106,9 +106,9 @@ rules:
       min: 1
       max: 1
       description: "Requires only one .nfo file"
-    - pattern: "*.r???"
+    - pattern: "*.r??"
       min: 1
-      description: "Requires at least one .r??? file"
+      description: "Requires at least one .r?? file"
   magazine:
     - pattern: "*.nfo"
       min: 1
@@ -143,9 +143,9 @@ rules:
       min: 1
       max: 1
       description: "Requires only one *.{mkv,mp4} file inside the Sample folder"
-    - pattern: "*.r???"
+    - pattern: "*.r??"
       min: 1
-      description: "Requires at least one .r??? file"
+      description: "Requires at least one .r?? file"
   music:
     - pattern: "*.m3u"
       min: 1
@@ -157,9 +157,9 @@ rules:
       min: 1
       max: 1
       description: "Requires only one .nfo file"
-    - pattern: "*.mp3"
+    - pattern: "*.{mp3,flac}"
       min: 1
-      description: "Requires at least one .mp3 file"
+      description: "Requires at least one .mp3 or .flac file"
   series:
     - pattern: "*"
       type: dir
