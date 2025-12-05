@@ -10,6 +10,7 @@ require (
 	github.com/moistari/rls v0.6.0
 	github.com/schollz/progressbar/v3 v3.18.0
 	github.com/spf13/cobra v1.10.2
+	gopkg.in/yaml.v3 v3.0.1
 )
 
 require (
@@ -38,7 +39,6 @@ require (
 	golang.org/x/term v0.34.0 // indirect
 	golang.org/x/text v0.28.0 // indirect
 	golang.org/x/time v0.12.0 // indirect
-	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
 
 // Fix for arm6 build: force use of xz v0.5.15+ to avoid integer overflow on 32-bit architectures
