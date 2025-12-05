@@ -43,4 +43,5 @@ type Rule struct {
 	Min         int
 	Max         int
 	Description string
+	Regex       bool // If true, pattern is treated as regex instead of glob
 }

@@ -6,7 +6,7 @@ rules:
       min: 1
       max: 1
       description: "Requires only one .nfo file"
-    - pattern: "file_id.diz"
+    - pattern: "*.diz"
       min: 1
       max: 1
       description: "Requires only one file_id.diz file"
@@ -32,10 +32,10 @@ rules:
       min: 1
       max: 1
       description: "Requires only one .nfo file"
-    - pattern: "file_id.diz"
+    - pattern: "*.diz"
       min: 1
       max: 1
-      description: "Requires only one file_id.diz file"
+      description: "Requires only one .diz file"
     - pattern: "*.zip"
       min: 1
       description: "Requires at least one .zip file"
@@ -44,7 +44,7 @@ rules:
       min: 1
       max: 1
       description: "Requires only one .nfo file"
-    - pattern: "file_id.diz"
+    - pattern: "*.diz"
       min: 1
       max: 1
       description: "Requires only one file_id.diz file"
@@ -64,7 +64,8 @@ rules:
       min: 1
       max: 1
       description: "Requires only one .nfo file"
-    - pattern: "*.r??"
+    - pattern: ".*\\.r\\d{2}$"
+      regex: true
       min: 1
       description: "It usually contains one or more .r?? files"
   episode:
@@ -90,7 +91,8 @@ rules:
       min: 1
       max: 1
       description: "Requires only one *.{mkv,mp4} file inside the Sample folder"
-    - pattern: "*.r??"
+    - pattern: ".*\\.r\\d{2}$"
+      regex: true
       min: 1
       description: "Requires at least one .r?? file"
   game:
@@ -106,7 +108,8 @@ rules:
       min: 1
       max: 1
       description: "Requires only one .nfo file"
-    - pattern: "*.r??"
+    - pattern: ".*\\.r\\d{2}$"
+      regex: true
       min: 1
       description: "Requires at least one .r?? file"
   magazine:
@@ -114,7 +117,7 @@ rules:
       min: 1
       max: 1
       description: "Requires only one .nfo file"
-    - pattern: "file_id.diz"
+    - pattern: "*.diz"
       min: 1
       max: 1
       description: "Requires only one file_id.diz file"
@@ -143,7 +146,8 @@ rules:
       min: 1
       max: 1
       description: "Requires only one *.{mkv,mp4} file inside the Sample folder"
-    - pattern: "*.r??"
+    - pattern: ".*\\.r\\d{2}$"
+      regex: true
       min: 1
       description: "Requires at least one .r?? file"
   music:

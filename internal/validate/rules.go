@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"regexp"
 	"strings"
 
 	"github.com/autobrr/sfvbrr/internal/preset"
@@ -59,6 +60,7 @@ func validateRule(folderPath string, rule preset.Rule) RuleResult {
 			Min:         rule.Min,
 			Max:         rule.Max,
 			Description: rule.Description,
+			Regex:       rule.Regex,
 		},
 		Description: rule.Description,
 	}
@@ -67,7 +69,7 @@ func validateRule(folderPath string, rule preset.Rule) RuleResult {
 	isDirRule := rule.Type == "dir"
 
 	// Count matches
-	matched, err := countMatches(folderPath, rule.Pattern, isDirRule)
+	matched, err := countMatches(folderPath, rule.Pattern, isDirRule, rule.Regex)
 	if err != nil {
 		result.Valid = false
 		result.Error = err
@@ -95,7 +97,7 @@ func validateRule(folderPath string, rule preset.Rule) RuleResult {
 }
 
 // countMatches counts how many files or directories match the pattern
-func countMatches(folderPath string, pattern string, isDir bool) (int, error) {
+func countMatches(folderPath string, pattern string, isDir bool, useRegex bool) (int, error) {
 	// Read directory entries
 	entries, err := os.ReadDir(folderPath)
 	if err != nil {
@@ -117,7 +119,7 @@ func countMatches(folderPath string, pattern string, isDir bool) (int, error) {
 				continue
 			}
 
-			matched, err := matchPattern(entry.Name(), dirPattern)
+			matched, err := matchPattern(entry.Name(), dirPattern, useRegex)
 			if err != nil {
 				continue
 			}
@@ -135,7 +137,7 @@ func countMatches(folderPath string, pattern string, isDir bool) (int, error) {
 						continue
 					}
 
-					matched, err := matchPattern(subEntry.Name(), filePattern)
+					matched, err := matchPattern(subEntry.Name(), filePattern, useRegex)
 					if err != nil {
 						continue
 					}
@@ -157,7 +159,7 @@ func countMatches(folderPath string, pattern string, isDir bool) (int, error) {
 				continue
 			}
 
-			matched, err := matchPattern(entry.Name(), pattern)
+			matched, err := matchPattern(entry.Name(), pattern, useRegex)
 			if err != nil {
 				continue
 			}
@@ -172,8 +174,17 @@ func countMatches(folderPath string, pattern string, isDir bool) (int, error) {
 }
 
 // matchPattern matches a filename against a pattern
-// Supports glob patterns like *.nfo, *.r???, and brace expansion like {mkv,mp4}
-func matchPattern(filename string, pattern string) (bool, error) {
+// Supports glob patterns like *.nfo, *.r???, brace expansion like {mkv,mp4}, and regex patterns
+func matchPattern(filename string, pattern string, useRegex bool) (bool, error) {
+	// If regex is enabled, use regex matching
+	if useRegex {
+		matched, err := regexp.MatchString(pattern, filename)
+		if err != nil {
+			return false, fmt.Errorf("invalid regex pattern: %w", err)
+		}
+		return matched, nil
+	}
+
 	// Handle brace expansion like {mkv,mp4} or *.{mkv,mp4}
 	if strings.Contains(pattern, "{") && strings.Contains(pattern, "}") {
 		// Extract the base pattern and brace content

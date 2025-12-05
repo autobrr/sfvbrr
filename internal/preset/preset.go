@@ -15,6 +15,7 @@ type Rule struct {
 	Min         int    `yaml:"min,omitempty"`
 	Max         int    `yaml:"max,omitempty"`
 	Description string `yaml:"description,omitempty"`
+	Regex       bool   `yaml:"regex,omitempty"` // If true, pattern is treated as regex instead of glob
 }
 
 // PresetConfig represents the entire preset configuration
