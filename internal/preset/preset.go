@@ -29,6 +29,7 @@ func LoadPresets(presetPath string) (*PresetConfig, error) {
 	if presetPath == "" {
 		// Try to find presets.yaml in common locations
 		possiblePaths := []string{
+			"~/.config/sfvbrr/presets.yaml",
 			"docs/presets.yaml",
 			"presets.yaml",
 			"./presets.yaml",
