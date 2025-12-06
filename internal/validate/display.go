@@ -88,6 +88,15 @@ func DisplayResult(result *ValidationResult, opts Options) bool {
 		fmt.Fprintln(os.Stdout)
 	}
 
+	// Show unexpected files if any
+	if len(result.UnexpectedFiles) > 0 {
+		fmt.Fprintf(os.Stdout, "%s\n", errorColor("Unexpected Files/Directories:"))
+		for _, file := range result.UnexpectedFiles {
+			fmt.Fprintf(os.Stdout, "  %s %s\n", errorColor("✗"), file)
+		}
+		fmt.Fprintln(os.Stdout)
+	}
+
 	// Show errors if any
 	if len(result.Errors) > 0 {
 		fmt.Fprintf(os.Stdout, "%s\n", errorColor("Errors:"))
