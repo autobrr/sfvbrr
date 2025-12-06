@@ -37,12 +37,12 @@
 - **Fast**: Blazingly fast checksum verification
 - **Simple**: Easy to use CLI
 - **Portable**: Single binary with no dependencies
-- **Smart**: Detects missing/extra files based on the SFV content and type of release
+- **Smart**: Detects missing/extra files based on the content and type of release
 - **Customizable**: Various options in the config can change the behavior
 
 ## Quick Start
 
-After you download the single binary for your arch, store the default configuration/preset from [docs](docs/presets.yaml) in your `~/.config/sfvbrr/` folder:
+Upon the first start, the binary will create a default [configuration](internal/preset/presets.yaml) in your `$HOME/.config/sfvbrr/` folder:
 
 <details>
 
@@ -51,182 +51,222 @@ After you download the single binary for your arch, store the default configurat
 schema_version: 1
 rules:
   app:
-    - pattern: "*.nfo"
-      min: 1
-      max: 1
-      description: "Requires only one .nfo file"
-    - pattern: "*.diz"
-      min: 1
-      max: 1
-      description: "Requires only one file_id.diz file"
-    - pattern: "*.zip"
-      min: 1
-      description: "Requires at least one .zip file"
+    deny_unexpected: true
+    rules:
+      - pattern: "*.nfo"
+        min: 1
+        max: 1
+        description: "Requires only one .nfo file"
+      - pattern: "file_id.diz"
+        min: 1
+        max: 1
+        description: "Requires exactly one file_id.diz file"
+      - pattern: "*.diz"
+        max: 1
+        description: "Requires no other .diz files besides file_id.diz"
+      - pattern: "*.zip"
+        min: 1
+        description: "Requires at least one .zip file"
   audiobook:
-    - pattern: "*.m3u"
-      min: 1
-      description: "Requires at least one .m3u file"
-    - pattern: "*.sfv"
-      min: 1
-      description: "Requires at least one .sfv file"
-    - pattern: "*.nfo"
-      min: 1
-      max: 1
-      description: "Requires only one .nfo file"
-    - pattern: "*.mp3"
-      min: 1
-      description: "Requires at least one .mp3 file"
+    deny_unexpected: true
+    rules:
+      - pattern: "*.m3u"
+        min: 1
+        description: "Requires at least one .m3u file"
+      - pattern: "*.sfv"
+        min: 1
+        description: "Requires at least one .sfv file"
+      - pattern: "*.nfo"
+        min: 1
+        max: 1
+        description: "Requires only one .nfo file"
+      - pattern: "*.mp3"
+        min: 1
+        description: "Requires at least one .mp3 file"
   book:
-    - pattern: "*.nfo"
-      min: 1
-      max: 1
-      description: "Requires only one .nfo file"
-    - pattern: "*.diz"
-      min: 1
-      max: 1
-      description: "Requires only one .diz file"
-    - pattern: "*.zip"
-      min: 1
-      description: "Requires at least one .zip file"
+    deny_unexpected: true
+    rules:
+      - pattern: "*.nfo"
+        min: 1
+        max: 1
+        description: "Requires only one .nfo file"
+      - pattern: "file_id.diz"
+        min: 1
+        max: 1
+        description: "Requires exactly one file_id.diz file"
+      - pattern: "*.diz"
+        max: 1
+        description: "Requires no other .diz files besides file_id.diz"
+      - pattern: "*.zip"
+        min: 1
+        description: "Requires at least one .zip file"
   comic:
-    - pattern: "*.nfo"
-      min: 1
-      max: 1
-      description: "Requires only one .nfo file"
-    - pattern: "*.diz"
-      min: 1
-      max: 1
-      description: "Requires only one file_id.diz file"
-    - pattern: "*.zip"
-      min: 1
-      description: "Requires at least one .zip file"
+    deny_unexpected: true
+    rules:
+      - pattern: "*.nfo"
+        min: 1
+        max: 1
+        description: "Requires only one .nfo file"
+      - pattern: "file_id.diz"
+        min: 1
+        max: 1
+        description: "Requires exactly one file_id.diz file"
+      - pattern: "*.diz"
+        max: 1
+        description: "Requires no other .diz files besides file_id.diz"
+      - pattern: "*.zip"
+        min: 1
+        description: "Requires at least one .zip file"
   education:
-    - pattern: "*.rar"
-      min: 1
-      max: 1
-      description: "Requires only one .rar file"
-    - pattern: "*.sfv"
-      min: 1
-      max: 1
-      description: "Requires only one .sfv file"
-    - pattern: "*.nfo"
-      min: 1
-      max: 1
-      description: "Requires only one .nfo file"
-    - pattern: ".*\\.r\\d{2}$"
-      regex: true
-      min: 1
-      description: "It usually contains one or more .r?? files"
+    deny_unexpected: true
+    rules:
+      - pattern: "*.rar"
+        min: 1
+        max: 1
+        description: "Requires only one .rar file"
+      - pattern: "*.sfv"
+        min: 1
+        max: 1
+        description: "Requires only one .sfv file"
+      - pattern: "*.nfo"
+        min: 1
+        max: 1
+        description: "Requires only one .nfo file"
+      - pattern: ".*\\.r\\d{2}$"
+        regex: true
+        min: 1
+        description: "It usually contains one or more .r?? files"
   episode:
-    - pattern: "*.rar"
-      min: 1
-      max: 1
-      description: "Requires only one .rar file"
-    - pattern: "*.sfv"
-      min: 1
-      max: 1
-      description: "Requires only one .sfv file"
-    - pattern: "*.nfo"
-      min: 1
-      max: 1
-      description: "Requires only one .nfo file"
-    - pattern: "Sample"
-      type: dir
-      min: 1
-      max: 1
-      description: "Requires only one Sample folder"
-    # Syntax {mkv,mp4} handles the "OR" logic for extensions
-    - pattern: "Sample/*.{mkv,mp4}"
-      min: 1
-      max: 1
-      description: "Requires only one *.{mkv,mp4} file inside the Sample folder"
-    - pattern: ".*\\.r\\d{2}$"
-      regex: true
-      min: 1
-      description: "Requires at least one .r?? file"
+    deny_unexpected: true
+    rules:
+      - pattern: "*.rar"
+        min: 1
+        max: 1
+        description: "Requires only one .rar file"
+      - pattern: "*.sfv"
+        min: 1
+        max: 1
+        description: "Requires only one .sfv file"
+      - pattern: "*.nfo"
+        min: 1
+        max: 1
+        description: "Requires only one .nfo file"
+      - pattern: "Sample"
+        type: dir
+        min: 1
+        max: 1
+        description: "Requires only one Sample folder"
+      # Syntax {mkv,mp4} handles the "OR" logic for extensions
+      - pattern: "Sample/*.{mkv,mp4}"
+        min: 1
+        max: 1
+        description: "Requires only one *.{mkv,mp4} file inside the Sample folder"
+      - pattern: ".*\\.r\\d{2}$"
+        regex: true
+        min: 1
+        description: "Requires at least one .r?? file"
   game:
-    - pattern: "*.rar"
-      min: 1
-      max: 1
-      description: "Requires only one .rar file"
-    - pattern: "*.sfv"
-      min: 1
-      max: 1
-      description: "Requires only one .sfv file"
-    - pattern: "*.nfo"
-      min: 1
-      max: 1
-      description: "Requires only one .nfo file"
-    - pattern: ".*\\.r\\d{2}$"
-      regex: true
-      min: 1
-      description: "Requires at least one .r?? file"
+    deny_unexpected: true
+    rules:
+      - pattern: "*.rar"
+        min: 1
+        max: 1
+        description: "Requires only one .rar file"
+      - pattern: "*.sfv"
+        min: 1
+        max: 1
+        description: "Requires only one .sfv file"
+      - pattern: "*.nfo"
+        min: 1
+        max: 1
+        description: "Requires only one .nfo file"
+      - pattern: ".*\\.r\\d{2}$"
+        regex: true
+        min: 1
+        description: "Requires at least one .r?? file"
   magazine:
-    - pattern: "*.nfo"
-      min: 1
-      max: 1
-      description: "Requires only one .nfo file"
-    - pattern: "*.diz"
-      min: 1
-      max: 1
-      description: "Requires only one file_id.diz file"
-    - pattern: "*.zip"
-      min: 1
-      description: "Requires at least one .zip file"
+    deny_unexpected: true
+    rules:
+      - pattern: "*.nfo"
+        min: 1
+        max: 1
+        description: "Requires only one .nfo file"
+      - pattern: "file_id.diz"
+        min: 1
+        max: 1
+        description: "Requires exactly one file_id.diz file"
+      - pattern: "*.diz"
+        max: 1
+        description: "Requires no other .diz files besides file_id.diz"
+      - pattern: "*.zip"
+        min: 1
+        description: "Requires at least one .zip file"
   movie:
-    - pattern: "*.rar"
-      min: 1
-      max: 1
-      description: "Requires only one .rar file"
-    - pattern: "*.sfv"
-      min: 1
-      max: 1
-      description: "Requires only one .sfv file"
-    - pattern: "*.nfo"
-      min: 1
-      max: 1
-      description: "Requires only one .nfo file"
-    - pattern: "Sample"
-      type: dir
-      min: 1
-      max: 1
-      description: "Requires only one Sample folder"
-    - pattern: "Sample/*.{mkv,mp4}"
-      min: 1
-      max: 1
-      description: "Requires only one *.{mkv,mp4} file inside the Sample folder"
-    - pattern: ".*\\.r\\d{2}$"
-      regex: true
-      min: 1
-      description: "Requires at least one .r?? file"
+    deny_unexpected: true
+    rules:
+      - pattern: "*.rar"
+        min: 1
+        max: 1
+        description: "Requires only one .rar file"
+      - pattern: "*.sfv"
+        min: 1
+        max: 1
+        description: "Requires only one .sfv file"
+      - pattern: "*.nfo"
+        min: 1
+        max: 1
+        description: "Requires only one .nfo file"
+      - pattern: "Sample"
+        type: dir
+        min: 1
+        max: 1
+        description: "Requires only one Sample folder"
+      - pattern: "Sample/*.{mkv,mp4}"
+        min: 1
+        max: 1
+        description: "Requires only one *.{mkv,mp4} file inside the Sample folder"
+      - pattern: ".*\\.r\\d{2}$"
+        regex: true
+        min: 1
+        description: "Requires at least one .r?? file"
   music:
-    - pattern: "*.m3u"
-      min: 1
-      description: "Requires at least one .m3u file"
-    - pattern: "*.sfv"
-      min: 1
-      description: "Requires at least one .sfv file"
-    - pattern: "*.nfo"
-      min: 1
-      max: 1
-      description: "Requires only one .nfo file"
-    - pattern: "*.{mp3,flac}"
-      min: 1
-      description: "Requires at least one .mp3 or .flac file"
+    deny_unexpected: true
+    rules:
+      - pattern: "*.m3u"
+        min: 1
+        description: "Requires at least one .m3u file"
+      - pattern: "*.sfv"
+        min: 1
+        description: "Requires at least one .sfv file"
+      - pattern: "*.nfo"
+        min: 1
+        max: 1
+        description: "Requires only one .nfo file"
+      - pattern: "*.{mp3,flac}"
+        min: 1
+        description: "Requires at least one .mp3 or .flac file"
   series:
-    - pattern: "*"
-      type: dir
-      min: 2
-      description: "Requires at least two subfolders"
+    deny_unexpected: true
+    rules:
+      - pattern: "*"
+        type: dir
+        min: 2
+        description: "Requires at least two subfolders"
 ```
 
 </details>
 
 ## Installation
 
+* Linux
+
 ```
 wget $(curl -s https://api.github.com/repos/autobrr/sfvbrr/releases/latest | grep browser_download_url | grep linux_x86_64 | cut -d\" -f4)
 ```
+
+* Windows
+
+* MacOSX
 
 ## Usage
 

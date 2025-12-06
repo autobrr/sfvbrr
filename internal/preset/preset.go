@@ -30,14 +30,86 @@ type PresetConfig struct {
 	Rules         map[string]*CategoryRules `yaml:"rules"`
 }
 
+// getDefaultConfigPath returns the default configuration file path (cross-platform)
+func getDefaultConfigPath() (string, error) {
+	homeDir, err := os.UserHomeDir()
+	if err != nil {
+		return "", fmt.Errorf("failed to get home directory: %w", err)
+	}
+	configDir := filepath.Join(homeDir, ".config", "sfvbrr")
+	return filepath.Join(configDir, "presets.yaml"), nil
+}
+
+// initializeDefaultConfig creates the default config directory and file if it doesn't exist
+func initializeDefaultConfig() error {
+	configPath, err := getDefaultConfigPath()
+	if err != nil {
+		return err
+	}
+
+	// Check if config file already exists
+	if _, err := os.Stat(configPath); err == nil {
+		return nil // Already exists, nothing to do
+	}
+
+	// Create the config directory
+	configDir := filepath.Dir(configPath)
+	if err := os.MkdirAll(configDir, 0755); err != nil {
+		return fmt.Errorf("failed to create config directory %s: %w", configDir, err)
+	}
+
+	// Write the embedded presets.yaml to the config directory
+	if err := os.WriteFile(configPath, defaultPresetsYAML, 0644); err != nil {
+		return fmt.Errorf("failed to write default preset file to %s: %w", configPath, err)
+	}
+
+	return nil
+}
+
+// expandPath expands ~ in paths (cross-platform)
+func expandPath(path string) (string, error) {
+	if len(path) == 0 {
+		return path, nil
+	}
+
+	if path[0] == '~' {
+		homeDir, err := os.UserHomeDir()
+		if err != nil {
+			return "", fmt.Errorf("failed to get home directory: %w", err)
+		}
+		if len(path) > 1 && path[1] == filepath.Separator {
+			// ~/path -> homeDir/path
+			return filepath.Join(homeDir, path[2:]), nil
+		} else if len(path) == 1 {
+			// Just ~ -> homeDir
+			return homeDir, nil
+		} else {
+			// ~path -> homeDir/path (no separator)
+			return filepath.Join(homeDir, path[1:]), nil
+		}
+	}
+
+	return path, nil
+}
+
 // LoadPresets loads the preset configuration from a YAML file
 func LoadPresets(presetPath string) (*PresetConfig, error) {
 	// If no path provided, try default location
 	if presetPath == "" {
+		// Initialize default config on first run
+		if err := initializeDefaultConfig(); err != nil {
+			return nil, fmt.Errorf("failed to initialize default config: %w", err)
+		}
+
+		// Get the default config path
+		defaultPath, err := getDefaultConfigPath()
+		if err != nil {
+			return nil, fmt.Errorf("failed to get default config path: %w", err)
+		}
+
 		// Try to find presets.yaml in common locations
 		possiblePaths := []string{
-			"~/.config/sfvbrr/presets.yaml",
-			"docs/presets.yaml",
+			defaultPath,
 			"presets.yaml",
 			"./presets.yaml",
 		}
@@ -51,6 +123,13 @@ func LoadPresets(presetPath string) (*PresetConfig, error) {
 
 		if presetPath == "" {
 			return nil, fmt.Errorf("preset file not found in default locations")
+		}
+	} else {
+		// Expand ~ in provided path
+		var err error
+		presetPath, err = expandPath(presetPath)
+		if err != nil {
+			return nil, err
 		}
 	}
 
