@@ -11,11 +11,12 @@ type RuleResult struct {
 
 // ValidationResult represents the overall result of folder validation
 type ValidationResult struct {
-	FolderPath string
-	Category   string
-	Valid      bool
-	RuleResults []RuleResult
-	Errors     []error
+	FolderPath      string
+	Category        string
+	Valid           bool
+	RuleResults     []RuleResult
+	Errors          []error
+	UnexpectedFiles []string // Files/directories that don't match any rule pattern
 }
 
 // Options contains configuration options for validation

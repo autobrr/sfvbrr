@@ -48,6 +48,19 @@ func ValidateFolder(folderPath string, presetConfig *preset.PresetConfig, catego
 		}
 	}
 
+	// Check for unexpected files/directories if deny_unexpected is enabled
+	if presetConfig.GetDenyUnexpected(category) {
+		unexpected, err := findUnexpectedFiles(folderPath, rules)
+		if err != nil {
+			result.Valid = false
+			result.Errors = append(result.Errors, fmt.Errorf("failed to check for unexpected files: %w", err))
+		} else if len(unexpected) > 0 {
+			result.Valid = false
+			result.UnexpectedFiles = unexpected
+			result.Errors = append(result.Errors, fmt.Errorf("found %d unexpected file(s)/directory(ies)", len(unexpected)))
+		}
+	}
+
 	return result, nil
 }
 
@@ -220,4 +233,120 @@ func matchPattern(filename string, pattern string, useRegex bool) (bool, error) 
 	}
 
 	return matched, nil
+}
+
+// findUnexpectedFiles finds all files and directories that don't match any rule pattern
+func findUnexpectedFiles(folderPath string, rules []preset.Rule) ([]string, error) {
+	// Read all directory entries (including hidden files)
+	entries, err := os.ReadDir(folderPath)
+	if err != nil {
+		return nil, fmt.Errorf("failed to read directory: %w", err)
+	}
+
+	// Track allowed entries
+	allowedRootEntries := make(map[string]bool)            // Root level files/dirs
+	allowedDirsForNested := make(map[string]bool)          // Dirs that have nested patterns
+	allowedNestedFiles := make(map[string]map[string]bool) // dir -> set of allowed files
+
+	// First pass: identify which entries match rules
+	for _, rule := range rules {
+		isDirRule := rule.Type == "dir"
+
+		// Handle nested patterns like "Sample/*.{mkv,mp4}"
+		if strings.Contains(rule.Pattern, "/") {
+			parts := strings.SplitN(rule.Pattern, "/", 2)
+			dirPattern := parts[0]
+			filePattern := parts[1]
+
+			// Find matching directories
+			for _, entry := range entries {
+				if !entry.IsDir() {
+					continue
+				}
+
+				matched, err := matchPattern(entry.Name(), dirPattern, rule.Regex)
+				if err != nil || !matched {
+					continue
+				}
+
+				// This directory is allowed for nested patterns
+				allowedDirsForNested[entry.Name()] = true
+				if allowedNestedFiles[entry.Name()] == nil {
+					allowedNestedFiles[entry.Name()] = make(map[string]bool)
+				}
+
+				// Check files inside this directory
+				subDirPath := filepath.Join(folderPath, entry.Name())
+				subEntries, err := os.ReadDir(subDirPath)
+				if err != nil {
+					continue
+				}
+
+				for _, subEntry := range subEntries {
+					if subEntry.IsDir() {
+						continue // Subdirectories are not allowed
+					}
+
+					matched, err := matchPattern(subEntry.Name(), filePattern, rule.Regex)
+					if err == nil && matched {
+						allowedNestedFiles[entry.Name()][subEntry.Name()] = true
+					}
+				}
+			}
+		} else {
+			// Regular pattern matching
+			for _, entry := range entries {
+				// Filter by type
+				if isDirRule && !entry.IsDir() {
+					continue
+				}
+				if !isDirRule && entry.IsDir() {
+					continue
+				}
+
+				matched, err := matchPattern(entry.Name(), rule.Pattern, rule.Regex)
+				if err == nil && matched {
+					allowedRootEntries[entry.Name()] = true
+				}
+			}
+		}
+	}
+
+	// Second pass: find unexpected entries
+	unexpected := make([]string, 0)
+
+	for _, entry := range entries {
+		entryName := entry.Name()
+
+		if entry.IsDir() {
+			// Check if directory is allowed (either explicitly or via nested patterns)
+			if allowedRootEntries[entryName] || allowedDirsForNested[entryName] {
+				// Directory is allowed - check its contents
+				subDirPath := filepath.Join(folderPath, entryName)
+				subEntries, err := os.ReadDir(subDirPath)
+				if err == nil {
+					allowedFiles := allowedNestedFiles[entryName]
+					for _, subEntry := range subEntries {
+						if subEntry.IsDir() {
+							// Subdirectories are not allowed
+							unexpected = append(unexpected, filepath.Join(entryName, subEntry.Name()))
+						} else if allowedFiles == nil || !allowedFiles[subEntry.Name()] {
+							// File doesn't match any nested pattern
+							unexpected = append(unexpected, filepath.Join(entryName, subEntry.Name()))
+						}
+					}
+				}
+			} else {
+				// Directory is not allowed at all
+				unexpected = append(unexpected, entryName)
+			}
+		} else {
+			// File is not allowed
+			if !allowedRootEntries[entryName] {
+				unexpected = append(unexpected, entryName)
+			}
+		}
+	}
+
+	return unexpected, nil
 }
