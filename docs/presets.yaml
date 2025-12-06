@@ -6,10 +6,13 @@ rules:
       min: 1
       max: 1
       description: "Requires only one .nfo file"
-    - pattern: "*.diz"
+    - pattern: "file_id.diz"
       min: 1
       max: 1
-      description: "Requires only one file_id.diz file"
+      description: "Requires exactly one file_id.diz file"
+    - pattern: "*.diz"
+      max: 1
+      description: "Requires no other .diz files besides file_id.diz"
     - pattern: "*.zip"
       min: 1
       description: "Requires at least one .zip file"
@@ -32,10 +35,13 @@ rules:
       min: 1
       max: 1
       description: "Requires only one .nfo file"
-    - pattern: "*.diz"
+    - pattern: "file_id.diz"
       min: 1
       max: 1
-      description: "Requires only one .diz file"
+      description: "Requires exactly one file_id.diz file"
+    - pattern: "*.diz"
+      max: 1
+      description: "Requires no other .diz files besides file_id.diz"
     - pattern: "*.zip"
       min: 1
       description: "Requires at least one .zip file"
@@ -44,10 +50,13 @@ rules:
       min: 1
       max: 1
       description: "Requires only one .nfo file"
-    - pattern: "*.diz"
+    - pattern: "file_id.diz"
       min: 1
       max: 1
-      description: "Requires only one file_id.diz file"
+      description: "Requires exactly one file_id.diz file"
+    - pattern: "*.diz"
+      max: 1
+      description: "Requires no other .diz files besides file_id.diz"
     - pattern: "*.zip"
       min: 1
       description: "Requires at least one .zip file"
@@ -117,10 +126,13 @@ rules:
       min: 1
       max: 1
       description: "Requires only one .nfo file"
-    - pattern: "*.diz"
+    - pattern: "file_id.diz"
       min: 1
       max: 1
-      description: "Requires only one file_id.diz file"
+      description: "Requires exactly one file_id.diz file"
+    - pattern: "*.diz"
+      max: 1
+      description: "Requires no other .diz files besides file_id.diz"
     - pattern: "*.zip"
       min: 1
       description: "Requires at least one .zip file"
