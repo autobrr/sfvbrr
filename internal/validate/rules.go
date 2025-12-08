@@ -321,21 +321,26 @@ func findUnexpectedFiles(folderPath string, rules []preset.Rule) ([]string, erro
 		if entry.IsDir() {
 			// Check if directory is allowed (either explicitly or via nested patterns)
 			if allowedRootEntries[entryName] || allowedDirsForNested[entryName] {
-				// Directory is allowed - check its contents
-				subDirPath := filepath.Join(folderPath, entryName)
-				subEntries, err := os.ReadDir(subDirPath)
-				if err == nil {
-					allowedFiles := allowedNestedFiles[entryName]
-					for _, subEntry := range subEntries {
-						if subEntry.IsDir() {
-							// Subdirectories are not allowed
-							unexpected = append(unexpected, filepath.Join(entryName, subEntry.Name()))
-						} else if allowedFiles == nil || !allowedFiles[subEntry.Name()] {
-							// File doesn't match any nested pattern
-							unexpected = append(unexpected, filepath.Join(entryName, subEntry.Name()))
+				// Only check directory contents if it has nested patterns
+				// If it's just a simple directory rule, we don't validate its contents
+				if allowedDirsForNested[entryName] {
+					// Directory is allowed for nested patterns - check its contents
+					subDirPath := filepath.Join(folderPath, entryName)
+					subEntries, err := os.ReadDir(subDirPath)
+					if err == nil {
+						allowedFiles := allowedNestedFiles[entryName]
+						for _, subEntry := range subEntries {
+							if subEntry.IsDir() {
+								// Subdirectories are not allowed
+								unexpected = append(unexpected, filepath.Join(entryName, subEntry.Name()))
+							} else if allowedFiles == nil || !allowedFiles[subEntry.Name()] {
+								// File doesn't match any nested pattern
+								unexpected = append(unexpected, filepath.Join(entryName, subEntry.Name()))
+							}
 						}
 					}
 				}
+				// If directory is only in allowedRootEntries (simple dir rule), don't check contents
 			} else {
 				// Directory is not allowed at all
 				unexpected = append(unexpected, entryName)
