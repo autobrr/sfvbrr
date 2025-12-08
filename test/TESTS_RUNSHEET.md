@@ -1023,7 +1023,25 @@
 
   ```bash
   Validating Release:
-    Folder:       10_5/First_Last-Title-WEB-SK-2025-GRP
+    Folder:       10_5/BAND-ALBUM-(CAT0001)-CD-FLAC-2025-GRP
+    Category:     music
+
+  Rule Validation:
+    ✗ *.nfo (found 2) - found 2 matches, but maximum allowed is 1
+
+  Summary:
+    Valid rules:    3
+    Invalid rules:  1
+
+  Errors:
+    found 2 matches, but maximum allowed is 1
+  ```
+
+* **[10.6](validate/10_6/)** :x: A folder with no `.nfo` files.
+
+  ```bash
+  Validating Release:
+    Folder:       10_6/First_Last-Title-WEB-SK-2025-GRP
     Category:     music
 
   Rule Validation:
@@ -1037,11 +1055,11 @@
     found 0 matches, but minimum required is 1
   ```
 
-* **[10.6](validate/10_6/)** :x: A valid release folder with one additional unassociated file (Violates `deny_unexpected`).
+* **[10.7](validate/10_7/)** :x: A valid release folder with one additional unassociated file (Violates `deny_unexpected`).
 
   ```bash
   Validating Release:
-    Folder:       10_6/First_Last_-_Title-WEB-CZ-2025-GRP
+    Folder:       10_7/First_Last_-_Title-WEB-CZ-2025-GRP
     Category:     music
 
   Rule Validation:
