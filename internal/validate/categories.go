@@ -8,7 +8,13 @@ import (
 )
 
 // DetectCategory detects the release category from a folder path
-func DetectCategory(folderPath string) (string, error) {
+// If overwriteCategory is provided and non-empty, it will be returned instead of detecting
+func DetectCategory(folderPath string, overwriteCategory string) (string, error) {
+	// If overwrite category is provided, use it directly
+	if overwriteCategory != "" {
+		return overwriteCategory, nil
+	}
+
 	// Extract folder name from path
 	folderName := filepath.Base(folderPath)
 
