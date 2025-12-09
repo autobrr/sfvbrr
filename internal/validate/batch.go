@@ -10,7 +10,8 @@ import (
 
 // FindFoldersRecursive finds all folders recursively in the given directory
 // that can be validated (i.e., have a detectable category)
-// If overwriteCategory is provided, all directories will be included regardless of detection
+// Note: overwriteCategory parameter is kept for API compatibility but not used here.
+// The overwrite category is applied during validation, not during folder discovery.
 func FindFoldersRecursive(dir string, overwriteCategory string) ([]string, error) {
 	var folders []string
 
@@ -21,15 +22,11 @@ func FindFoldersRecursive(dir string, overwriteCategory string) ([]string, error
 		}
 
 		if info.IsDir() {
-			// If overwrite category is provided, include all directories
-			if overwriteCategory != "" {
+			// Always try to detect category for this folder to filter for valid releases
+			// The overwrite category will be applied later during validation
+			category, err := DetectCategory(path, "")
+			if err == nil && category != "" {
 				folders = append(folders, path)
-			} else {
-				// Try to detect category for this folder
-				category, err := DetectCategory(path, "")
-				if err == nil && category != "" {
-					folders = append(folders, path)
-				}
 			}
 		}
 
