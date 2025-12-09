@@ -21,19 +21,21 @@ type ValidationResult struct {
 
 // Options contains configuration options for validation
 type Options struct {
-	PresetPath string // Path to preset YAML file (empty = auto-detect)
-	Verbose    bool   // Verbose output
-	Quiet      bool   // Quiet mode (minimal output)
-	Recursive  bool   // Recursive mode - search subdirectories
+	PresetPath       string // Path to preset YAML file (empty = auto-detect)
+	Verbose          bool   // Verbose output
+	Quiet            bool   // Quiet mode (minimal output)
+	Recursive        bool   // Recursive mode - search subdirectories
+	OverwriteCategory string // Override category detection (empty = use auto-detection)
 }
 
 // DefaultOptions returns default options for validation
 func DefaultOptions() Options {
 	return Options{
-		PresetPath: "",
-		Verbose:    false,
-		Quiet:      false,
-		Recursive:  false,
+		PresetPath:       "",
+		Verbose:          false,
+		Quiet:            false,
+		Recursive:        false,
+		OverwriteCategory: "",
 	}
 }
 

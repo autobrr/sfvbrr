@@ -10,7 +10,8 @@ import (
 
 // FindFoldersRecursive finds all folders recursively in the given directory
 // that can be validated (i.e., have a detectable category)
-func FindFoldersRecursive(dir string) ([]string, error) {
+// If overwriteCategory is provided, all directories will be included regardless of detection
+func FindFoldersRecursive(dir string, overwriteCategory string) ([]string, error) {
 	var folders []string
 
 	err := filepath.Walk(dir, func(path string, info os.FileInfo, err error) error {
@@ -20,10 +21,15 @@ func FindFoldersRecursive(dir string) ([]string, error) {
 		}
 
 		if info.IsDir() {
-			// Try to detect category for this folder
-			category, err := DetectCategory(path)
-			if err == nil && category != "" {
+			// If overwrite category is provided, include all directories
+			if overwriteCategory != "" {
 				folders = append(folders, path)
+			} else {
+				// Try to detect category for this folder
+				category, err := DetectCategory(path, "")
+				if err == nil && category != "" {
+					folders = append(folders, path)
+				}
 			}
 		}
 
@@ -39,8 +45,8 @@ func FindFoldersRecursive(dir string) ([]string, error) {
 
 // validateSingleFolder validates a single folder and displays results
 func validateSingleFolder(folderPath string, presetConfig *preset.PresetConfig, opts Options) (bool, error) {
-	// Detect category
-	category, err := DetectCategory(folderPath)
+	// Detect category (or use overwrite if provided)
+	category, err := DetectCategory(folderPath, opts.OverwriteCategory)
 	if err != nil {
 		return false, fmt.Errorf("failed to detect category for %s: %w", folderPath, err)
 	}
@@ -72,6 +78,13 @@ func ValidateFolders(folders []string, opts Options) error {
 		return fmt.Errorf("failed to load presets: %w", err)
 	}
 
+	// Validate overwrite category if provided
+	if opts.OverwriteCategory != "" {
+		if _, exists := presetConfig.Rules[opts.OverwriteCategory]; !exists {
+			return fmt.Errorf("invalid category '%s': category not found in preset configuration", opts.OverwriteCategory)
+		}
+	}
+
 	var hasErrors bool
 
 	for _, folder := range folders {
@@ -99,7 +112,7 @@ func ValidateFolders(folders []string, opts Options) error {
 
 		if opts.Recursive {
 			// Find all folders recursively
-			subFolders, err := FindFoldersRecursive(absPath)
+			subFolders, err := FindFoldersRecursive(absPath, opts.OverwriteCategory)
 			if err != nil {
 				fmt.Fprintf(os.Stderr, "Error: failed to find folders recursively in %s: %v\n", folder, err)
 				hasErrors = true
