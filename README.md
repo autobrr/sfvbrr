@@ -20,7 +20,7 @@
 - [Quick Start](#quick-start)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Test](test/TESTS_RUNSHEET.md)
+- [Testing](#testing)
 - [License](#license)
 
 ## Overview
@@ -31,6 +31,7 @@
 
 - Verifies your scene releases for consistency and cleanliness
 - Validate checksums of scene release files (*.sfv)
+- Fully customizable
 
 **Key Features:**
 
@@ -256,21 +257,204 @@ rules:
 
 </details>
 
+It contains the rulesets for various scene categories (relies on [moistari/rls](https://github.com/moistari/rls)) which you can validate your data against, as well as verify the checksum of your data.
+
 ## Installation
 
 * Linux
 
 ```
 wget $(curl -s https://api.github.com/repos/autobrr/sfvbrr/releases/latest | grep browser_download_url | grep linux_x86_64 | cut -d\" -f4)
+tar xvzf sfvbrr_*
+sudo mv sfvbrr /usr/local/bin/
 ```
 
 * Windows
 
+```
+wget $(curl -s https://api.github.com/repos/autobrr/sfvbrr/releases/latest | grep browser_download_url | grep _windows_x86_64 | cut -d\" -f4)
+unzip sfvbrr_*
+move sfvbrr %windir%/system32
+```
+
 * MacOSX
+
+```
+wget $(curl -s https://api.github.com/repos/autobrr/sfvbrr/releases/latest | grep browser_download_url | grep darwin_x86_64 | cut -d\" -f4)
+tar xvzf sfvbrr_*
+sudo mv sfvbrr /usr/local/bin/
+```
 
 ## Usage
 
-* Basic
+* Key concepts
+
+The `presets.yaml` file is the configuration file that defines validation rules for different scene release categories (it can be customized for any content validation, including P2P folders of course). It allows you to specify what files and directories are required, allowed, or forbidden for each category of release. **Rules** are individual validation checks that are applied to a folder. Each rule specifies:
+- A pattern to match files or directories
+- Minimum and/or maximum count requirements
+- Optional description for explanation/documentation
+
+The `pattern` field specifies what files or directories to match. It supports 3 matching modes:
+- [Glob patterns](#glob-patterns) (default): Standard file glob patterns
+- [Regex patterns](#regex-patterns), when `regex: true` is set: The pattern is treated as a regular expression
+- [Nested patterns](#nested-patterns): Patterns with `/` to match files inside directories
+
+The `deny_unexpected` option is a **required** boolean flag (bu default `true`) for each pattern that controls strictness - only files/directories that match at least one rule pattern are allowed. Any file or directory that doesn't match any rule will cause validation to fail.
+
+Minimum/Maximum is another **required** field for each pattern (it has no default - `0`). If specified, the count of matching files/directories must be **greater than or equal** (min) / **less than or equal** (max) to this value.
+
+Type is an optional parameter. It specifies whether the pattern matches `file`s or `dir`ectories. When `type: dir` is used, the pattern matches directory names, not file names.
+
+### Matching details
+
+#### Glob patterns
+
+Glob patterns use standard file matching syntax:
+- `*` - matches any sequence of characters (except path separators)
+- `?` - matches any single character
+- `[abc]` - matches any character in the set
+- `*.ext` - matches all files with extension `.ext`
+
+#### Brace expansion
+
+You can use brace expansion for "OR" logic:
+- `*.{mkv,mp4}` - matches files ending in `.mkv` OR `.mp4`
+- `*.{zip,rar}` - matches files ending in `.zip` OR `.rar`
+
+#### Regex patterns
+
+When `regex: true`, the pattern uses Go's `regexp` package syntax:
+- `.*` - matches any sequence of characters
+- `\d` - matches a digit
+- `\d{2}` - matches exactly two digits
+- `^` - start of string
+- `$` - end of string
+
+**Example**: `.*\.r\d{2}$` matches filenames ending with `.r` followed by exactly two digits (this matches files like `file.r00`, `file.r01`, `file.r99`, etc.).
+
+#### Nested Patterns
+
+Patterns can include a path separator `/` to match files inside directories:
+- `Sample/*.{mkv,mp4}` - matches `.mkv` or `.mp4` files inside a `Sample` directory (such as `Sample/sample.mkv`)
+
+#### Defaults
+
+| Property          | Default Value | Notes                               |
+|-------------------|---------------|-------------------------------------|
+| `type`            | `"file"`      | Matches files by default            |
+| `regex`           | `false`       | Uses glob patterns by default       |
+| `min`             | `0`           | No minimum requirement              |
+| `max`             | `0`           | No maximum limit                    |
+| `description`     | `""`          | Optional, for documentation only    |
+| `deny_unexpected` | **Required**  | Must be explicitly set (no default) |
+
+### Examples
+
+#### Example 1: Simple File Requirement
+
+```yaml
+rules:
+  app:
+    deny_unexpected: true
+    rules:
+      - pattern: "*.nfo"
+        min: 1
+        max: 1
+        description: "Requires exactly one .nfo file"
+```
+
+This rule requires exactly one `.nfo` file in the folder of an "app" type.
+
+#### Example 2: Multiple File Types (OR Logic)
+
+```yaml
+rules:
+  music:
+    deny_unexpected: true
+    rules:
+      - pattern: "*.{mp3,flac}"
+        min: 1
+        description: "Requires at least one .mp3 or .flac file"
+```
+
+This rule requires at least one file that is either `.mp3` OR `.flac`.
+
+#### Example 3: Regex Pattern
+
+```yaml
+rules:
+  game:
+    deny_unexpected: true
+    rules:
+      - pattern: ".*\\.r\\d{2}$"
+        regex: true
+        min: 1
+        description: "Requires at least one .r?? file"
+```
+
+This rule requires at least one file matching the pattern `.r00`, `.r01`, `.r02`, etc.
+
+#### Example 4: Directory Matching
+
+```yaml
+rules:
+  episode:
+    deny_unexpected: true
+    rules:
+      - pattern: "Sample"
+        type: dir
+        min: 1
+        max: 1
+        description: "Requires exactly one Sample folder"
+      - pattern: "Sample/*.{mkv,mp4}"
+        min: 1
+        max: 1
+        description: "Requires exactly one video file in Sample folder"
+```
+
+This example shows:
+1. First rule: Requires exactly one directory named `Sample`
+2. Second rule: Requires exactly one `.mkv` or `.mp4` file inside that `Sample` directory
+
+#### Example 5: Complex Category
+
+```yaml
+rules:
+  app:
+    deny_unexpected: true
+    rules:
+      - pattern: "*.nfo"
+        min: 1
+        max: 1
+        description: "Requires only one .nfo file"
+      - pattern: "file_id.diz"
+        min: 1
+        max: 1
+        description: "Requires exactly one file_id.diz file"
+      - pattern: "*.diz"
+        max: 1
+        description: "Requires no other .diz files besides file_id.diz"
+      - pattern: "*.zip"
+        min: 1
+        description: "Requires at least one .zip file"
+```
+
+This example shows multiple rules working together:
+- Exactly one `.nfo` file
+- Exactly one `file_id.diz` file
+- No other `.diz` files (the `*.diz` pattern matches `file_id.diz` too, so max: 1 ensures only one total)
+- At least one `.zip` file
+
+### Tips & Tricks
+
+1. **Always set `deny_unexpected`**: This is required and helps ensure releases don't contain unexpected/unwanted/unrelated files.
+2. **Use specific patterns first**: When you have overlapping patterns (like `file_id.diz` and `*.diz`), put the more specific pattern first.
+3. **Test your patterns**: Regex patterns can be tricky. Test properly!
+4. **Use descriptions**: While optional, descriptions help document what each rule does and why it exists.
+5. **Order matters for clarity**: While rule order doesn't affect validation logic (all rules must pass), ordering them logically helps with readability.
+6. **Escape special characters in regex**: Remember to escape dots, parentheses, and other special regex characters when using `regex: true`.
+
+* Basic CLI
 
 <details>
 
@@ -297,7 +481,7 @@ Use "sfvbrr [command] --help" for more information about a command.
 
 </details>
 
-* Subcommand - sfv
+* CLI Subcommand - sfv
 
 <details>
 
@@ -336,7 +520,7 @@ Flags:
 
 </details>
 
-* Subcommand - validate
+* CLI Subcommand - validate
 
 <details>
 
@@ -372,6 +556,11 @@ Flags:
 ```
 
 </details>
+
+## Testing
+
+There is an entire dataset in [test/validate](test/validate/) which you can test the functionality against some hypothetical scenarios. The results are typically published in [test/TESTS_RUNSHEET.md](test/TESTS_RUNSHEET.md).
+
 
 ## License
 
