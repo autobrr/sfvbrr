@@ -30,20 +30,20 @@
 **sfvbrr** (pronounced _"es-ef-wee-brrrrrr"_) is a simple yet powerful tool for:
 
 - Verifies your scene releases for consistency and cleanliness
-- Validate checksums of scene release files (*.sfv)
-- Fully customizable
+- Validate checksums of scene release files (`*.sfv`) and `*.zip` file(s) integrity
+- Fully customizable via YAML presets file
 
 **Key Features:**
 
-- **Fast**: Blazingly fast checksum verification
-- **Simple**: Easy to use CLI
-- **Portable**: Single binary with no dependencies
+- **Fast**: Blazingly fast checksum and zip verification
+- **Simple**: Easy to use CLI (sample outputs [below](#command-line-arguments))
+- **Portable**: Single Go binary with no dependencies
 - **Smart**: Detects missing/extra files based on the content and type of release
-- **Customizable**: Various options in the config can change the behavior
+- **Customizable**: Various options in the [config](#key-concepts-of-the-presetsyaml) can change the behavior
 
 ## Quick Start
 
-Upon the first run (`sfvbrr validate /path/to/folder`), the binary will create a default [configuration](internal/preset/presets.yaml) in your `$HOME/.config/sfvbrr/` folder:
+Upon the first validation run (`sfvbrr validate /path/to/folder`), the binary will automatically create a default [configuration](internal/preset/presets.yaml) in your `$HOME/.config/sfvbrr/` folder, such as:
 
 <details>
 
@@ -257,11 +257,15 @@ rules:
 
 </details>
 
-It contains the rulesets for various scene categories (relies on [moistari/rls](https://github.com/moistari/rls)) which you can validate your data against, as well as verify the checksum of your data.
+It provides the rulesets for the most common 0day scene categories - built on [moistari/rls](https://github.com/moistari/rls) library allowing you to confirm its checksums, validate your data and make sure there is no garbage in them. The category can be manually [-- overwritten](#command-line-arguments), if required.
+
+With little to no time, you can adjust these out-of-the-box scene rules for your specific use-case.
 
 ## Installation
 
 * Linux
+
+<details>
 
 ```
 wget $(curl -s https://api.github.com/repos/autobrr/sfvbrr/releases/latest | grep browser_download_url | grep linux_x86_64 | cut -d\" -f4)
@@ -269,7 +273,11 @@ tar xvzf sfvbrr_*
 sudo mv sfvbrr /usr/local/bin/
 ```
 
+</details>
+
 * Windows
+
+<details>
 
 ```
 wget $(curl -s https://api.github.com/repos/autobrr/sfvbrr/releases/latest | grep browser_download_url | grep _windows_x86_64 | cut -d\" -f4)
@@ -277,7 +285,11 @@ unzip sfvbrr_*
 move sfvbrr %windir%/system32
 ```
 
+</details>
+
 * MacOSX
+
+<details>
 
 ```
 wget $(curl -s https://api.github.com/repos/autobrr/sfvbrr/releases/latest | grep browser_download_url | grep darwin_x86_64 | cut -d\" -f4)
@@ -285,11 +297,13 @@ tar xvzf sfvbrr_*
 sudo mv sfvbrr /usr/local/bin/
 ```
 
+</details>
+
 ## Usage
 
-* Key concepts
+### Key concepts of the `presets.yaml`
 
-The `presets.yaml` file is the configuration file that defines validation rules for different scene release categories (it can be customized for any content validation, including P2P folders of course). It allows you to specify what files and directories are required, allowed, or forbidden for each category of release. **Rules** are individual validation checks that are applied to a folder. Each rule specifies:
+The `presets.yaml` file is the configuration file that defines validation rules for different scene release categories (it can be customized for any content validation, including P2P folders). It allows you to specify what files and directories are required, allowed, or forbidden for each category of release. **Rules** are individual validation checks that are applied to a folder. Each rule specifies:
 - A pattern to match files or directories
 - Minimum and/or maximum count requirements
 - Optional description for explanation/documentation
@@ -309,19 +323,29 @@ Type is an optional parameter. It specifies whether the pattern matches `file`s 
 
 #### Glob patterns
 
+<details>
+
 Glob patterns use standard file matching syntax:
 - `*` - matches any sequence of characters (except path separators)
 - `?` - matches any single character
 - `[abc]` - matches any character in the set
 - `*.ext` - matches all files with extension `.ext`
 
+</details>
+
 #### Brace expansion
+
+<details>
 
 You can use brace expansion for "OR" logic:
 - `*.{mkv,mp4}` - matches files ending in `.mkv` OR `.mp4`
 - `*.{zip,rar}` - matches files ending in `.zip` OR `.rar`
 
+</details>
+
 #### Regex patterns
+
+<details>
 
 When `regex: true`, the pattern uses Go's `regexp` package syntax:
 - `.*` - matches any sequence of characters
@@ -332,16 +356,22 @@ When `regex: true`, the pattern uses Go's `regexp` package syntax:
 
 **Example**: `.*\.r\d{2}$` matches filenames ending with `.r` followed by exactly two digits (this matches files like `file.r00`, `file.r01`, `file.r99`, etc.).
 
+</details>
+
 #### Nested Patterns
+
+<details>
 
 Patterns can include a path separator `/` to match files inside directories:
 - `Sample/*.{mkv,mp4}` - matches `.mkv` or `.mp4` files inside a `Sample` directory (such as `Sample/sample.mkv`)
+
+</details>
 
 #### Defaults
 
 | Property          | Default Value | Notes                               |
 |-------------------|---------------|-------------------------------------|
-| `type`            | `"file"`      | Matches files by default            |
+| `type`            | `file`        | Matches files by default            |
 | `regex`           | `false`       | Uses glob patterns by default       |
 | `min`             | `0`           | No minimum requirement              |
 | `max`             | `0`           | No maximum limit                    |
@@ -349,6 +379,8 @@ Patterns can include a path separator `/` to match files inside directories:
 | `deny_unexpected` | **Required**  | Must be explicitly set (no default) |
 
 ### Examples
+
+<details>
 
 #### Example 1: Simple File Requirement
 
@@ -365,6 +397,10 @@ rules:
 
 This rule requires exactly one `.nfo` file in the folder of an "app" type.
 
+</details>
+
+<details>
+
 #### Example 2: Multiple File Types (OR Logic)
 
 ```yaml
@@ -378,6 +414,10 @@ rules:
 ```
 
 This rule requires at least one file that is either `.mp3` OR `.flac`.
+
+</details>
+
+<details>
 
 #### Example 3: Regex Pattern
 
@@ -393,6 +433,10 @@ rules:
 ```
 
 This rule requires at least one file matching the pattern `.r00`, `.r01`, `.r02`, etc.
+
+</details>
+
+<details>
 
 #### Example 4: Directory Matching
 
@@ -415,6 +459,10 @@ rules:
 This example shows:
 1. First rule: Requires exactly one directory named `Sample`
 2. Second rule: Requires exactly one `.mkv` or `.mp4` file inside that `Sample` directory
+
+</details>
+
+<details>
 
 #### Example 5: Complex Category
 
@@ -445,6 +493,8 @@ This example shows multiple rules working together:
 - No other `.diz` files (the `*.diz` pattern matches `file_id.diz` too, so max: 1 ensures only one total)
 - At least one `.zip` file
 
+</details>
+
 ### Tips & Tricks
 
 1. **Always set `deny_unexpected`**: This is required and helps ensure releases don't contain unexpected/unwanted/unrelated files.
@@ -453,6 +503,8 @@ This example shows multiple rules working together:
 4. **Use descriptions**: While optional, descriptions help document what each rule does and why it exists.
 5. **Order matters for clarity**: While rule order doesn't affect validation logic (all rules must pass), ordering them logically helps with readability.
 6. **Escape special characters in regex**: Remember to escape dots, parentheses, and other special regex characters when using `regex: true`.
+
+### Command-line arguments
 
 * Basic CLI
 
@@ -472,6 +524,7 @@ Available Commands:
   update      Update sfvbrr
   validate    Validate scene release folders
   version     Print version information
+  zip         Validate ZIP file integrity
 
 Flags:
   -h, --help   help for sfvbrr
@@ -481,7 +534,51 @@ Use "sfvbrr [command] --help" for more information about a command.
 
 </details>
 
-* CLI Subcommand - sfv
+* CLI Subcommand - **validate**
+
+<details>
+
+```bash
+$ sfvbrr validate --help
+Validate scene release folders against category-specific rules.
+
+The command detects the release category from the folder name and validates
+the folder contents against the rules defined in the preset configuration file.
+
+When the recursive option (-r) is used, the command will search for valid
+release folders in all subdirectories of the specified folder(s).
+
+The --overwrite flag allows you to bypass automatic category detection and
+manually specify a category for validation.
+
+Examples:
+  # Validate a single folder
+  sfvbrr validate /path/to/release
+
+  # Validate multiple folders
+  sfvbrr validate /path/to/release1 /path/to/release2
+
+  # Validate recursively
+  sfvbrr validate -r /path/to/releases
+
+  # Override category detection
+  sfvbrr validate --overwrite app /path/to/release
+
+Usage:
+  sfvbrr validate [folder...] [flags]
+
+Flags:
+  -h, --help               help for validate
+      --overwrite string   Override category detection with specified category (bypasses automatic detection)
+  -p, --preset string      Path to preset YAML file (default: auto-detect)
+  -q, --quiet              Quiet mode - only show errors
+  -r, --recursive          Recursively search for release folders in subdirectories
+  -v, --verbose            Show detailed validation results for each rule
+```
+
+</details>
+
+* CLI Subcommand - **sfv**
 
 <details>
 
@@ -520,39 +617,78 @@ Flags:
 
 </details>
 
-* CLI Subcommand - validate
+* CLI Subcommand - **zip**
 
 <details>
 
 ```bash
-$ sfvbrr validate --help
-Validate scene release folders against category-specific rules.
+$ sfvbrr zip --help
+Validate ZIP file integrity by testing all entries in ZIP files (equivalent to zip -T).
 
-The command detects the release category from the folder name and validates
-the folder contents against the rules defined in the preset configuration file.
+The command will search for ZIP files (case insensitive) in each specified folder
+and validate all entries in each ZIP file by reading them and verifying their CRC-32 checksums.
 
-When the recursive option (-r) is used, the command will search for valid
-release folders in all subdirectories of the specified folder(s).
+When the recursive option (-r) is used, the command will search for ZIP files in all
+subdirectories of the specified folder(s).
 
 Examples:
-  # Validate a single folder
-  sfvbrr validate /path/to/release
+  # Validate ZIP files in a single folder
+  sfvbrr zip /path/to/release
 
-  # Validate multiple folders
-  sfvbrr validate /path/to/release1 /path/to/release2
+  # Validate ZIP files in multiple folders
+  sfvbrr zip /path/to/release1 /path/to/release2
 
-  # Validate recursively
-  sfvbrr validate -r /path/to/releases
+  # Validate ZIP files recursively
+  sfvbrr zip -r /path/to/releases
 
 Usage:
-  sfvbrr validate [folder...] [flags]
+  sfvbrr zip [folder...] [flags]
 
 Flags:
-  -h, --help            help for validate
-  -p, --preset string   Path to preset YAML file (default: auto-detect)
-  -q, --quiet           Quiet mode - only show errors
-  -r, --recursive       Recursively search for release folders in subdirectories
-  -v, --verbose         Show detailed validation results for each rule
+  -b, --buffer-size int     Buffer size for file reading in bytes (0 = auto, default 64KB)
+      --cpuprofile string   Write CPU profile to file
+  -h, --help                help for zip
+  -q, --quiet               Quiet mode - only show errors
+  -r, --recursive           Recursively search for ZIP files in subdirectories
+  -v, --verbose             Show detailed validation results for each entry
+  -w, --workers int         Number of parallel workers (0 = auto-detect)
+```
+
+</details>
+
+* CLI Subcommand - **completion**
+
+<details>
+
+```bash
+$ sfvbrr completion bash --help
+Generate the autocompletion script for the bash shell.
+
+This script depends on the 'bash-completion' package.
+If it is not installed already, you can install it via your OS's package manager.
+
+To load completions in your current shell session:
+
+	source <(sfvbrr completion bash)
+
+To load completions for every new session, execute once:
+
+#### Linux:
+
+	sfvbrr completion bash > /etc/bash_completion.d/sfvbrr
+
+#### macOS:
+
+	sfvbrr completion bash > $(brew --prefix)/etc/bash_completion.d/sfvbrr
+
+You will need to start a new shell for this setup to take effect.
+
+Usage:
+  sfvbrr completion bash
+
+Flags:
+  -h, --help              help for bash
+      --no-descriptions   disable completion descriptions
 ```
 
 </details>
