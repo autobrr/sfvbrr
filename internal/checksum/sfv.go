@@ -213,15 +213,19 @@ func ValidateSFV(sfv *SFVFile, opts Options) (*ValidationResult, error) {
 	formatter := NewFormatter(opts.Verbose)
 	displayer := NewDisplay(formatter)
 	displayer.SetQuiet(opts.Quiet)
-	displayer.SetBatch(opts.Recursive) // Batch mode for recursive operations
+	// Don't set batch mode - we want progress even in recursive/multi-folder mode
+	// Batch mode is only for suppressing file listings, not progress bars
 
 	// Show files and initialize progress bar
-	if !opts.Quiet && !opts.Recursive {
-		displayer.ShowFiles(sfv.Entries, workers)
+	if !opts.Quiet {
+		// Only show file tree for single folder, non-recursive mode
+		if !opts.Recursive && len(sfv.Entries) <= 20 {
+			displayer.ShowFiles(sfv.Entries, workers)
+		}
 		displayer.ShowProgress(len(sfv.Entries))
 	}
 	defer func() {
-		if !opts.Quiet && !opts.Recursive {
+		if !opts.Quiet {
 			displayer.FinishProgress()
 		}
 	}()
