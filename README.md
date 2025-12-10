@@ -43,7 +43,7 @@
 
 ## Quick Start
 
-Upon the first start, the binary will create a default [configuration](internal/preset/presets.yaml) in your `$HOME/.config/sfvbrr/` folder:
+Upon the first run (`sfvbrr validate /path/to/folder`), the binary will create a default [configuration](internal/preset/presets.yaml) in your `$HOME/.config/sfvbrr/` folder:
 
 <details>
 
