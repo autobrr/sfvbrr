@@ -304,6 +304,57 @@ func DisplayResult(result *ValidationResult, opts Options) bool {
 	return result.InvalidFiles > 0 || result.MissingFiles > 0
 }
 
+// DisplayZIPResult displays the ZIP validation results to the user
+// Returns true if validation failed (has invalid entries)
+func DisplayZIPResult(result *ZIPValidationResult, opts Options) bool {
+	formatter := NewFormatter(opts.Verbose)
+	display := NewDisplay(formatter)
+	display.SetQuiet(opts.Quiet)
+	display.SetBatch(opts.Recursive) // Batch mode for recursive operations
+
+	if opts.Quiet {
+		// In quiet mode, only show summary if there are errors
+		if result.InvalidEntries > 0 {
+			fmt.Fprintf(os.Stderr, "%s: %d invalid\n",
+				result.ZIPFile.Path,
+				result.InvalidEntries)
+		}
+		return result.InvalidEntries > 0
+	}
+
+	// Show ZIP file path
+	fmt.Fprintf(display.output, "\n%s\n", magenta("Validating ZIP:"))
+	fmt.Fprintf(display.output, "  %-13s %s\n", label("ZIP file:"), result.ZIPFile.Path)
+	fmt.Fprintf(display.output, "  %-13s %d\n", label("Files in archive:"), result.TotalEntries)
+	fmt.Fprintln(display.output)
+
+	// Show individual results if verbose
+	if opts.Verbose {
+		fmt.Fprintf(display.output, "%s\n", magenta("Validation results:"))
+		for _, res := range result.Results {
+			if res.Valid {
+				fmt.Fprintf(display.output, "  %s %s\n", success("✓"), res.Entry.Name)
+			} else {
+				if res.Error != nil {
+					fmt.Fprintf(display.output, "  %s %s %s\n", errorColor("✗"), res.Entry.Name, errorColor(fmt.Sprintf("(%s)", res.Error.Error())))
+				}
+			}
+		}
+		fmt.Fprintln(display.output)
+	}
+
+	// Show summary
+	fmt.Fprintf(display.output, "%s\n", magenta("Summary:"))
+	fmt.Fprintf(display.output, "  %-15s %s\n", label("Valid:"), success(result.ValidEntries))
+	if result.InvalidEntries > 0 {
+		fmt.Fprintf(display.output, "  %-15s %s\n", label("Invalid:"), errorColor(result.InvalidEntries))
+	}
+	fmt.Fprintln(display.output)
+
+	// Return true if validation failed
+	return result.InvalidEntries > 0
+}
+
 type Formatter struct {
 	verbose bool
 }
