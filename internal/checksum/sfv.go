@@ -209,6 +209,23 @@ func ValidateSFV(sfv *SFVFile, opts Options) (*ValidationResult, error) {
 		bufferSize = maxBufferSize
 	}
 
+	// Create displayer for progress tracking
+	formatter := NewFormatter(opts.Verbose)
+	displayer := NewDisplay(formatter)
+	displayer.SetQuiet(opts.Quiet)
+	displayer.SetBatch(opts.Recursive) // Batch mode for recursive operations
+
+	// Show files and initialize progress bar
+	if !opts.Quiet && !opts.Recursive {
+		displayer.ShowFiles(sfv.Entries, workers)
+		displayer.ShowProgress(len(sfv.Entries))
+	}
+	defer func() {
+		if !opts.Quiet && !opts.Recursive {
+			displayer.FinishProgress()
+		}
+	}()
+
 	result := &ValidationResult{
 		SFVFile:    *sfv,
 		Results:    make([]SFVResult, len(sfv.Entries)),
@@ -277,7 +294,11 @@ func ValidateSFV(sfv *SFVFile, opts Options) (*ValidationResult, error) {
 		close(resultChan)
 	}()
 
-	// Collect results
+	// Create progress tracker
+	tracker := NewProgressTracker(len(sfv.Entries))
+	completed := 0
+
+	// Collect results and update progress
 	for res := range resultChan {
 		result.Results[res.index] = res.result
 		if res.result.Valid {
@@ -292,8 +313,13 @@ func ValidateSFV(sfv *SFVFile, opts Options) (*ValidationResult, error) {
 				result.Errors = append(result.Errors, res.result.Error)
 			}
 		}
+
+		// Update progress
+		completed++
+		tracker.Update(completed)
+		rate := tracker.GetRate()
+		displayer.UpdateProgress(completed, rate)
 	}
 
 	return result, nil
 }
-
