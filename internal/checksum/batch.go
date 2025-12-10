@@ -7,6 +7,30 @@ import (
 	"strings"
 )
 
+// FindSFVFiles finds all SFV files in the given directory (case insensitive)
+func FindSFVFiles(dir string) ([]string, error) {
+	entries, err := os.ReadDir(dir)
+	if err != nil {
+		return nil, fmt.Errorf("failed to read directory: %w", err)
+	}
+
+	var sfvFiles []string
+	for _, entry := range entries {
+		if !entry.IsDir() {
+			filename := entry.Name()
+			if strings.EqualFold(filepath.Ext(filename), ".sfv") {
+				sfvFiles = append(sfvFiles, filepath.Join(dir, filename))
+			}
+		}
+	}
+
+	if len(sfvFiles) == 0 {
+		return nil, fmt.Errorf("no SFV files found in directory: %s", dir)
+	}
+
+	return sfvFiles, nil
+}
+
 // FindSFVFilesRecursive finds all SFV files recursively in the given directory
 func FindSFVFilesRecursive(dir string) ([]string, error) {
 	var sfvFiles []string
@@ -109,21 +133,23 @@ func ValidateFolders(folders []string, opts Options) error {
 				}
 			}
 		} else {
-			// Find SFV file in current directory only
-			sfvPath, err := FindSFVFile(absPath)
+			// Find all SFV files in current directory only
+			sfvFiles, err := FindSFVFiles(absPath)
 			if err != nil {
 				fmt.Fprintf(os.Stderr, "Error: %v\n", err)
 				hasErrors = true
 				continue
 			}
 
-			// Validate SFV
-			failed, err := validateSingleSFV(sfvPath, opts)
-			if err != nil {
-				fmt.Fprintf(os.Stderr, "Error: %v\n", err)
-				hasErrors = true
-			} else if failed {
-				hasErrors = true
+			// Validate each SFV file found
+			for _, sfvPath := range sfvFiles {
+				failed, err := validateSingleSFV(sfvPath, opts)
+				if err != nil {
+					fmt.Fprintf(os.Stderr, "Error: %v\n", err)
+					hasErrors = true
+				} else if failed {
+					hasErrors = true
+				}
 			}
 		}
 	}

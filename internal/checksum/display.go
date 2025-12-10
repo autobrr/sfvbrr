@@ -63,9 +63,10 @@ func (d *Display) ShowProgress(total int) {
 func (d *Display) UpdateProgress(completed int, rate float64) {
 	// Progress bar needs explicit quiet check because it writes directly to the terminal,
 	// bypassing our d.output writer
-	if d.isBatch || d.quiet {
+	if d.quiet {
 		return
 	}
+	// Allow progress updates even in batch mode - batch mode only suppresses file listings
 	if d.bar != nil {
 		if err := d.bar.Set(completed); err != nil {
 			// Silently ignore progress bar errors
@@ -82,7 +83,7 @@ func (d *Display) UpdateProgress(completed int, rate float64) {
 
 // ShowFiles displays the list of files being validated and the number of workers used.
 func (d *Display) ShowFiles(entries []SFVEntry, numWorkers int) {
-	if d.quiet {
+	if d.quiet || d.isBatch {
 		return
 	}
 

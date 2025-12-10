@@ -209,6 +209,27 @@ func ValidateSFV(sfv *SFVFile, opts Options) (*ValidationResult, error) {
 		bufferSize = maxBufferSize
 	}
 
+	// Create displayer for progress tracking
+	formatter := NewFormatter(opts.Verbose)
+	displayer := NewDisplay(formatter)
+	displayer.SetQuiet(opts.Quiet)
+	// Don't set batch mode - we want progress even in recursive/multi-folder mode
+	// Batch mode is only for suppressing file listings, not progress bars
+
+	// Show files and initialize progress bar
+	if !opts.Quiet {
+		// Only show file tree for single folder, non-recursive mode
+		if !opts.Recursive && len(sfv.Entries) <= 20 {
+			displayer.ShowFiles(sfv.Entries, workers)
+		}
+		displayer.ShowProgress(len(sfv.Entries))
+	}
+	defer func() {
+		if !opts.Quiet {
+			displayer.FinishProgress()
+		}
+	}()
+
 	result := &ValidationResult{
 		SFVFile:    *sfv,
 		Results:    make([]SFVResult, len(sfv.Entries)),
@@ -277,7 +298,11 @@ func ValidateSFV(sfv *SFVFile, opts Options) (*ValidationResult, error) {
 		close(resultChan)
 	}()
 
-	// Collect results
+	// Create progress tracker
+	tracker := NewProgressTracker(len(sfv.Entries))
+	completed := 0
+
+	// Collect results and update progress
 	for res := range resultChan {
 		result.Results[res.index] = res.result
 		if res.result.Valid {
@@ -292,8 +317,13 @@ func ValidateSFV(sfv *SFVFile, opts Options) (*ValidationResult, error) {
 				result.Errors = append(result.Errors, res.result.Error)
 			}
 		}
+
+		// Update progress
+		completed++
+		tracker.Update(completed)
+		rate := tracker.GetRate()
+		displayer.UpdateProgress(completed, rate)
 	}
 
 	return result, nil
 }
-
