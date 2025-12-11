@@ -326,6 +326,11 @@ func DisplayZIPResult(result *ZIPValidationResult, opts Options) bool {
 	fmt.Fprintf(display.output, "\n%s\n", magenta("Validating ZIP:"))
 	fmt.Fprintf(display.output, "  %-13s %s\n", label("ZIP file:"), result.ZIPFile.Path)
 	fmt.Fprintf(display.output, "  %-13s %d\n", label("Files in archive:"), result.TotalEntries)
+
+	// If ZIP file couldn't be parsed, show the error
+	if result.TotalEntries == 0 && len(result.Errors) > 0 {
+		fmt.Fprintf(display.output, "  %-13s %s\n", label("Error:"), errorColor(result.Errors[0].Error()))
+	}
 	fmt.Fprintln(display.output)
 
 	// Show individual results if verbose
