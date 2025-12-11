@@ -18,9 +18,9 @@ type ZIPEntry struct {
 
 // ZIPResult represents the result of validating a single ZIP entry
 type ZIPResult struct {
-	Entry    ZIPEntry
-	Valid    bool
-	Error    error
+	Entry ZIPEntry
+	Valid bool
+	Error error
 }
 
 // ZIPFile represents a ZIP file being validated
@@ -31,12 +31,12 @@ type ZIPFile struct {
 
 // ZIPValidationResult represents the overall result of ZIP validation
 type ZIPValidationResult struct {
-	ZIPFile      ZIPFile
-	Results      []ZIPResult
-	TotalEntries int
-	ValidEntries int
+	ZIPFile        ZIPFile
+	Results        []ZIPResult
+	TotalEntries   int
+	ValidEntries   int
 	InvalidEntries int
-	Errors       []error
+	Errors         []error
 }
 
 // FindZIPFiles finds all ZIP files in the given directory (case insensitive)
@@ -284,7 +284,21 @@ func validateSingleZIP(zipPath string, opts Options) (bool, error) {
 	// Parse ZIP file
 	zip, err := ParseZIPFile(zipPath)
 	if err != nil {
-		return false, fmt.Errorf("failed to parse ZIP file %s: %w", zipPath, err)
+		// Create a result indicating the ZIP file is invalid/corrupted
+		result := &ZIPValidationResult{
+			ZIPFile: ZIPFile{
+				Path:    zipPath,
+				Entries: []ZIPEntry{},
+			},
+			Results:        []ZIPResult{},
+			TotalEntries:   0,
+			ValidEntries:   0,
+			InvalidEntries: 1, // Mark as invalid since we couldn't parse it
+			Errors:         []error{err},
+		}
+		// Display results and return validation status
+		failed := DisplayZIPResult(result, opts)
+		return failed, nil
 	}
 
 	// Validate ZIP
