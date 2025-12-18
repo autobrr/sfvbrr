@@ -47,7 +47,7 @@ jobs:
           cache: true
 
       - name: Cache Go modules
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ~/go/pkg/mod
           key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
@@ -63,7 +63,7 @@ jobs:
           go tool cover -html=coverage.out -o coverage.html
 
       - name: Upload coverage reports
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: coverage-report
           path: |
@@ -109,7 +109,7 @@ jobs:
           BUILDER: ${{ github.actor }}@github-actions
 
       - name: Upload assets
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: sfvbrr
           path: |
@@ -192,7 +192,7 @@ jobs:
   #         touch "/tmp/digests/${digest#sha256:}"
 
   #     - name: Upload image digest
-  #       uses: actions/upload-artifact@v5
+  #       uses: actions/upload-artifact@v6
   #       with:
   #         name: docker-digests-${{ steps.digest-prep.outputs.manifest-hash }}
   #         path: /tmp/digests/*
