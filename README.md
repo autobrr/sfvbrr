@@ -20,6 +20,7 @@
 - [Quick Start](#quick-start)
 - [Installation](#installation)
 - [Usage](#usage)
+- [Integration](#integration-with-qui)
 - [Testing](#testing)
 - [License](#license)
 
@@ -692,6 +693,12 @@ Flags:
 ```
 
 </details>
+
+## Integration with [Qui](https://github.com/autobrr/qui)
+
+An example of the validation process:
+
+![qui_screenshot](.github/assets/qui_screenshot.png)
 
 ## Testing
 
