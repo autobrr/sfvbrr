@@ -1,0 +1,3839 @@
+{
+  "folder_path": "01_1/App.Pro.v1.1.1.Linux.RPM.ARM64.Incl.Keymaker-GRP",
+  "category": "app",
+  "valid": true,
+  "rule_results": [
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .nfo file"
+    },
+    {
+      "pattern": "file_id.diz",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires exactly one file_id.diz file"
+    },
+    {
+      "pattern": "*.diz",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires no other .diz files besides file_id.diz"
+    },
+    {
+      "pattern": "*.zip",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires at least one .zip file"
+    }
+  ]
+}
+{
+  "folder_path": "01_2/Corporation.Program.v1.0.0.0.x64.Multilingual.Incl.Keymaker-GRP",
+  "category": "app",
+  "valid": true,
+  "rule_results": [
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .nfo file"
+    },
+    {
+      "pattern": "file_id.diz",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires exactly one file_id.diz file"
+    },
+    {
+      "pattern": "*.diz",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires no other .diz files besides file_id.diz"
+    },
+    {
+      "pattern": "*.zip",
+      "type": "",
+      "matched": 2,
+      "valid": true,
+      "description": "Requires at least one .zip file"
+    }
+  ]
+}
+{
+  "folder_path": "01_3/APPLICATION.TEXT.TEXT.V2025.2-GRP",
+  "category": "app",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .nfo file"
+    },
+    {
+      "pattern": "file_id.diz",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires exactly one file_id.diz file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "*.diz",
+      "type": "",
+      "matched": 0,
+      "valid": true,
+      "description": "Requires no other .diz files besides file_id.diz"
+    },
+    {
+      "pattern": "*.zip",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires at least one .zip file"
+    }
+  ],
+  "errors": [
+    "found 0 matches, but minimum required is 1"
+  ]
+}
+{
+  "folder_path": "01_4/AppApp.v10.00.MacOS.UB.Incl.Keygen-GRP",
+  "category": "app",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 2,
+      "valid": false,
+      "description": "Requires only one .nfo file",
+      "error": "found 2 matches, but maximum allowed is 1"
+    },
+    {
+      "pattern": "file_id.diz",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires exactly one file_id.diz file"
+    },
+    {
+      "pattern": "*.diz",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires no other .diz files besides file_id.diz"
+    },
+    {
+      "pattern": "*.zip",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires at least one .zip file"
+    }
+  ],
+  "errors": [
+    "found 2 matches, but maximum allowed is 1"
+  ]
+}
+{
+  "folder_path": "01_5/Software.Tool.Compiler.v2025.20.x86.Incl.Keygen-GRP",
+  "category": "app",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .nfo file"
+    },
+    {
+      "pattern": "file_id.diz",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires exactly one file_id.diz file"
+    },
+    {
+      "pattern": "*.diz",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires no other .diz files besides file_id.diz"
+    },
+    {
+      "pattern": "*.zip",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires at least one .zip file",
+      "error": "found 0 matches, but minimum required is 1"
+    }
+  ],
+  "unexpected_files": [
+    "installer.rar"
+  ],
+  "errors": [
+    "found 0 matches, but minimum required is 1",
+    "found 1 unexpected file(s)/directory(ies)"
+  ]
+}
+{
+  "folder_path": "01_6/App.Pro.v1.1.1.Linux.RPM.ARM64.Incl.Keymaker-GRP",
+  "category": "app",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .nfo file"
+    },
+    {
+      "pattern": "file_id.diz",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires exactly one file_id.diz file"
+    },
+    {
+      "pattern": "*.diz",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires no other .diz files besides file_id.diz"
+    },
+    {
+      "pattern": "*.zip",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires at least one .zip file"
+    }
+  ],
+  "unexpected_files": [
+    "completely_unrelated_file.txt"
+  ],
+  "errors": [
+    "found 1 unexpected file(s)/directory(ies)"
+  ]
+}
+{
+  "folder_path": "02_1/First_Last_-_Title-AUDiOBOOK-WEB-EN-2025-GRP",
+  "category": "audiobook",
+  "valid": true,
+  "rule_results": [
+    {
+      "pattern": "*.m3u",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires at least one .m3u file"
+    },
+    {
+      "pattern": "*.sfv",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires at least one .sfv file"
+    },
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .nfo file"
+    },
+    {
+      "pattern": "*.mp3",
+      "type": "",
+      "matched": 10,
+      "valid": true,
+      "description": "Requires at least one .mp3 file"
+    },
+    {
+      "pattern": "*.jpg",
+      "type": "",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows any amount of .jpg files"
+    }
+  ]
+}
+{
+  "folder_path": "02_2/Artist-Title-AUDiOBOOK-WEB-EN-2025-GRP",
+  "category": "audiobook",
+  "valid": true,
+  "rule_results": [
+    {
+      "pattern": "*.m3u",
+      "type": "",
+      "matched": 3,
+      "valid": true,
+      "description": "Requires at least one .m3u file"
+    },
+    {
+      "pattern": "*.sfv",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires at least one .sfv file"
+    },
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .nfo file"
+    },
+    {
+      "pattern": "*.mp3",
+      "type": "",
+      "matched": 20,
+      "valid": true,
+      "description": "Requires at least one .mp3 file"
+    },
+    {
+      "pattern": "*.jpg",
+      "type": "",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows any amount of .jpg files"
+    }
+  ]
+}
+{
+  "folder_path": "02_3/First_Last_-_1_2_3_4_5_6-AUDiOBOOK-WEB-SE-2025-GRP",
+  "category": "audiobook",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*.m3u",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires at least one .m3u file"
+    },
+    {
+      "pattern": "*.sfv",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires at least one .sfv file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .nfo file"
+    },
+    {
+      "pattern": "*.mp3",
+      "type": "",
+      "matched": 10,
+      "valid": true,
+      "description": "Requires at least one .mp3 file"
+    },
+    {
+      "pattern": "*.jpg",
+      "type": "",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows any amount of .jpg files"
+    }
+  ],
+  "errors": [
+    "found 0 matches, but minimum required is 1"
+  ]
+}
+{
+  "folder_path": "02_4/First_Last_-_Title-AUDiOBOOK-WEB-EN-2025-GRP",
+  "category": "audiobook",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*.m3u",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires at least one .m3u file"
+    },
+    {
+      "pattern": "*.sfv",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires at least one .sfv file"
+    },
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .nfo file"
+    },
+    {
+      "pattern": "*.mp3",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires at least one .mp3 file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "*.jpg",
+      "type": "",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows any amount of .jpg files"
+    }
+  ],
+  "unexpected_files": [
+    "01-track.m4b"
+  ],
+  "errors": [
+    "found 0 matches, but minimum required is 1",
+    "found 1 unexpected file(s)/directory(ies)"
+  ]
+}
+{
+  "folder_path": "02_5/First_Last_-_Title-AUDiOBOOK-WEB-EN-2025-GRP",
+  "category": "audiobook",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*.m3u",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires at least one .m3u file"
+    },
+    {
+      "pattern": "*.sfv",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires at least one .sfv file"
+    },
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 2,
+      "valid": false,
+      "description": "Requires only one .nfo file",
+      "error": "found 2 matches, but maximum allowed is 1"
+    },
+    {
+      "pattern": "*.mp3",
+      "type": "",
+      "matched": 10,
+      "valid": true,
+      "description": "Requires at least one .mp3 file"
+    },
+    {
+      "pattern": "*.jpg",
+      "type": "",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows any amount of .jpg files"
+    }
+  ],
+  "errors": [
+    "found 2 matches, but maximum allowed is 1"
+  ]
+}
+{
+  "folder_path": "02_6/First_Last_-_Title-AUDiOBOOK-WEB-EN-2025-GRP",
+  "category": "audiobook",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*.m3u",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires at least one .m3u file"
+    },
+    {
+      "pattern": "*.sfv",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires at least one .sfv file"
+    },
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .nfo file"
+    },
+    {
+      "pattern": "*.mp3",
+      "type": "",
+      "matched": 10,
+      "valid": true,
+      "description": "Requires at least one .mp3 file"
+    },
+    {
+      "pattern": "*.jpg",
+      "type": "",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows any amount of .jpg files"
+    }
+  ],
+  "unexpected_files": [
+    "completely_unrelated_file.txt"
+  ],
+  "errors": [
+    "found 1 unexpected file(s)/directory(ies)"
+  ]
+}
+{
+  "folder_path": "03_1/First.Last.The.Title.2025.RETAiL.ePub.eBook-GRP",
+  "category": "book",
+  "valid": true,
+  "rule_results": [
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .nfo file"
+    },
+    {
+      "pattern": "file_id.diz",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires exactly one file_id.diz file"
+    },
+    {
+      "pattern": "*.diz",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires no other .diz files besides file_id.diz"
+    },
+    {
+      "pattern": "*.zip",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires at least one .zip file"
+    }
+  ]
+}
+{
+  "folder_path": "03_2/Publishing.Title.Second.Edition.Artbook.2025.Scan.eBook-GRP",
+  "category": "book",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one .nfo file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "file_id.diz",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires exactly one file_id.diz file"
+    },
+    {
+      "pattern": "*.diz",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires no other .diz files besides file_id.diz"
+    },
+    {
+      "pattern": "*.zip",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires at least one .zip file"
+    }
+  ],
+  "errors": [
+    "found 0 matches, but minimum required is 1"
+  ]
+}
+{
+  "folder_path": "03_3/Publisher.-.Word.Word.Word.3rd.Edition.2025.Retail.EPUB.eBook-GRP",
+  "category": "book",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .nfo file"
+    },
+    {
+      "pattern": "file_id.diz",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires exactly one file_id.diz file"
+    },
+    {
+      "pattern": "*.diz",
+      "type": "",
+      "matched": 2,
+      "valid": false,
+      "description": "Requires no other .diz files besides file_id.diz",
+      "error": "found 2 matches, but maximum allowed is 1"
+    },
+    {
+      "pattern": "*.zip",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires at least one .zip file"
+    }
+  ],
+  "errors": [
+    "found 2 matches, but maximum allowed is 1"
+  ]
+}
+{
+  "folder_path": "03_4/Books.-.La.La.La.La.La.La.La.La.La.2025.Retail.eBook-GRP",
+  "category": "book",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one .nfo file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "file_id.diz",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires exactly one file_id.diz file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "*.diz",
+      "type": "",
+      "matched": 0,
+      "valid": true,
+      "description": "Requires no other .diz files besides file_id.diz"
+    },
+    {
+      "pattern": "*.zip",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires at least one .zip file",
+      "error": "found 0 matches, but minimum required is 1"
+    }
+  ],
+  "unexpected_files": [
+    "file1.pdf",
+    "file2.epub"
+  ],
+  "errors": [
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 2 unexpected file(s)/directory(ies)"
+  ]
+}
+{
+  "folder_path": "03_5/First.Last.The.Title.2025.RETAiL.ePub.eBook-GRP",
+  "category": "book",
+  "valid": true,
+  "rule_results": [
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .nfo file"
+    },
+    {
+      "pattern": "file_id.diz",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires exactly one file_id.diz file"
+    },
+    {
+      "pattern": "*.diz",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires no other .diz files besides file_id.diz"
+    },
+    {
+      "pattern": "*.zip",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires at least one .zip file"
+    }
+  ]
+}
+{
+  "folder_path": "04_1/Comics.-.Title.Vol.01.2025.Retail.Comic.eBook-GRP",
+  "category": "comic",
+  "valid": true,
+  "rule_results": [
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .nfo file"
+    },
+    {
+      "pattern": "file_id.diz",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires exactly one file_id.diz file"
+    },
+    {
+      "pattern": "*.diz",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires no other .diz files besides file_id.diz"
+    },
+    {
+      "pattern": "*.zip",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires at least one .zip file"
+    }
+  ]
+}
+{
+  "folder_path": "04_2/Comics.-.Title.Vol.02.2025.Retail.Comic.eBook-GRP",
+  "category": "comic",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .nfo file"
+    },
+    {
+      "pattern": "file_id.diz",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires exactly one file_id.diz file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "*.diz",
+      "type": "",
+      "matched": 0,
+      "valid": true,
+      "description": "Requires no other .diz files besides file_id.diz"
+    },
+    {
+      "pattern": "*.zip",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires at least one .zip file"
+    }
+  ],
+  "errors": [
+    "found 0 matches, but minimum required is 1"
+  ]
+}
+{
+  "folder_path": "04_3/Comics.-.Title.Vol.03.2025.Retail.Comic.eBook-GRP",
+  "category": "comic",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .nfo file"
+    },
+    {
+      "pattern": "file_id.diz",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires exactly one file_id.diz file"
+    },
+    {
+      "pattern": "*.diz",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires no other .diz files besides file_id.diz"
+    },
+    {
+      "pattern": "*.zip",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires at least one .zip file",
+      "error": "found 0 matches, but minimum required is 1"
+    }
+  ],
+  "unexpected_files": [
+    "issue1.cbr"
+  ],
+  "errors": [
+    "found 0 matches, but minimum required is 1",
+    "found 1 unexpected file(s)/directory(ies)"
+  ]
+}
+{
+  "folder_path": "04_4/Comics.-.Title.Vol.04.2025.Retail.Comic.eBook-GRP",
+  "category": "comic",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 2,
+      "valid": false,
+      "description": "Requires only one .nfo file",
+      "error": "found 2 matches, but maximum allowed is 1"
+    },
+    {
+      "pattern": "file_id.diz",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires exactly one file_id.diz file"
+    },
+    {
+      "pattern": "*.diz",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires no other .diz files besides file_id.diz"
+    },
+    {
+      "pattern": "*.zip",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires at least one .zip file"
+    }
+  ],
+  "errors": [
+    "found 2 matches, but maximum allowed is 1"
+  ]
+}
+{
+  "folder_path": "04_5/Comics.-.Title.Vol.01.2025.Retail.Comic.eBook-GRP",
+  "category": "comic",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .nfo file"
+    },
+    {
+      "pattern": "file_id.diz",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires exactly one file_id.diz file"
+    },
+    {
+      "pattern": "*.diz",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires no other .diz files besides file_id.diz"
+    },
+    {
+      "pattern": "*.zip",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires at least one .zip file"
+    }
+  ],
+  "unexpected_files": [
+    "completely_unrelated_file.txt"
+  ],
+  "errors": [
+    "found 1 unexpected file(s)/directory(ies)"
+  ]
+}
+{
+  "folder_path": "05_1/Learning.-.Topic.UPDATED.November.2025.BOOKWARE-GRP",
+  "category": "education",
+  "valid": true,
+  "rule_results": [
+    {
+      "pattern": "*.rar",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .rar file"
+    },
+    {
+      "pattern": "*.sfv",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .sfv file"
+    },
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .nfo file"
+    },
+    {
+      "pattern": ".*\\.[r-z]\\d{2}$",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "It usually contains one or more .r?? files"
+    }
+  ]
+}
+{
+  "folder_path": "05_2/OREILLY_CLOUD-GRP",
+  "category": "education",
+  "valid": true,
+  "rule_results": [
+    {
+      "pattern": "*.rar",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .rar file"
+    },
+    {
+      "pattern": "*.sfv",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .sfv file"
+    },
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .nfo file"
+    },
+    {
+      "pattern": ".*\\.[r-z]\\d{2}$",
+      "type": "",
+      "matched": 100,
+      "valid": true,
+      "description": "It usually contains one or more .r?? files"
+    }
+  ]
+}
+{
+  "folder_path": "05_3/WHATEVER_TUTORIAL-ISO",
+  "category": "education",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*.rar",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one .rar file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "*.sfv",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .sfv file"
+    },
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .nfo file"
+    },
+    {
+      "pattern": ".*\\.[r-z]\\d{2}$",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "It usually contains one or more .r?? files",
+      "error": "found 0 matches, but minimum required is 1"
+    }
+  ],
+  "unexpected_files": [
+    "tutorial.bin"
+  ],
+  "errors": [
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 1 unexpected file(s)/directory(ies)"
+  ]
+}
+{
+  "folder_path": "05_4/Udemy.The.Best.Seminar.TUTORiAL.GERMAN-GRP",
+  "category": "education",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*.rar",
+      "type": "",
+      "matched": 2,
+      "valid": false,
+      "description": "Requires only one .rar file",
+      "error": "found 2 matches, but maximum allowed is 1"
+    },
+    {
+      "pattern": "*.sfv",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .sfv file"
+    },
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .nfo file"
+    },
+    {
+      "pattern": ".*\\.[r-z]\\d{2}$",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "It usually contains one or more .r?? files",
+      "error": "found 0 matches, but minimum required is 1"
+    }
+  ],
+  "errors": [
+    "found 2 matches, but maximum allowed is 1",
+    "found 0 matches, but minimum required is 1"
+  ]
+}
+{
+  "folder_path": "05_5/Udemy.The.Best.Seminar.BOOKWARE.SWEDISH-GRP",
+  "category": "education",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*.rar",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .rar file"
+    },
+    {
+      "pattern": "*.sfv",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one .sfv file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .nfo file"
+    },
+    {
+      "pattern": ".*\\.[r-z]\\d{2}$",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "It usually contains one or more .r?? files",
+      "error": "found 0 matches, but minimum required is 1"
+    }
+  ],
+  "errors": [
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1"
+  ]
+}
+{
+  "folder_path": "05_6/Learning.-.Topic.UPDATED.November.2025.BOOKWARE-GRP",
+  "category": "education",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*.rar",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .rar file"
+    },
+    {
+      "pattern": "*.sfv",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .sfv file"
+    },
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .nfo file"
+    },
+    {
+      "pattern": ".*\\.[r-z]\\d{2}$",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "It usually contains one or more .r?? files"
+    }
+  ],
+  "unexpected_files": [
+    "Whatever"
+  ],
+  "errors": [
+    "found 1 unexpected file(s)/directory(ies)"
+  ]
+}
+{
+  "folder_path": "06_1/Show.S01E06.1080p.WEB.h264-GRP",
+  "category": "episode",
+  "valid": true,
+  "rule_results": [
+    {
+      "pattern": "*.rar",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .rar file"
+    },
+    {
+      "pattern": "*.sfv",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .sfv file"
+    },
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .nfo file"
+    },
+    {
+      "pattern": "Sample",
+      "type": "dir",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one Sample folder"
+    },
+    {
+      "pattern": "Sample/*.{mkv,mp4}",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one *.{mkv,mp4} file inside the Sample folder"
+    },
+    {
+      "pattern": ".*\\.[r-z]\\d{2}$",
+      "type": "",
+      "matched": 2,
+      "valid": true,
+      "description": "Requires at least one .r?? file"
+    },
+    {
+      "pattern": "Proof",
+      "type": "dir",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows Proof folder, but not required"
+    },
+    {
+      "pattern": "Proof/*.jpg",
+      "type": "",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows any amount of .jpg files in the Proof folder"
+    }
+  ]
+}
+{
+  "folder_path": "06_2/TVShow.S10.E999.720p.BluRay.x264-GRP",
+  "category": "episode",
+  "valid": true,
+  "rule_results": [
+    {
+      "pattern": "*.rar",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .rar file"
+    },
+    {
+      "pattern": "*.sfv",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .sfv file"
+    },
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .nfo file"
+    },
+    {
+      "pattern": "Sample",
+      "type": "dir",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one Sample folder"
+    },
+    {
+      "pattern": "Sample/*.{mkv,mp4}",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one *.{mkv,mp4} file inside the Sample folder"
+    },
+    {
+      "pattern": ".*\\.[r-z]\\d{2}$",
+      "type": "",
+      "matched": 2,
+      "valid": true,
+      "description": "Requires at least one .r?? file"
+    },
+    {
+      "pattern": "Proof",
+      "type": "dir",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows Proof folder, but not required"
+    },
+    {
+      "pattern": "Proof/*.jpg",
+      "type": "",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows any amount of .jpg files in the Proof folder"
+    }
+  ]
+}
+{
+  "folder_path": "06_3/GreatShow.S09E01.1080p.WEB.x264-GRP",
+  "category": "episode",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*.rar",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .rar file"
+    },
+    {
+      "pattern": "*.sfv",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .sfv file"
+    },
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .nfo file"
+    },
+    {
+      "pattern": "Sample",
+      "type": "dir",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one Sample folder",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "Sample/*.{mkv,mp4}",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one *.{mkv,mp4} file inside the Sample folder",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": ".*\\.[r-z]\\d{2}$",
+      "type": "",
+      "matched": 2,
+      "valid": true,
+      "description": "Requires at least one .r?? file"
+    },
+    {
+      "pattern": "Proof",
+      "type": "dir",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows Proof folder, but not required"
+    },
+    {
+      "pattern": "Proof/*.jpg",
+      "type": "",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows any amount of .jpg files in the Proof folder"
+    }
+  ],
+  "errors": [
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1"
+  ]
+}
+{
+  "folder_path": "06_4/Top.Show.S01E01.2025.S01E10.DV.2160p.WEB.h265-GRP",
+  "category": "episode",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*.rar",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .rar file"
+    },
+    {
+      "pattern": "*.sfv",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .sfv file"
+    },
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .nfo file"
+    },
+    {
+      "pattern": "Sample",
+      "type": "dir",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one Sample folder"
+    },
+    {
+      "pattern": "Sample/*.{mkv,mp4}",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one *.{mkv,mp4} file inside the Sample folder",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": ".*\\.[r-z]\\d{2}$",
+      "type": "",
+      "matched": 2,
+      "valid": true,
+      "description": "Requires at least one .r?? file"
+    },
+    {
+      "pattern": "Proof",
+      "type": "dir",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows Proof folder, but not required"
+    },
+    {
+      "pattern": "Proof/*.jpg",
+      "type": "",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows any amount of .jpg files in the Proof folder"
+    }
+  ],
+  "errors": [
+    "found 0 matches, but minimum required is 1"
+  ]
+}
+{
+  "folder_path": "06_5/Episode.E01.MULTi.1080p.WEB.x264-GRP",
+  "category": "episode",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*.rar",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .rar file"
+    },
+    {
+      "pattern": "*.sfv",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .sfv file"
+    },
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .nfo file"
+    },
+    {
+      "pattern": "Sample",
+      "type": "dir",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one Sample folder"
+    },
+    {
+      "pattern": "Sample/*.{mkv,mp4}",
+      "type": "",
+      "matched": 2,
+      "valid": false,
+      "description": "Requires only one *.{mkv,mp4} file inside the Sample folder",
+      "error": "found 2 matches, but maximum allowed is 1"
+    },
+    {
+      "pattern": ".*\\.[r-z]\\d{2}$",
+      "type": "",
+      "matched": 2,
+      "valid": true,
+      "description": "Requires at least one .r?? file"
+    },
+    {
+      "pattern": "Proof",
+      "type": "dir",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows Proof folder, but not required"
+    },
+    {
+      "pattern": "Proof/*.jpg",
+      "type": "",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows any amount of .jpg files in the Proof folder"
+    }
+  ],
+  "errors": [
+    "found 2 matches, but maximum allowed is 1"
+  ]
+}
+{
+  "folder_path": "06_6/Episode.S01E99.2025.HDR.2160p.WEB.h265-GRP",
+  "category": "episode",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*.rar",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .rar file"
+    },
+    {
+      "pattern": "*.sfv",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .sfv file"
+    },
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .nfo file"
+    },
+    {
+      "pattern": "Sample",
+      "type": "dir",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one Sample folder"
+    },
+    {
+      "pattern": "Sample/*.{mkv,mp4}",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one *.{mkv,mp4} file inside the Sample folder",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": ".*\\.[r-z]\\d{2}$",
+      "type": "",
+      "matched": 2,
+      "valid": true,
+      "description": "Requires at least one .r?? file"
+    },
+    {
+      "pattern": "Proof",
+      "type": "dir",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows Proof folder, but not required"
+    },
+    {
+      "pattern": "Proof/*.jpg",
+      "type": "",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows any amount of .jpg files in the Proof folder"
+    }
+  ],
+  "unexpected_files": [
+    "Sample/show.rar"
+  ],
+  "errors": [
+    "found 0 matches, but minimum required is 1",
+    "found 1 unexpected file(s)/directory(ies)"
+  ]
+}
+{
+  "folder_path": "06_7/EPISODE.25.01.01.XXX.1080p.MP4-GRP",
+  "category": "episode",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*.rar",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .rar file"
+    },
+    {
+      "pattern": "*.sfv",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .sfv file"
+    },
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .nfo file"
+    },
+    {
+      "pattern": "Sample",
+      "type": "dir",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one Sample folder"
+    },
+    {
+      "pattern": "Sample/*.{mkv,mp4}",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one *.{mkv,mp4} file inside the Sample folder"
+    },
+    {
+      "pattern": ".*\\.[r-z]\\d{2}$",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires at least one .r?? file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "Proof",
+      "type": "dir",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows Proof folder, but not required"
+    },
+    {
+      "pattern": "Proof/*.jpg",
+      "type": "",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows any amount of .jpg files in the Proof folder"
+    }
+  ],
+  "errors": [
+    "found 0 matches, but minimum required is 1"
+  ]
+}
+{
+  "folder_path": "06_8/Show.S01E06.1080p.WEB.h264-GRP",
+  "category": "episode",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*.rar",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .rar file"
+    },
+    {
+      "pattern": "*.sfv",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .sfv file"
+    },
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .nfo file"
+    },
+    {
+      "pattern": "Sample",
+      "type": "dir",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one Sample folder"
+    },
+    {
+      "pattern": "Sample/*.{mkv,mp4}",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one *.{mkv,mp4} file inside the Sample folder"
+    },
+    {
+      "pattern": ".*\\.[r-z]\\d{2}$",
+      "type": "",
+      "matched": 2,
+      "valid": true,
+      "description": "Requires at least one .r?? file"
+    },
+    {
+      "pattern": "Proof",
+      "type": "dir",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows Proof folder, but not required"
+    },
+    {
+      "pattern": "Proof/*.jpg",
+      "type": "",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows any amount of .jpg files in the Proof folder"
+    }
+  ],
+  "unexpected_files": [
+    "completely_unrelated_file.txt"
+  ],
+  "errors": [
+    "found 1 unexpected file(s)/directory(ies)"
+  ]
+}
+{
+  "folder_path": "06_9/Show.S01E09.1080p.BluRay.x264-GRP",
+  "category": "episode",
+  "valid": true,
+  "rule_results": [
+    {
+      "pattern": "*.rar",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .rar file"
+    },
+    {
+      "pattern": "*.sfv",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .sfv file"
+    },
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .nfo file"
+    },
+    {
+      "pattern": "Sample",
+      "type": "dir",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one Sample folder"
+    },
+    {
+      "pattern": "Sample/*.{mkv,mp4}",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one *.{mkv,mp4} file inside the Sample folder"
+    },
+    {
+      "pattern": ".*\\.[r-z]\\d{2}$",
+      "type": "",
+      "matched": 2,
+      "valid": true,
+      "description": "Requires at least one .r?? file"
+    },
+    {
+      "pattern": "Proof",
+      "type": "dir",
+      "matched": 1,
+      "valid": true,
+      "description": "Allows Proof folder, but not required"
+    },
+    {
+      "pattern": "Proof/*.jpg",
+      "type": "",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows any amount of .jpg files in the Proof folder"
+    }
+  ]
+}
+{
+  "folder_path": "07_1/Great.Game.Udate.v1.2.34.567890.incl.DLC-GRP",
+  "category": "game",
+  "valid": true,
+  "rule_results": [
+    {
+      "pattern": "*.rar",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .rar file"
+    },
+    {
+      "pattern": "*.sfv",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .sfv file"
+    },
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .nfo file"
+    },
+    {
+      "pattern": ".*\\.[r-z]\\d{2}$",
+      "type": "",
+      "matched": 2,
+      "valid": true,
+      "description": "Requires at least one .r?? file"
+    }
+  ]
+}
+{
+  "folder_path": "07_2/Game1.v2.0.0.0.GOG-GRP",
+  "category": "game",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*.rar",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .rar file"
+    },
+    {
+      "pattern": "*.sfv",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .sfv file"
+    },
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one .nfo file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": ".*\\.[r-z]\\d{2}$",
+      "type": "",
+      "matched": 2,
+      "valid": true,
+      "description": "Requires at least one .r?? file"
+    }
+  ],
+  "errors": [
+    "found 0 matches, but minimum required is 1"
+  ]
+}
+{
+  "folder_path": "07_3/Game2.GoG.Classic-GRP",
+  "category": "game",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*.rar",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one .rar file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "*.sfv",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .sfv file"
+    },
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .nfo file"
+    },
+    {
+      "pattern": ".*\\.[r-z]\\d{2}$",
+      "type": "",
+      "matched": 2,
+      "valid": true,
+      "description": "Requires at least one .r?? file"
+    }
+  ],
+  "errors": [
+    "found 0 matches, but minimum required is 1"
+  ]
+}
+{
+  "folder_path": "07_4/Game_Boy_Nintendo_Switch_Online_Update_v1.0.0_INTERNAL_JPN_NSW-GRP",
+  "category": "game",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*.rar",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .rar file"
+    },
+    {
+      "pattern": "*.sfv",
+      "type": "",
+      "matched": 2,
+      "valid": false,
+      "description": "Requires only one .sfv file",
+      "error": "found 2 matches, but maximum allowed is 1"
+    },
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .nfo file"
+    },
+    {
+      "pattern": ".*\\.[r-z]\\d{2}$",
+      "type": "",
+      "matched": 2,
+      "valid": true,
+      "description": "Requires at least one .r?? file"
+    }
+  ],
+  "errors": [
+    "found 2 matches, but maximum allowed is 1"
+  ]
+}
+{
+  "folder_path": "07_5/Great.Game.Udate.v1.2.34.567890.incl.DLC-GRP",
+  "category": "game",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*.rar",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .rar file"
+    },
+    {
+      "pattern": "*.sfv",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .sfv file"
+    },
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .nfo file"
+    },
+    {
+      "pattern": ".*\\.[r-z]\\d{2}$",
+      "type": "",
+      "matched": 2,
+      "valid": true,
+      "description": "Requires at least one .r?? file"
+    }
+  ],
+  "unexpected_files": [
+    "completely_unrelated_file.bin"
+  ],
+  "errors": [
+    "found 1 unexpected file(s)/directory(ies)"
+  ]
+}
+{
+  "folder_path": "08_1/Title.No.100.2025.GERMAN.HYBRID.MAGAZINE.eBook-GRP",
+  "category": "magazine",
+  "valid": true,
+  "rule_results": [
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .nfo file"
+    },
+    {
+      "pattern": "file_id.diz",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires exactly one file_id.diz file"
+    },
+    {
+      "pattern": "*.diz",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires no other .diz files besides file_id.diz"
+    },
+    {
+      "pattern": "*.zip",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires at least one .zip file"
+    }
+  ]
+}
+{
+  "folder_path": "08_2/Title.No.1.2025.FiNNiSH.HYBRiD.MAGAZiNE.eBook-GRP",
+  "category": "magazine",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one .nfo file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "file_id.diz",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires exactly one file_id.diz file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "*.diz",
+      "type": "",
+      "matched": 0,
+      "valid": true,
+      "description": "Requires no other .diz files besides file_id.diz"
+    },
+    {
+      "pattern": "*.zip",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires at least one .zip file",
+      "error": "found 0 matches, but minimum required is 1"
+    }
+  ],
+  "unexpected_files": [
+    "mag.pdf"
+  ],
+  "errors": [
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 1 unexpected file(s)/directory(ies)"
+  ]
+}
+{
+  "folder_path": "08_3/Title.No.1.2025.NORWEGiAN.HYBRiD.MAGAZiNE.eBook-GRP",
+  "category": "magazine",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .nfo file"
+    },
+    {
+      "pattern": "file_id.diz",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires exactly one file_id.diz file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "*.diz",
+      "type": "",
+      "matched": 0,
+      "valid": true,
+      "description": "Requires no other .diz files besides file_id.diz"
+    },
+    {
+      "pattern": "*.zip",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires at least one .zip file"
+    }
+  ],
+  "errors": [
+    "found 0 matches, but minimum required is 1"
+  ]
+}
+{
+  "folder_path": "08_4/Mag.No.123.2025.THAi.HYBRiD.MAGAZiNE.eBook-GRP",
+  "category": "magazine",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 2,
+      "valid": false,
+      "description": "Requires only one .nfo file",
+      "error": "found 2 matches, but maximum allowed is 1"
+    },
+    {
+      "pattern": "file_id.diz",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires exactly one file_id.diz file"
+    },
+    {
+      "pattern": "*.diz",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires no other .diz files besides file_id.diz"
+    },
+    {
+      "pattern": "*.zip",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires at least one .zip file"
+    }
+  ],
+  "errors": [
+    "found 2 matches, but maximum allowed is 1"
+  ]
+}
+{
+  "folder_path": "08_5/Title.No.100.2025.GERMAN.HYBRID.MAGAZINE.eBook-GRP",
+  "category": "magazine",
+  "valid": true,
+  "rule_results": [
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .nfo file"
+    },
+    {
+      "pattern": "file_id.diz",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires exactly one file_id.diz file"
+    },
+    {
+      "pattern": "*.diz",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires no other .diz files besides file_id.diz"
+    },
+    {
+      "pattern": "*.zip",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires at least one .zip file"
+    }
+  ]
+}
+{
+  "folder_path": "09_1/The.Movie.2025.1080P.BLURAY.X264-GRP",
+  "category": "movie",
+  "valid": true,
+  "rule_results": [
+    {
+      "pattern": "*.rar",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .rar file"
+    },
+    {
+      "pattern": "*.sfv",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .sfv file"
+    },
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .nfo file"
+    },
+    {
+      "pattern": "Sample",
+      "type": "dir",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one Sample folder"
+    },
+    {
+      "pattern": "Sample/*.{mkv,mp4}",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one *.{mkv,mp4} file inside the Sample folder"
+    },
+    {
+      "pattern": ".*\\.[r-z]\\d{2}$",
+      "type": "",
+      "matched": 2,
+      "valid": true,
+      "description": "Requires at least one .r?? file"
+    },
+    {
+      "pattern": "Proof",
+      "type": "dir",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows Proof folder, but not required"
+    },
+    {
+      "pattern": "Proof/*.jpg",
+      "type": "",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows any amount of .jpg files in the Proof folder"
+    }
+  ]
+}
+{
+  "folder_path": "09_2/Movie.1900.COMPLETE.BLURAY-GRP",
+  "category": "movie",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*.rar",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .rar file"
+    },
+    {
+      "pattern": "*.sfv",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .sfv file"
+    },
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .nfo file"
+    },
+    {
+      "pattern": "Sample",
+      "type": "dir",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one Sample folder"
+    },
+    {
+      "pattern": "Sample/*.{mkv,mp4}",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one *.{mkv,mp4} file inside the Sample folder",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": ".*\\.[r-z]\\d{2}$",
+      "type": "",
+      "matched": 2,
+      "valid": true,
+      "description": "Requires at least one .r?? file"
+    },
+    {
+      "pattern": "Proof",
+      "type": "dir",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows Proof folder, but not required"
+    },
+    {
+      "pattern": "Proof/*.jpg",
+      "type": "",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows any amount of .jpg files in the Proof folder"
+    }
+  ],
+  "unexpected_files": [
+    "Sample/sample.wmv"
+  ],
+  "errors": [
+    "found 0 matches, but minimum required is 1",
+    "found 1 unexpected file(s)/directory(ies)"
+  ]
+}
+{
+  "folder_path": "09_3/Great.Movie.of.2025.1080p.BluRay.H264-GRP",
+  "category": "movie",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*.rar",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .rar file"
+    },
+    {
+      "pattern": "*.sfv",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .sfv file"
+    },
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .nfo file"
+    },
+    {
+      "pattern": "Sample",
+      "type": "dir",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one Sample folder"
+    },
+    {
+      "pattern": "Sample/*.{mkv,mp4}",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one *.{mkv,mp4} file inside the Sample folder",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": ".*\\.[r-z]\\d{2}$",
+      "type": "",
+      "matched": 2,
+      "valid": true,
+      "description": "Requires at least one .r?? file"
+    },
+    {
+      "pattern": "Proof",
+      "type": "dir",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows Proof folder, but not required"
+    },
+    {
+      "pattern": "Proof/*.jpg",
+      "type": "",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows any amount of .jpg files in the Proof folder"
+    }
+  ],
+  "errors": [
+    "found 0 matches, but minimum required is 1"
+  ]
+}
+{
+  "folder_path": "09_4/Another.Naughty.Movie.1900.XXX.BDRIP.X264-GRP",
+  "category": "movie",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*.rar",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one .rar file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "*.sfv",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .sfv file"
+    },
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .nfo file"
+    },
+    {
+      "pattern": "Sample",
+      "type": "dir",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one Sample folder"
+    },
+    {
+      "pattern": "Sample/*.{mkv,mp4}",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one *.{mkv,mp4} file inside the Sample folder"
+    },
+    {
+      "pattern": ".*\\.[r-z]\\d{2}$",
+      "type": "",
+      "matched": 2,
+      "valid": true,
+      "description": "Requires at least one .r?? file"
+    },
+    {
+      "pattern": "Proof",
+      "type": "dir",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows Proof folder, but not required"
+    },
+    {
+      "pattern": "Proof/*.jpg",
+      "type": "",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows any amount of .jpg files in the Proof folder"
+    }
+  ],
+  "errors": [
+    "found 0 matches, but minimum required is 1"
+  ]
+}
+{
+  "folder_path": "09_5/Movie.2025.SUBBED.DV.HDR.2160p.WEB.h265-GRP",
+  "category": "movie",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*.rar",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .rar file"
+    },
+    {
+      "pattern": "*.sfv",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .sfv file"
+    },
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one .nfo file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "Sample",
+      "type": "dir",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one Sample folder"
+    },
+    {
+      "pattern": "Sample/*.{mkv,mp4}",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one *.{mkv,mp4} file inside the Sample folder"
+    },
+    {
+      "pattern": ".*\\.[r-z]\\d{2}$",
+      "type": "",
+      "matched": 2,
+      "valid": true,
+      "description": "Requires at least one .r?? file"
+    },
+    {
+      "pattern": "Proof",
+      "type": "dir",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows Proof folder, but not required"
+    },
+    {
+      "pattern": "Proof/*.jpg",
+      "type": "",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows any amount of .jpg files in the Proof folder"
+    }
+  ],
+  "errors": [
+    "found 0 matches, but minimum required is 1"
+  ]
+}
+{
+  "folder_path": "09_6/The.Movie.2025.1080P.BLURAY.X264-GRP",
+  "category": "movie",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*.rar",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .rar file"
+    },
+    {
+      "pattern": "*.sfv",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .sfv file"
+    },
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .nfo file"
+    },
+    {
+      "pattern": "Sample",
+      "type": "dir",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one Sample folder"
+    },
+    {
+      "pattern": "Sample/*.{mkv,mp4}",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one *.{mkv,mp4} file inside the Sample folder"
+    },
+    {
+      "pattern": ".*\\.[r-z]\\d{2}$",
+      "type": "",
+      "matched": 2,
+      "valid": true,
+      "description": "Requires at least one .r?? file"
+    },
+    {
+      "pattern": "Proof",
+      "type": "dir",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows Proof folder, but not required"
+    },
+    {
+      "pattern": "Proof/*.jpg",
+      "type": "",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows any amount of .jpg files in the Proof folder"
+    }
+  ],
+  "unexpected_files": [
+    "movie.srt"
+  ],
+  "errors": [
+    "found 1 unexpected file(s)/directory(ies)"
+  ]
+}
+{
+  "folder_path": "10_1/First_Last_-_Title-WEB-CZ-2025-GRP",
+  "category": "music",
+  "valid": true,
+  "rule_results": [
+    {
+      "pattern": "*.m3u",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires at least one .m3u file"
+    },
+    {
+      "pattern": "*.sfv",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires at least one .sfv file"
+    },
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .nfo file"
+    },
+    {
+      "pattern": "*.{mp3,flac}",
+      "type": "",
+      "matched": 12,
+      "valid": true,
+      "description": "Requires at least one .mp3 or .flac file"
+    },
+    {
+      "pattern": "*.jpg",
+      "type": "",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows JPEG files"
+    }
+  ]
+}
+{
+  "folder_path": "10_2/Artist-Title-WEB-2025-GRP",
+  "category": "music",
+  "valid": true,
+  "rule_results": [
+    {
+      "pattern": "*.m3u",
+      "type": "",
+      "matched": 3,
+      "valid": true,
+      "description": "Requires at least one .m3u file"
+    },
+    {
+      "pattern": "*.sfv",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires at least one .sfv file"
+    },
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .nfo file"
+    },
+    {
+      "pattern": "*.{mp3,flac}",
+      "type": "",
+      "matched": 20,
+      "valid": true,
+      "description": "Requires at least one .mp3 or .flac file"
+    },
+    {
+      "pattern": "*.jpg",
+      "type": "",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows JPEG files"
+    }
+  ]
+}
+{
+  "folder_path": "10_3/Artist-Album-DELUXE-24BIT-48KHZ-WEB-FLAC-2025-GRP",
+  "category": "music",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*.m3u",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires at least one .m3u file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "*.sfv",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires at least one .sfv file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one .nfo file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "*.{mp3,flac}",
+      "type": "",
+      "matched": 11,
+      "valid": true,
+      "description": "Requires at least one .mp3 or .flac file"
+    },
+    {
+      "pattern": "*.jpg",
+      "type": "",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows JPEG files"
+    }
+  ],
+  "errors": [
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1"
+  ]
+}
+{
+  "folder_path": "10_4/First_Last_-_Title-SINGLE-WEB-EN-2025-GRP",
+  "category": "music",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*.m3u",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires at least one .m3u file"
+    },
+    {
+      "pattern": "*.sfv",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires at least one .sfv file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .nfo file"
+    },
+    {
+      "pattern": "*.{mp3,flac}",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires at least one .mp3 or .flac file"
+    },
+    {
+      "pattern": "*.jpg",
+      "type": "",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows JPEG files"
+    }
+  ],
+  "errors": [
+    "found 0 matches, but minimum required is 1"
+  ]
+}
+{
+  "folder_path": "10_5/BAND-ALBUM-(CAT0001)-CD-FLAC-2025-GRP",
+  "category": "music",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*.m3u",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires at least one .m3u file"
+    },
+    {
+      "pattern": "*.sfv",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires at least one .sfv file"
+    },
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 2,
+      "valid": false,
+      "description": "Requires only one .nfo file",
+      "error": "found 2 matches, but maximum allowed is 1"
+    },
+    {
+      "pattern": "*.{mp3,flac}",
+      "type": "",
+      "matched": 10,
+      "valid": true,
+      "description": "Requires at least one .mp3 or .flac file"
+    },
+    {
+      "pattern": "*.jpg",
+      "type": "",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows JPEG files"
+    }
+  ],
+  "errors": [
+    "found 2 matches, but maximum allowed is 1"
+  ]
+}
+{
+  "folder_path": "10_6/First_Last-Title-WEB-SK-2025-GRP",
+  "category": "music",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*.m3u",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires at least one .m3u file"
+    },
+    {
+      "pattern": "*.sfv",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires at least one .sfv file"
+    },
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one .nfo file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "*.{mp3,flac}",
+      "type": "",
+      "matched": 11,
+      "valid": true,
+      "description": "Requires at least one .mp3 or .flac file"
+    },
+    {
+      "pattern": "*.jpg",
+      "type": "",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows JPEG files"
+    }
+  ],
+  "errors": [
+    "found 0 matches, but minimum required is 1"
+  ]
+}
+{
+  "folder_path": "10_7/First_Last_-_Title-WEB-CZ-2025-GRP",
+  "category": "music",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*.m3u",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires at least one .m3u file"
+    },
+    {
+      "pattern": "*.sfv",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires at least one .sfv file"
+    },
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .nfo file"
+    },
+    {
+      "pattern": "*.{mp3,flac}",
+      "type": "",
+      "matched": 12,
+      "valid": true,
+      "description": "Requires at least one .mp3 or .flac file"
+    },
+    {
+      "pattern": "*.jpg",
+      "type": "",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows JPEG files"
+    }
+  ],
+  "unexpected_files": [
+    "completely_unrelated_file.bmp"
+  ],
+  "errors": [
+    "found 1 unexpected file(s)/directory(ies)"
+  ]
+}
+{
+  "folder_path": "10_8/First_Last_-_Title-WEB-CZ-2025-GRP",
+  "category": "music",
+  "valid": true,
+  "rule_results": [
+    {
+      "pattern": "*.m3u",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires at least one .m3u file"
+    },
+    {
+      "pattern": "*.sfv",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires at least one .sfv file"
+    },
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Requires only one .nfo file"
+    },
+    {
+      "pattern": "*.{mp3,flac}",
+      "type": "",
+      "matched": 12,
+      "valid": true,
+      "description": "Requires at least one .mp3 or .flac file"
+    },
+    {
+      "pattern": "*.jpg",
+      "type": "",
+      "matched": 1,
+      "valid": true,
+      "description": "Allows JPEG files"
+    }
+  ]
+}
+{
+  "folder_path": "11_1/Show.Season.01.HDTV.x264-GRP",
+  "category": "series",
+  "valid": true,
+  "rule_results": [
+    {
+      "pattern": "*",
+      "type": "dir",
+      "matched": 2,
+      "valid": true,
+      "description": "Requires at least two subfolders"
+    }
+  ]
+}
+{
+  "folder_path": "11_1/Show.Season.01.HDTV.x264-GRP/Season_1",
+  "category": "series",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*",
+      "type": "dir",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires at least two subfolders",
+      "error": "found 0 matches, but minimum required is 2"
+    }
+  ],
+  "errors": [
+    "found 0 matches, but minimum required is 2"
+  ]
+}
+{
+  "folder_path": "11_1/Show.Season.01.HDTV.x264-GRP/Season_2",
+  "category": "series",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*",
+      "type": "dir",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires at least two subfolders",
+      "error": "found 0 matches, but minimum required is 2"
+    }
+  ],
+  "errors": [
+    "found 0 matches, but minimum required is 2"
+  ]
+}
+{
+  "folder_path": "11_1/Show.Season.S01.COMPLETE.HDTV.x264-GRP",
+  "category": "series",
+  "valid": true,
+  "rule_results": [
+    {
+      "pattern": "*",
+      "type": "dir",
+      "matched": 2,
+      "valid": true,
+      "description": "Requires at least two subfolders"
+    }
+  ]
+}
+{
+  "folder_path": "11_1/Show.Season.S01.COMPLETE.HDTV.x264-GRP/Show.Season.S01E01.HDTV.x264-GRP",
+  "category": "episode",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*.rar",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one .rar file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "*.sfv",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one .sfv file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one .nfo file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "Sample",
+      "type": "dir",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one Sample folder",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "Sample/*.{mkv,mp4}",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one *.{mkv,mp4} file inside the Sample folder",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": ".*\\.[r-z]\\d{2}$",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires at least one .r?? file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "Proof",
+      "type": "dir",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows Proof folder, but not required"
+    },
+    {
+      "pattern": "Proof/*.jpg",
+      "type": "",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows any amount of .jpg files in the Proof folder"
+    }
+  ],
+  "unexpected_files": [
+    ".gitkeep"
+  ],
+  "errors": [
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 1 unexpected file(s)/directory(ies)"
+  ]
+}
+{
+  "folder_path": "11_1/Show.Season.S01.COMPLETE.HDTV.x264-GRP/Show.Season.S01E02.HDTV.x264-GRP",
+  "category": "episode",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*.rar",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one .rar file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "*.sfv",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one .sfv file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one .nfo file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "Sample",
+      "type": "dir",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one Sample folder",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "Sample/*.{mkv,mp4}",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one *.{mkv,mp4} file inside the Sample folder",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": ".*\\.[r-z]\\d{2}$",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires at least one .r?? file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "Proof",
+      "type": "dir",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows Proof folder, but not required"
+    },
+    {
+      "pattern": "Proof/*.jpg",
+      "type": "",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows any amount of .jpg files in the Proof folder"
+    }
+  ],
+  "unexpected_files": [
+    ".gitkeep"
+  ],
+  "errors": [
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 1 unexpected file(s)/directory(ies)"
+  ]
+}
+{
+  "folder_path": "11_2/Show.S01.1080p.WEB.H264-GRP",
+  "category": "series",
+  "valid": true,
+  "rule_results": [
+    {
+      "pattern": "*",
+      "type": "dir",
+      "matched": 5,
+      "valid": true,
+      "description": "Requires at least two subfolders"
+    }
+  ]
+}
+{
+  "folder_path": "11_2/Show.S01.1080p.WEB.H264-GRP/Show.S01E01.1080p.WEB.H264-GRP",
+  "category": "episode",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*.rar",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one .rar file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "*.sfv",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one .sfv file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one .nfo file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "Sample",
+      "type": "dir",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one Sample folder",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "Sample/*.{mkv,mp4}",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one *.{mkv,mp4} file inside the Sample folder",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": ".*\\.[r-z]\\d{2}$",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires at least one .r?? file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "Proof",
+      "type": "dir",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows Proof folder, but not required"
+    },
+    {
+      "pattern": "Proof/*.jpg",
+      "type": "",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows any amount of .jpg files in the Proof folder"
+    }
+  ],
+  "unexpected_files": [
+    ".gitkeep"
+  ],
+  "errors": [
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 1 unexpected file(s)/directory(ies)"
+  ]
+}
+{
+  "folder_path": "11_2/Show.S01.1080p.WEB.H264-GRP/Show.S01E02.1080p.WEB.H264-GRP",
+  "category": "episode",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*.rar",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one .rar file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "*.sfv",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one .sfv file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one .nfo file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "Sample",
+      "type": "dir",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one Sample folder",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "Sample/*.{mkv,mp4}",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one *.{mkv,mp4} file inside the Sample folder",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": ".*\\.[r-z]\\d{2}$",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires at least one .r?? file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "Proof",
+      "type": "dir",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows Proof folder, but not required"
+    },
+    {
+      "pattern": "Proof/*.jpg",
+      "type": "",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows any amount of .jpg files in the Proof folder"
+    }
+  ],
+  "unexpected_files": [
+    ".gitkeep"
+  ],
+  "errors": [
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 1 unexpected file(s)/directory(ies)"
+  ]
+}
+{
+  "folder_path": "11_2/Show.S01.1080p.WEB.H264-GRP/Show.S01E03.1080p.WEB.H264-GRP",
+  "category": "episode",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*.rar",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one .rar file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "*.sfv",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one .sfv file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one .nfo file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "Sample",
+      "type": "dir",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one Sample folder",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "Sample/*.{mkv,mp4}",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one *.{mkv,mp4} file inside the Sample folder",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": ".*\\.[r-z]\\d{2}$",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires at least one .r?? file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "Proof",
+      "type": "dir",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows Proof folder, but not required"
+    },
+    {
+      "pattern": "Proof/*.jpg",
+      "type": "",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows any amount of .jpg files in the Proof folder"
+    }
+  ],
+  "unexpected_files": [
+    ".gitkeep"
+  ],
+  "errors": [
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 1 unexpected file(s)/directory(ies)"
+  ]
+}
+{
+  "folder_path": "11_2/Show.S01.1080p.WEB.H264-GRP/Show.S01E04.1080p.WEB.H264-GRP",
+  "category": "episode",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*.rar",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one .rar file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "*.sfv",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one .sfv file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one .nfo file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "Sample",
+      "type": "dir",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one Sample folder",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "Sample/*.{mkv,mp4}",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one *.{mkv,mp4} file inside the Sample folder",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": ".*\\.[r-z]\\d{2}$",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires at least one .r?? file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "Proof",
+      "type": "dir",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows Proof folder, but not required"
+    },
+    {
+      "pattern": "Proof/*.jpg",
+      "type": "",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows any amount of .jpg files in the Proof folder"
+    }
+  ],
+  "unexpected_files": [
+    ".gitkeep"
+  ],
+  "errors": [
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 1 unexpected file(s)/directory(ies)"
+  ]
+}
+{
+  "folder_path": "11_2/Show.S01.1080p.WEB.H264-GRP/Show.S01E05.1080p.WEB.H264-GRP",
+  "category": "episode",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*.rar",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one .rar file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "*.sfv",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one .sfv file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one .nfo file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "Sample",
+      "type": "dir",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one Sample folder",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "Sample/*.{mkv,mp4}",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one *.{mkv,mp4} file inside the Sample folder",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": ".*\\.[r-z]\\d{2}$",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires at least one .r?? file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "Proof",
+      "type": "dir",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows Proof folder, but not required"
+    },
+    {
+      "pattern": "Proof/*.jpg",
+      "type": "",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows any amount of .jpg files in the Proof folder"
+    }
+  ],
+  "unexpected_files": [
+    ".gitkeep"
+  ],
+  "errors": [
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 1 unexpected file(s)/directory(ies)"
+  ]
+}
+{
+  "folder_path": "11_3/Super.Duper.Series.S02.1080p.BluRay.H264-GRP",
+  "category": "series",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*",
+      "type": "dir",
+      "matched": 1,
+      "valid": false,
+      "description": "Requires at least two subfolders",
+      "error": "found 1 matches, but minimum required is 2"
+    }
+  ],
+  "errors": [
+    "found 1 matches, but minimum required is 2"
+  ]
+}
+{
+  "folder_path": "11_3/Super.Duper.Series.S02.1080p.BluRay.H264-GRP/Super.Duper.Series.S02E01.1080p.BluRay.H264-GRP",
+  "category": "episode",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*.rar",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one .rar file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "*.sfv",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one .sfv file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one .nfo file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "Sample",
+      "type": "dir",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one Sample folder",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "Sample/*.{mkv,mp4}",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one *.{mkv,mp4} file inside the Sample folder",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": ".*\\.[r-z]\\d{2}$",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires at least one .r?? file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "Proof",
+      "type": "dir",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows Proof folder, but not required"
+    },
+    {
+      "pattern": "Proof/*.jpg",
+      "type": "",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows any amount of .jpg files in the Proof folder"
+    }
+  ],
+  "unexpected_files": [
+    ".gitkeep"
+  ],
+  "errors": [
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 1 unexpected file(s)/directory(ies)"
+  ]
+}
+{
+  "folder_path": "11_4/The.Adventures.Of.Nobody.S32.720p.BluRay.x264-GRP",
+  "category": "series",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*",
+      "type": "dir",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires at least two subfolders",
+      "error": "found 0 matches, but minimum required is 2"
+    }
+  ],
+  "unexpected_files": [
+    "completely_unrelated_file.txt",
+    "imdb.nfo"
+  ],
+  "errors": [
+    "found 0 matches, but minimum required is 2",
+    "found 2 unexpected file(s)/directory(ies)"
+  ]
+}
+{
+  "folder_path": "11_5/Show.Season.S02.COMPLETE.HDTV.x264-GRP",
+  "category": "series",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*",
+      "type": "dir",
+      "matched": 2,
+      "valid": true,
+      "description": "Requires at least two subfolders"
+    }
+  ],
+  "unexpected_files": [
+    "unassociated.log"
+  ],
+  "errors": [
+    "found 1 unexpected file(s)/directory(ies)"
+  ]
+}
+{
+  "folder_path": "11_5/Show.Season.S02.COMPLETE.HDTV.x264-GRP/Show.Season.S02E01.HDTV.x264-GRP",
+  "category": "episode",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*.rar",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one .rar file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "*.sfv",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one .sfv file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one .nfo file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "Sample",
+      "type": "dir",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one Sample folder",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "Sample/*.{mkv,mp4}",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one *.{mkv,mp4} file inside the Sample folder",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": ".*\\.[r-z]\\d{2}$",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires at least one .r?? file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "Proof",
+      "type": "dir",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows Proof folder, but not required"
+    },
+    {
+      "pattern": "Proof/*.jpg",
+      "type": "",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows any amount of .jpg files in the Proof folder"
+    }
+  ],
+  "unexpected_files": [
+    ".gitkeep"
+  ],
+  "errors": [
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 1 unexpected file(s)/directory(ies)"
+  ]
+}
+{
+  "folder_path": "11_5/Show.Season.S02.COMPLETE.HDTV.x264-GRP/Show.Season.S02E02.HDTV.x264-GRP",
+  "category": "episode",
+  "valid": false,
+  "rule_results": [
+    {
+      "pattern": "*.rar",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one .rar file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "*.sfv",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one .sfv file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "*.nfo",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one .nfo file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "Sample",
+      "type": "dir",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one Sample folder",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "Sample/*.{mkv,mp4}",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires only one *.{mkv,mp4} file inside the Sample folder",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": ".*\\.[r-z]\\d{2}$",
+      "type": "",
+      "matched": 0,
+      "valid": false,
+      "description": "Requires at least one .r?? file",
+      "error": "found 0 matches, but minimum required is 1"
+    },
+    {
+      "pattern": "Proof",
+      "type": "dir",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows Proof folder, but not required"
+    },
+    {
+      "pattern": "Proof/*.jpg",
+      "type": "",
+      "matched": 0,
+      "valid": true,
+      "description": "Allows any amount of .jpg files in the Proof folder"
+    }
+  ],
+  "unexpected_files": [
+    ".gitkeep"
+  ],
+  "errors": [
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 0 matches, but minimum required is 1",
+    "found 1 unexpected file(s)/directory(ies)"
+  ]
+}
