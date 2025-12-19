@@ -10,12 +10,14 @@ import (
 )
 
 var (
-	sfvWorkers    int
-	sfvBufferSize int
-	sfvVerbose    bool
-	sfvQuiet      bool
-	sfvRecursive  bool
-	sfvCPUProfile string
+	sfvWorkers     int
+	sfvBufferSize  int
+	sfvVerbose     bool
+	sfvQuiet       bool
+	sfvRecursive   bool
+	sfvCPUProfile  string
+	sfvOutputJSON  bool
+	sfvOutputYAML  bool
 )
 
 var sfvCmd = &cobra.Command{
@@ -47,12 +49,20 @@ Examples:
 		}
 		defer cleanup()
 
+		outputFormat := checksum.OutputFormatText
+		if sfvOutputJSON {
+			outputFormat = checksum.OutputFormatJSON
+		} else if sfvOutputYAML {
+			outputFormat = checksum.OutputFormatYAML
+		}
+
 		opts := checksum.Options{
-			Workers:    sfvWorkers,
-			BufferSize: sfvBufferSize,
-			Verbose:    sfvVerbose,
-			Quiet:      sfvQuiet,
-			Recursive:  sfvRecursive,
+			Workers:      sfvWorkers,
+			BufferSize:   sfvBufferSize,
+			Verbose:      sfvVerbose,
+			Quiet:        sfvQuiet,
+			Recursive:    sfvRecursive,
+			OutputFormat: outputFormat,
 		}
 
 		if err := checksum.ValidateFolders(args, opts); err != nil {
@@ -71,6 +81,9 @@ func init() {
 	sfvCmd.Flags().BoolVarP(&sfvQuiet, "quiet", "q", false, "Quiet mode - only show errors")
 	sfvCmd.Flags().BoolVarP(&sfvRecursive, "recursive", "r", false, "Recursively search for SFV files in subdirectories")
 	sfvCmd.Flags().StringVar(&sfvCPUProfile, "cpuprofile", "", "Write CPU profile to file")
+	sfvCmd.Flags().BoolVar(&sfvOutputJSON, "json", false, "Output results in JSON format")
+	sfvCmd.Flags().BoolVar(&sfvOutputYAML, "yaml", false, "Output results in YAML format")
+	sfvCmd.MarkFlagsMutuallyExclusive("json", "yaml")
 }
 
 // setupProfiling sets up CPU profiling if the cpuprofile path is provided.

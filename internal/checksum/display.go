@@ -248,6 +248,15 @@ func (d *Display) ShowWarning(msg string) {
 // DisplayResult displays the validation results to the user
 // Returns true if validation failed (has invalid or missing files)
 func DisplayResult(result *ValidationResult, opts Options) bool {
+	// Handle JSON/YAML output
+	if opts.OutputFormat != OutputFormatText {
+		if err := OutputValidationResult(result, opts.OutputFormat); err != nil {
+			fmt.Fprintf(os.Stderr, "Error: failed to output result: %v\n", err)
+			return true
+		}
+		return result.InvalidFiles > 0 || result.MissingFiles > 0
+	}
+
 	formatter := NewFormatter(opts.Verbose)
 	display := NewDisplay(formatter)
 	display.SetQuiet(opts.Quiet)
@@ -307,6 +316,15 @@ func DisplayResult(result *ValidationResult, opts Options) bool {
 // DisplayZIPResult displays the ZIP validation results to the user
 // Returns true if validation failed (has invalid entries)
 func DisplayZIPResult(result *ZIPValidationResult, opts Options) bool {
+	// Handle JSON/YAML output
+	if opts.OutputFormat != OutputFormatText {
+		if err := OutputZIPValidationResult(result, opts.OutputFormat); err != nil {
+			fmt.Fprintf(os.Stderr, "Error: failed to output result: %v\n", err)
+			return true
+		}
+		return result.InvalidEntries > 0
+	}
+
 	formatter := NewFormatter(opts.Verbose)
 	display := NewDisplay(formatter)
 	display.SetQuiet(opts.Quiet)
