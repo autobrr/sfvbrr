@@ -32,12 +32,12 @@ build:
 .PHONY: build-pgo
 build-pgo:
 	@echo "Building ${BINARY_NAME} with PGO..."
-	@if [ ! -f "cpu.pprof" ]; then \
+	@if [ ! -f "default.pgo" ]; then \
 		echo "No PGO profile found. Run 'make profile' first."; \
 		exit 1; \
 	fi
 	@mkdir -p ${BUILD_DIR}
-	CGO_ENABLED=0 $(GO) build -pgo=cpu.pprof ${LDFLAGS} -o ${BUILD_DIR}/${BINARY_NAME}
+	CGO_ENABLED=0 $(GO) build -pgo=default.pgo ${LDFLAGS} -o ${BUILD_DIR}/${BINARY_NAME}
 
 # generate PGO profile with various workloads
 .PHONY: profile
@@ -74,9 +74,9 @@ profile:
 
 	@echo "Merging profiles..."
 	@if [ -f "cpu1.pprof" ] && [ -f "cpu2.pprof" ] && [ -f "cpu3.pprof" ]; then \
-		go tool pprof -proto cpu1.pprof cpu2.pprof cpu3.pprof> cpu.pprof; \
+		go tool pprof -proto cpu1.pprof cpu2.pprof cpu3.pprof> default.pgo; \
 		rm cpu1.pprof cpu2.pprof cpu3.pprof; \
-		echo "Profile generated at cpu.pprof"; \
+		echo "Profile generated at default.pgo"; \
 	else \
 		echo "Error: Profile files not generated correctly"; \
 		exit 1; \
@@ -96,12 +96,12 @@ install: build
 .PHONY: install-pgo
 install-pgo:
 	@echo "Installing ${BINARY_NAME} with PGO..."
-	@if [ ! -f "cpu.pprof" ]; then \
+	@if [ ! -f "default.pgo" ]; then \
 		echo "No PGO profile found. Run 'make profile' first."; \
 		exit 1; \
 	fi
 	@mkdir -p ${BUILD_DIR}
-	CGO_ENABLED=0 $(GO) build -pgo=cpu.pprof ${LDFLAGS} -o ${BUILD_DIR}/${BINARY_NAME}
+	CGO_ENABLED=0 $(GO) build -pgo=default.pgo ${LDFLAGS} -o ${BUILD_DIR}/${BINARY_NAME}
 	@if [ "$$(id -u)" = "0" ]; then \
 		install -m 755 ${BUILD_DIR}/${BINARY_NAME} /usr/local/bin/; \
 	else \
