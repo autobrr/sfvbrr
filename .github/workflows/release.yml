@@ -158,7 +158,7 @@ jobs:
           ./sfvbrr zip ./test/zip/TEST.FOLDER.v0.1.X64-GRP --cpuprofile=./cpu3.pprof
 
           echo "Merging profiles..."
-          @if [ -f "cpu1.pprof" ] && [ -f "cpu2.pprof" ] && [ -f "cpu3.pprof" ]; then \
+          if [ -f "cpu1.pprof" ] && [ -f "cpu2.pprof" ] && [ -f "cpu3.pprof" ]; then \
             go tool pprof -proto cpu1.pprof cpu2.pprof cpu3.pprof> cpu.pprof; \
             rm cpu1.pprof cpu2.pprof cpu3.pprof; \
             echo "Profile generated at cpu.pprof"; \
