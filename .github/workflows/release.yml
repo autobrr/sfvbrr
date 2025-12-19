@@ -166,7 +166,6 @@ jobs:
             echo "Error: Profile files not generated correctly"; \
             exit 1; \
           fi
-          @rm -rf test_data
 
       - name: Upload pprof
         uses: actions/upload-artifact@v5
