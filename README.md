@@ -85,6 +85,8 @@ rules:
       - pattern: "*.mp3"
         min: 1
         description: "Requires at least one .mp3 file"
+      - pattern: "*.jpg"
+        description: "Allows any amount of .jpg files"
   book:
     deny_unexpected: true
     rules:
@@ -167,6 +169,12 @@ rules:
         regex: true
         min: 1
         description: "Requires at least one .r?? file"
+      - pattern: "Proof"
+        type: dir
+        max: 1
+        description: "Allows Proof folder, but not required"
+      - pattern: "Proof/*.jpg"
+        description: "Allows any amount of .jpg files in the Proof folder"
   game:
     deny_unexpected: true
     rules:
@@ -231,6 +239,12 @@ rules:
         regex: true
         min: 1
         description: "Requires at least one .r?? file"
+      - pattern: "Proof"
+        type: dir
+        max: 1
+        description: "Allows Proof folder, but not required"
+      - pattern: "Proof/*.jpg"
+        description: "Allows any amount of .jpg files in the Proof folder"
   music:
     deny_unexpected: true
     rules:
@@ -247,6 +261,8 @@ rules:
       - pattern: "*.{mp3,flac}"
         min: 1
         description: "Requires at least one .mp3 or .flac file"
+      - pattern: "*.jpg"
+        description: "Allows JPEG files"
   series:
     deny_unexpected: true
     rules:
@@ -569,12 +585,15 @@ Usage:
   sfvbrr validate [folder...] [flags]
 
 Flags:
-  -h, --help               help for validate
-      --overwrite string   Override category detection with specified category (bypasses automatic detection)
-  -p, --preset string      Path to preset YAML file (default: auto-detect)
-  -q, --quiet              Quiet mode - only show errors
-  -r, --recursive          Recursively search for release folders in subdirectories
-  -v, --verbose            Show detailed validation results for each rule
+      --cpuprofile string   Write CPU profile to file
+  -h, --help                help for validate
+      --json                Output results in JSON format
+      --overwrite string    Override category detection with specified category (bypasses automatic detection)
+  -p, --preset string       Path to preset YAML file (default: auto-detect)
+  -q, --quiet               Quiet mode - only show errors
+  -r, --recursive           Recursively search for release folders in subdirectories
+  -v, --verbose             Show detailed validation results for each rule
+      --yaml                Output results in YAML format
 ```
 
 </details>
@@ -610,10 +629,12 @@ Flags:
   -b, --buffer-size int     Buffer size for file reading in bytes (0 = auto, default 64KB)
       --cpuprofile string   Write CPU profile to file
   -h, --help                help for sfv
+      --json                Output results in JSON format
   -q, --quiet               Quiet mode - only show errors
   -r, --recursive           Recursively search for SFV files in subdirectories
   -v, --verbose             Show detailed validation results for each file
   -w, --workers int         Number of parallel workers (0 = auto-detect)
+      --yaml                Output results in YAML format
 ```
 
 </details>
@@ -649,10 +670,12 @@ Flags:
   -b, --buffer-size int     Buffer size for file reading in bytes (0 = auto, default 64KB)
       --cpuprofile string   Write CPU profile to file
   -h, --help                help for zip
+      --json                Output results in JSON format
   -q, --quiet               Quiet mode - only show errors
   -r, --recursive           Recursively search for ZIP files in subdirectories
   -v, --verbose             Show detailed validation results for each entry
   -w, --workers int         Number of parallel workers (0 = auto-detect)
+      --yaml                Output results in YAML format
 ```
 
 </details>
