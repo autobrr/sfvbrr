@@ -129,7 +129,6 @@ jobs:
           # Build initial binary
           go build -o sfvbrr
 
-
           echo "Running profile workload 1: SFV..."
           ./sfvbrr sfv ./test/sfv/TEST.FOLDER.v0.1.X64-GRP --cpuprofile=./cpu1.pprof
 
@@ -159,9 +158,9 @@ jobs:
 
           echo "Merging profiles..."
           if [ -f "cpu1.pprof" ] && [ -f "cpu2.pprof" ] && [ -f "cpu3.pprof" ]; then \
-            go tool pprof -proto cpu1.pprof cpu2.pprof cpu3.pprof> cpu.pprof; \
+            go tool pprof -proto cpu1.pprof cpu2.pprof cpu3.pprof> default.pgo; \
             rm cpu1.pprof cpu2.pprof cpu3.pprof; \
-            echo "Profile generated at cpu.pprof"; \
+            echo "Profile generated at default.pgo"; \
           else \
             echo "Error: Profile files not generated correctly"; \
             exit 1; \
@@ -171,7 +170,7 @@ jobs:
         uses: actions/upload-artifact@v5
         with:
           name: pprof
-          path: cpu.pprof
+          path: default.pgo
 
   goreleaserbuild:
     name: Build distribution binaries
