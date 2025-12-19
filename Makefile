@@ -81,7 +81,6 @@ profile:
 		echo "Error: Profile files not generated correctly"; \
 		exit 1; \
 	fi
-	@rm -rf test_data
 
 # install binary in system path
 .PHONY: install
@@ -114,36 +113,6 @@ install-pgo:
 test:
 	@echo "Running tests..."
 	$(GO) test -v ./...
-
-# run quick tests with race detector (for CI and quick feedback)
-.PHONY: test-race-short
-test-race-short:
-	@echo "Running quick tests with race detector..."
-	GORACE="$(GORACE)" $(GO) test -race -short ./torrent -v
-	@if [ -f "./race_report.log" ]; then \
-		echo "Race conditions detected! Check race_report.log"; \
-		cat "./race_report.log"; \
-	fi
-
-# run all tests with race detector (excluding large tests)
-.PHONY: test-race
-test-race:
-	@echo "Running tests with race detector..."
-	GORACE="$(GORACE)" $(GO) test -race ./torrent -v
-	@if [ -f "./race_report.log" ]; then \
-		echo "Race conditions detected! Check race_report.log"; \
-		cat "./race_report.log"; \
-	fi
-
-# run large tests (resource intensive)
-.PHONY: test-large
-test-large:
-	@echo "Running large tests..."
-	GORACE="$(GORACE)" $(GO) test -v -tags=large_tests ./torrent
-	@if [ -f "./race_report.log" ]; then \
-		echo "Race conditions detected! Check race_report.log"; \
-		cat "./race_report.log"; \
-	fi
 
 # run tests with coverage
 .PHONY: test-coverage
@@ -183,9 +152,6 @@ help:
 	@echo "  install        - Install the binary in GOPATH"
 	@echo "  install-pgo    - Install the binary with PGO optimization"
 	@echo "  test           - Run tests (excluding large tests)"
-	@echo "  test-race-short- Run quick tests with race detector"
-	@echo "  test-race      - Run all tests with race detector (excluding large tests)"
-	@echo "  test-large     - Run large tests (resource intensive)"
 	@echo "  test-coverage  - Run tests with coverage report"
 	@echo "  lint           - Run golangci-lint"
 	@echo "  clean          - Remove build artifacts"

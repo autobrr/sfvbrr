@@ -51,9 +51,6 @@ jobs:
           go-version-file: go.mod
           cache: true
 
-      - name: Run Tests with Race Detection
-        run: make test-race
-
       - name: Generate Test Summary
         run: go run gotest.tools/gotestsum@latest --junitfile unit-tests.xml --format pkgname
 

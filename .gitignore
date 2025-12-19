@@ -1,3 +1,4 @@
 build/
 cpu*.pprof
 dist/
+coverage.txt
