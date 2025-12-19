@@ -131,10 +131,13 @@ jobs:
           go build -o sfvbrr
 
           echo "Running profile workload 1: SFV..."
-          ./sfvbrr sfv ./test/sfv/TEST.FOLDER.v0.1.X64-GRP --cpuprofile=./cpu1.pprof
+          nice -n 19 ./sfvbrr sfv ./test/sfv/TEST.FOLDER.v0.1.X64-GRP --cpuprofile=./cpu1.pprof
+          # Ensure profile is flushed
+          sleep 2
+          sync
 
           echo "Running profile workload 2: Validate..."
-          ./sfvbrr validate \
+          nice -n 19 ./sfvbrr validate \
             ./test/validate/01_1/App.Pro.v1.1.1.Linux.RPM.ARM64.Incl.Keymaker-GRP \
             ./test/validate/01_2/Corporation.Program.v1.0.0.0.x64.Multilingual.Incl.Keymaker-GRP \
             ./test/validate/02_1/First_Last_-_Title-AUDiOBOOK-WEB-EN-2025-GRP \
@@ -153,27 +156,34 @@ jobs:
             ./test/validate/11_1/Show.Season.S01.COMPLETE.HDTV.x264-GRP \
             ./test/validate/11_2/Show.S01.1080p.WEB.H264-GRP \
             --cpuprofile=./cpu2.pprof
+          # Ensure profile is flushed
+          sleep 2
+          sync
 
           echo "Running profile workload 3: ZIP..."
-          ./sfvbrr zip ./test/zip/TEST.FOLDER.v0.1.X64-GRP --cpuprofile=./cpu3.pprof
+          nice -n 19 ./sfvbrr zip ./test/zip/TEST.FOLDER.v0.1.X64-GRP --cpuprofile=./cpu3.pprof
+          # Ensure profile is flushed
+          sleep 2
+          sync
 
           echo "Merging profiles..."
           if [ -f "cpu1.pprof" ] && [ -f "cpu2.pprof" ] && [ -f "cpu3.pprof" ]; then \
+            # Verify profile files are valid and have content
+            ls -lh cpu*.pprof; \
+            go tool pprof -top cpu1.pprof > /dev/null 2>&1 || (echo "cpu1.pprof is invalid" && exit 1); \
+            go tool pprof -top cpu2.pprof > /dev/null 2>&1 || (echo "cpu2.pprof is invalid" && exit 1); \
+            go tool pprof -top cpu3.pprof > /dev/null 2>&1 || (echo "cpu3.pprof is invalid" && exit 1); \
             # Merge profiles step by step to preserve all metadata
             go tool pprof -proto -output=merged12.pgo cpu1.pprof cpu2.pprof; \
             go tool pprof -proto -output=default.pgo merged12.pgo cpu3.pprof; \
+            # Verify the final profile
+            go tool pprof -top default.pgo > /dev/null 2>&1 || (echo "default.pgo is invalid" && exit 1); \
             rm cpu1.pprof cpu2.pprof cpu3.pprof merged12.pgo; \
             echo "Profile generated at default.pgo"; \
           else \
             echo "Error: Profile files not generated correctly"; \
             exit 1; \
           fi
-
-      - name: Upload pprof
-        uses: actions/upload-artifact@v5
-        with:
-          name: pprof
-          path: default.pgo
 
   goreleaserbuild:
     name: Build distribution binaries
