@@ -131,13 +131,28 @@ jobs:
           go build -o sfvbrr
 
           echo "Running profile workload 1: SFV..."
-          nice -n 19 ./sfvbrr sfv ./test/sfv/TEST.FOLDER.v0.1.X64-GRP --cpuprofile=./cpu1.pprof
+          # Create temporary directory for SFV test
+          mkdir -p /tmp/sfv-test
+          # Generate 10MB random file
+          dd if=/dev/urandom of=/tmp/sfv-test/large_file.bin bs=1M count=10 status=none
+          # Calculate CRC-32 checksum and create SFV file
+          # Using cksfv if available, otherwise calculate with a simple method
+          if command -v cksfv &> /dev/null; then \
+            cksfv /tmp/sfv-test/large_file.bin > /tmp/sfv-test/large_file.sfv; \
+          else \
+            # Calculate CRC-32 using Python (available on GitHub runners)
+            CRC32=$(python3 -c "import zlib; f=open('/tmp/sfv-test/large_file.bin','rb'); print(format(zlib.crc32(f.read()) & 0xffffffff, '08X')); f.close()"); \
+            echo "large_file.bin $CRC32" > /tmp/sfv-test/large_file.sfv; \
+          fi
+          # Run SFV validation with profiling
+          ./sfvbrr sfv /tmp/sfv-test --cpuprofile=./cpu1.pprof
           # Ensure profile is flushed
           sleep 2
           sync
+          rm -rf /tmp/sfv-test
 
           echo "Running profile workload 2: Validate..."
-          nice -n 19 ./sfvbrr validate \
+          ./sfvbrr validate \
             ./test/validate/01_1/App.Pro.v1.1.1.Linux.RPM.ARM64.Incl.Keymaker-GRP \
             ./test/validate/01_2/Corporation.Program.v1.0.0.0.x64.Multilingual.Incl.Keymaker-GRP \
             ./test/validate/02_1/First_Last_-_Title-AUDiOBOOK-WEB-EN-2025-GRP \
@@ -161,10 +176,20 @@ jobs:
           sync
 
           echo "Running profile workload 3: ZIP..."
-          nice -n 19 ./sfvbrr zip ./test/zip/TEST.FOLDER.v0.1.X64-GRP --cpuprofile=./cpu3.pprof
+          # Create temporary directory for ZIP test
+          mkdir -p /tmp/zip-test
+          # Generate 10MB random file
+          dd if=/dev/urandom of=/tmp/zip-test/large_file.bin bs=1M count=10 status=none
+          # Create zip file
+          cd /tmp/zip-test
+          zip -q large_file.zip large_file.bin
+          cd - > /dev/null
+          # Run ZIP validation with profiling
+          ./sfvbrr zip /tmp/zip-test --cpuprofile=./cpu3.pprof
           # Ensure profile is flushed
           sleep 2
           sync
+          rm -rf /tmp/zip-test
 
           echo "Merging profiles..."
           if [ -f "cpu1.pprof" ] && [ -f "cpu2.pprof" ] && [ -f "cpu3.pprof" ]; then \
