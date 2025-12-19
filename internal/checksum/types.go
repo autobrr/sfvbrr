@@ -37,13 +37,13 @@ type SFVFile struct {
 
 // ValidationResult represents the overall result of SFV validation
 type ValidationResult struct {
-	SFVFile    SFVFile
-	Results    []SFVResult
-	TotalFiles int
-	ValidFiles int
+	SFVFile      SFVFile
+	Results      []SFVResult
+	TotalFiles   int
+	ValidFiles   int
 	InvalidFiles int
 	MissingFiles int
-	Errors     []error
+	Errors       []error
 }
 
 // Options contains configuration options for SFV validation
@@ -59,10 +59,11 @@ type Options struct {
 // DefaultOptions returns default options for SFV validation
 func DefaultOptions() Options {
 	return Options{
-		Workers:    0, // Auto-detect
-		BufferSize: 0, // Auto-detect
-		Verbose:    false,
-		Quiet:      false,
+		Workers:      0, // Auto-detect
+		BufferSize:   0, // Auto-detect
+		Verbose:      false,
+		Quiet:        false,
+		OutputFormat: OutputFormatText,
 	}
 }
 

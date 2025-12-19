@@ -41,11 +41,12 @@ type Options struct {
 // DefaultOptions returns default options for validation
 func DefaultOptions() Options {
 	return Options{
-		PresetPath:       "",
-		Verbose:          false,
-		Quiet:            false,
-		Recursive:        false,
+		PresetPath:        "",
+		Verbose:           false,
+		Quiet:             false,
+		Recursive:         false,
 		OverwriteCategory: "",
+		OutputFormat:      OutputFormatText,
 	}
 }
 
