@@ -2,4 +2,3 @@ build/
 cpu*.pprof
 dist/
 coverage.txt
-default.pgo
