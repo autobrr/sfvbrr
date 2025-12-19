@@ -166,6 +166,16 @@ jobs:
             exit 1; \
           fi
 
+      - name: Verify PGO profile before upload
+        run: |
+          if [ ! -f "default.pgo" ]; then
+            echo "Error: default.pgo was not created"
+            exit 1
+          fi
+          echo "PGO profile size:"
+          ls -lh default.pgo
+          file default.pgo || true
+
       - name: Upload pprof
         uses: actions/upload-artifact@v5
         with:
@@ -193,6 +203,17 @@ jobs:
         with:
           name: pprof
           path: .
+
+      - name: Verify PGO profile exists
+        run: |
+          if [ ! -f "default.pgo" ]; then
+            echo "Error: default.pgo not found after download"
+            ls -la
+            exit 1
+          fi
+          echo "PGO profile found:"
+          ls -lh default.pgo
+          file default.pgo || true
 
       - name: Run GoReleaser build
         if: github.event_name == 'pull_request'
