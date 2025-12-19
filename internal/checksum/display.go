@@ -228,9 +228,7 @@ var (
 	yellow     = color.New(color.FgYellow).SprintFunc()
 	success    = color.New(color.FgGreen).SprintFunc()
 	label      = color.New(color.FgCyan).SprintFunc()
-	highlight  = color.New(color.FgHiWhite).SprintFunc()
 	errorColor = color.New(color.FgRed).SprintFunc()
-	white      = fmt.Sprint
 )
 
 func (d *Display) ShowMessage(msg string) {
