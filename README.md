@@ -134,7 +134,7 @@ rules:
         min: 1
         max: 1
         description: "Requires only one .nfo file"
-      - pattern: ".*\\.r\\d{2}$"
+      - pattern: ".*\\.[r-z]\\d{2}$"
         regex: true
         min: 1
         description: "It usually contains one or more .r?? files"
@@ -163,7 +163,7 @@ rules:
         min: 1
         max: 1
         description: "Requires only one *.{mkv,mp4} file inside the Sample folder"
-      - pattern: ".*\\.r\\d{2}$"
+      - pattern: ".*\\.[r-z]\\d{2}$"
         regex: true
         min: 1
         description: "Requires at least one .r?? file"
@@ -182,7 +182,7 @@ rules:
         min: 1
         max: 1
         description: "Requires only one .nfo file"
-      - pattern: ".*\\.r\\d{2}$"
+      - pattern: ".*\\.[r-z]\\d{2}$"
         regex: true
         min: 1
         description: "Requires at least one .r?? file"
@@ -227,7 +227,7 @@ rules:
         min: 1
         max: 1
         description: "Requires only one *.{mkv,mp4} file inside the Sample folder"
-      - pattern: ".*\\.r\\d{2}$"
+      - pattern: ".*\\.[r-z]\\d{2}$"
         regex: true
         min: 1
         description: "Requires at least one .r?? file"
@@ -427,7 +427,7 @@ rules:
   game:
     deny_unexpected: true
     rules:
-      - pattern: ".*\\.r\\d{2}$"
+      - pattern: ".*\\.[r-z]\\d{2}$"
         regex: true
         min: 1
         description: "Requires at least one .r?? file"
