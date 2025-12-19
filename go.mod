@@ -43,3 +43,6 @@ require (
 
 // Fix for arm6 build: force use of xz v0.5.15+ to avoid integer overflow on 32-bit architectures
 replace github.com/ulikunitz/xz => github.com/ulikunitz/xz v0.5.15
+
+// Use autobrr fork of rls library
+replace github.com/moistari/rls => github.com/autobrr/rls v0.7.0

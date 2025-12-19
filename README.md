@@ -257,7 +257,7 @@ rules:
 
 </details>
 
-It provides the rulesets for the most common 0day scene categories - built on [moistari/rls](https://github.com/moistari/rls) library allowing you to confirm its checksums, validate your data and make sure there is no garbage in them. The category can be manually [-- overwritten](#command-line-arguments), if required.
+It provides the rulesets for the most common 0day scene categories - built on [autobrr/rls](https://github.com/autobrr/rls) library allowing you to confirm its checksums, validate your data and make sure there is no garbage in them. The category can be manually [-- overwritten](#command-line-arguments), if required.
 
 With little to no time, you can adjust these out-of-the-box scene rules for your specific use-case.
 

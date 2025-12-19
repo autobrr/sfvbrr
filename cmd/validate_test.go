@@ -59,4 +59,3 @@ func TestReleaseTypeDetection(t *testing.T) {
 		})
 	}
 }
-

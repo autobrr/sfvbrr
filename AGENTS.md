@@ -115,7 +115,7 @@ sfvbrr is a high-performance scene release validation tool written in Go. The co
    - Optimized for both small and large files
 
 2. **Scene Release Detection**:
-   - Detects the type of scene release using the existing library https://github.com/moistari/rls
+   - Detects the type of scene release using the existing library https://github.com/autobrr/rls
    - Use `presets.yaml` to determine what are the rules for each category
    - Based on the type and rules, look at the content of each folder (one or more folders can be specified)
    - Validate the content of the folder(s)
