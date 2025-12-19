@@ -119,8 +119,9 @@ func TestValidateFolders_Recursive(t *testing.T) {
 
 	// Test recursive validation
 	opts := Options{
-		Recursive: true,
-		Quiet:     true, // Use quiet mode to avoid output in tests
+		Recursive:    true,
+		Quiet:        true, // Use quiet mode to avoid output in tests
+		OutputFormat: OutputFormatText,
 	}
 
 	err = ValidateFolders([]string{tmpDir}, opts)
@@ -128,4 +129,3 @@ func TestValidateFolders_Recursive(t *testing.T) {
 		t.Errorf("Expected validation to succeed, got error: %v", err)
 	}
 }
-

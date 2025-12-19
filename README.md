@@ -20,6 +20,7 @@
 - [Quick Start](#quick-start)
 - [Installation](#installation)
 - [Usage](#usage)
+- [Integration](#integration-with-qui)
 - [Testing](#testing)
 - [License](#license)
 
@@ -84,6 +85,8 @@ rules:
       - pattern: "*.mp3"
         min: 1
         description: "Requires at least one .mp3 file"
+      - pattern: "*.jpg"
+        description: "Allows any amount of .jpg files"
   book:
     deny_unexpected: true
     rules:
@@ -133,7 +136,7 @@ rules:
         min: 1
         max: 1
         description: "Requires only one .nfo file"
-      - pattern: ".*\\.r\\d{2}$"
+      - pattern: ".*\\.[r-z]\\d{2}$"
         regex: true
         min: 1
         description: "It usually contains one or more .r?? files"
@@ -162,10 +165,16 @@ rules:
         min: 1
         max: 1
         description: "Requires only one *.{mkv,mp4} file inside the Sample folder"
-      - pattern: ".*\\.r\\d{2}$"
+      - pattern: ".*\\.[r-z]\\d{2}$"
         regex: true
         min: 1
         description: "Requires at least one .r?? file"
+      - pattern: "Proof"
+        type: dir
+        max: 1
+        description: "Allows Proof folder, but not required"
+      - pattern: "Proof/*.jpg"
+        description: "Allows any amount of .jpg files in the Proof folder"
   game:
     deny_unexpected: true
     rules:
@@ -181,7 +190,7 @@ rules:
         min: 1
         max: 1
         description: "Requires only one .nfo file"
-      - pattern: ".*\\.r\\d{2}$"
+      - pattern: ".*\\.[r-z]\\d{2}$"
         regex: true
         min: 1
         description: "Requires at least one .r?? file"
@@ -226,10 +235,16 @@ rules:
         min: 1
         max: 1
         description: "Requires only one *.{mkv,mp4} file inside the Sample folder"
-      - pattern: ".*\\.r\\d{2}$"
+      - pattern: ".*\\.[r-z]\\d{2}$"
         regex: true
         min: 1
         description: "Requires at least one .r?? file"
+      - pattern: "Proof"
+        type: dir
+        max: 1
+        description: "Allows Proof folder, but not required"
+      - pattern: "Proof/*.jpg"
+        description: "Allows any amount of .jpg files in the Proof folder"
   music:
     deny_unexpected: true
     rules:
@@ -246,6 +261,8 @@ rules:
       - pattern: "*.{mp3,flac}"
         min: 1
         description: "Requires at least one .mp3 or .flac file"
+      - pattern: "*.jpg"
+        description: "Allows JPEG files"
   series:
     deny_unexpected: true
     rules:
@@ -257,7 +274,7 @@ rules:
 
 </details>
 
-It provides the rulesets for the most common 0day scene categories - built on [moistari/rls](https://github.com/moistari/rls) library allowing you to confirm its checksums, validate your data and make sure there is no garbage in them. The category can be manually [-- overwritten](#command-line-arguments), if required.
+It provides the rulesets for the most common 0day scene categories - built on [autobrr/rls](https://github.com/autobrr/rls) library allowing you to confirm its checksums, validate your data and make sure there is no garbage in them. The category can be manually [-- overwritten](#command-line-arguments), if required.
 
 With little to no time, you can adjust these out-of-the-box scene rules for your specific use-case.
 
@@ -313,7 +330,7 @@ The `pattern` field specifies what files or directories to match. It supports 3 
 - [Regex patterns](#regex-patterns), when `regex: true` is set: The pattern is treated as a regular expression
 - [Nested patterns](#nested-patterns): Patterns with `/` to match files inside directories
 
-The `deny_unexpected` option is a **required** boolean flag (bu default `true`) for each pattern that controls strictness - only files/directories that match at least one rule pattern are allowed. Any file or directory that doesn't match any rule will cause validation to fail.
+The `deny_unexpected` option is a **required** boolean flag (by default `true`) for each pattern that controls strictness - only files/directories that match at least one rule pattern are allowed. Any file or directory that doesn't match any rule will cause validation to fail.
 
 Minimum/Maximum is another **required** field for each pattern (it has no default - `0`). If specified, the count of matching files/directories must be **greater than or equal** (min) / **less than or equal** (max) to this value.
 
@@ -426,7 +443,7 @@ rules:
   game:
     deny_unexpected: true
     rules:
-      - pattern: ".*\\.r\\d{2}$"
+      - pattern: ".*\\.[r-z]\\d{2}$"
         regex: true
         min: 1
         description: "Requires at least one .r?? file"
@@ -568,12 +585,15 @@ Usage:
   sfvbrr validate [folder...] [flags]
 
 Flags:
-  -h, --help               help for validate
-      --overwrite string   Override category detection with specified category (bypasses automatic detection)
-  -p, --preset string      Path to preset YAML file (default: auto-detect)
-  -q, --quiet              Quiet mode - only show errors
-  -r, --recursive          Recursively search for release folders in subdirectories
-  -v, --verbose            Show detailed validation results for each rule
+      --cpuprofile string   Write CPU profile to file
+  -h, --help                help for validate
+      --json                Output results in JSON format
+      --overwrite string    Override category detection with specified category (bypasses automatic detection)
+  -p, --preset string       Path to preset YAML file (default: auto-detect)
+  -q, --quiet               Quiet mode - only show errors
+  -r, --recursive           Recursively search for release folders in subdirectories
+  -v, --verbose             Show detailed validation results for each rule
+      --yaml                Output results in YAML format
 ```
 
 </details>
@@ -609,10 +629,12 @@ Flags:
   -b, --buffer-size int     Buffer size for file reading in bytes (0 = auto, default 64KB)
       --cpuprofile string   Write CPU profile to file
   -h, --help                help for sfv
+      --json                Output results in JSON format
   -q, --quiet               Quiet mode - only show errors
   -r, --recursive           Recursively search for SFV files in subdirectories
   -v, --verbose             Show detailed validation results for each file
   -w, --workers int         Number of parallel workers (0 = auto-detect)
+      --yaml                Output results in YAML format
 ```
 
 </details>
@@ -648,10 +670,12 @@ Flags:
   -b, --buffer-size int     Buffer size for file reading in bytes (0 = auto, default 64KB)
       --cpuprofile string   Write CPU profile to file
   -h, --help                help for zip
+      --json                Output results in JSON format
   -q, --quiet               Quiet mode - only show errors
   -r, --recursive           Recursively search for ZIP files in subdirectories
   -v, --verbose             Show detailed validation results for each entry
   -w, --workers int         Number of parallel workers (0 = auto-detect)
+      --yaml                Output results in YAML format
 ```
 
 </details>
@@ -692,6 +716,12 @@ Flags:
 ```
 
 </details>
+
+## Integration with [Qui](https://github.com/autobrr/qui)
+
+An example of the validation process:
+
+![qui_screenshot](.github/assets/qui_screenshot.png)
 
 ## Testing
 

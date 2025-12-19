@@ -9,11 +9,14 @@ import (
 )
 
 var (
-	validatePresetPath       string
-	validateVerbose          bool
-	validateQuiet            bool
-	validateRecursive        bool
+	validatePresetPath        string
+	validateVerbose           bool
+	validateQuiet             bool
+	validateRecursive         bool
 	validateOverwriteCategory string
+	validateCPUProfile        string
+	validateOutputJSON        bool
+	validateOutputYAML        bool
 )
 
 var validateCmd = &cobra.Command{
@@ -44,12 +47,27 @@ Examples:
   sfvbrr validate --overwrite app /path/to/release`,
 	Args: cobra.MinimumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
+		cleanup, err := setupProfiling(validateCPUProfile)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "Error: %v\n", err)
+			os.Exit(1)
+		}
+		defer cleanup()
+
+		outputFormat := validate.OutputFormatText
+		if validateOutputJSON {
+			outputFormat = validate.OutputFormatJSON
+		} else if validateOutputYAML {
+			outputFormat = validate.OutputFormatYAML
+		}
+
 		opts := validate.Options{
-			PresetPath:       validatePresetPath,
-			Verbose:          validateVerbose,
-			Quiet:            validateQuiet,
-			Recursive:        validateRecursive,
+			PresetPath:        validatePresetPath,
+			Verbose:           validateVerbose,
+			Quiet:             validateQuiet,
+			Recursive:         validateRecursive,
 			OverwriteCategory: validateOverwriteCategory,
+			OutputFormat:      outputFormat,
 		}
 
 		if err := validate.ValidateFolders(args, opts); err != nil {
@@ -67,4 +85,8 @@ func init() {
 	validateCmd.Flags().BoolVarP(&validateQuiet, "quiet", "q", false, "Quiet mode - only show errors")
 	validateCmd.Flags().BoolVarP(&validateRecursive, "recursive", "r", false, "Recursively search for release folders in subdirectories")
 	validateCmd.Flags().StringVar(&validateOverwriteCategory, "overwrite", "", "Override category detection with specified category (bypasses automatic detection)")
+	validateCmd.Flags().StringVar(&validateCPUProfile, "cpuprofile", "", "Write CPU profile to file")
+	validateCmd.Flags().BoolVar(&validateOutputJSON, "json", false, "Output results in JSON format")
+	validateCmd.Flags().BoolVar(&validateOutputYAML, "yaml", false, "Output results in YAML format")
+	validateCmd.MarkFlagsMutuallyExclusive("json", "yaml")
 }

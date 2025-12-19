@@ -655,6 +655,19 @@
     found 1 unexpected file(s)/directory(ies)
   ```
 
+* **[6.9](validate/06_9/)** :white_check_mark: A valid release folder with one additional JPEG file in the Proof folder.
+
+  ```bash
+  Validating Release:
+    Folder:       06_9/Show.S01E09.1080p.BluRay.x264-GRP
+    Category:     episode
+
+  Rule Validation:
+
+  Summary:
+    Valid rules: 8
+  ```
+
 ## 7 Game
 
 * **[7.1](validate/07_1/)** :white_check_mark: A folder with `game.rar`, `game.r00`, `game.r01`, `checksum.sfv`, and `release.nfo`.
@@ -1073,6 +1086,20 @@
   Errors:
     found 1 unexpected file(s)/directory(ies)
   ```
+
+* **[10.8](validate/10_8/)** :x: A valid release folder with one additional unassociated file
+
+  ```bash
+  Validating Release:
+    Folder:       10_8/First_Last_-_Title-WEB-CZ-2025-GRP
+    Category:     music
+
+  Rule Validation:
+
+  Summary:
+    Valid rules: 5
+  ```
+
 
 ## 11 Series
 

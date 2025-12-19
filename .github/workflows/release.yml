@@ -1,4 +1,3 @@
----
 name: Release
 
 on:
@@ -7,22 +6,22 @@ on:
       - "main"
       - "develop"
     tags:
-      - "v*"
+      - 'v*'
     paths-ignore:
-      - ".github/ISSUE_TEMPLATE/**"
-      - ".github/images/**"
-      - "config.toml"
-      - "docker-compose.yml"
-      - "Makefile"
-      - "**.md"
+      - '.github/ISSUE_TEMPLATE/**'
+      - '.github/images/**'
+      - 'config.toml'
+      - 'docker-compose.yml'
+      - 'Makefile'
+      - '**.md'
   pull_request:
     paths-ignore:
-      - ".github/ISSUE_TEMPLATE/**"
-      - ".github/images/**"
-      - "config.toml"
-      - "docker-compose.yml"
-      - "Makefile"
-      - "**.md"
+      - '.github/ISSUE_TEMPLATE/**'
+      - '.github/images/**'
+      - 'config.toml'
+      - 'docker-compose.yml'
+      - 'Makefile'
+      - '**.md'
 
 env:
   REGISTRY: ghcr.io
@@ -34,46 +33,12 @@ permissions:
 
 jobs:
   test:
-    name: Run tests
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-
-      - name: Set up Go
-        uses: actions/setup-go@v6
-        with:
-          go-version-file: go.mod
-          cache: true
-
-      - name: Cache Go modules
-        uses: actions/cache@v5
-        with:
-          path: ~/go/pkg/mod
-          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
-          restore-keys: |
-            ${{ runner.os }}-go-
-
-      - name: Install dependencies
-        run: go mod download
-
-      - name: Run tests
-        run: |
-          go test -v -race -coverprofile=coverage.out ./...
-          go tool cover -html=coverage.out -o coverage.html
-
-      - name: Upload coverage reports
-        uses: actions/upload-artifact@v6
-        with:
-          name: coverage-report
-          path: |
-            coverage.out
-            coverage.html
-
-  goreleaserbuild:
-    name: Build distribution binaries
-    runs-on: ubuntu-latest
-    needs: [test]
+    strategy:
+      fail-fast: true
+      matrix:
+        os: [ ubuntu-latest ]
+    name: Test ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -83,8 +48,151 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v6
         with:
-          go-version-file: 'go.mod'
+          go-version-file: go.mod
           cache: true
+
+      - name: Generate Test Summary
+        run: go run gotest.tools/gotestsum@latest --junitfile unit-tests.xml --format pkgname
+
+      - name: Test Summary
+        uses: test-summary/action@v2
+        with:
+          paths: "unit-tests.xml"
+        if: always()
+
+  testother:
+    strategy:
+      fail-fast: true
+      matrix:
+        os: [ macos-latest, windows-latest ]
+    name: Test ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    env:
+      GOPATH: ${{ startsWith(matrix.os, 'windows') && 'D:\golang\go' || '' }}
+      GOCACHE: ${{ startsWith(matrix.os, 'windows') && 'D:\golang\cache' || '' }}
+      GOMODCACHE: ${{ startsWith(matrix.os, 'windows') && 'D:\golang\modcache' || '' }}
+      USERPROFILE: ${{ startsWith(matrix.os, 'windows') && 'D:\homedir' || '' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Set up Go
+        uses: actions/setup-go@v6
+        with:
+          go-version-file: go.mod
+          cache: true
+
+      - name: Run Tests (MacOS)
+        if: matrix.os == 'macos-latest'
+        env:
+          CGO_ENABLED: 0
+        run: go test ./...
+
+      - name: Run Tests (Windows)
+        if: matrix.os == 'windows-latest'
+        env:
+          CGO_ENABLED: 0
+        run: go test -short ./...
+
+      - name: Generate Test Summary
+        if: matrix.os != 'windows-latest'
+        run: go run gotest.tools/gotestsum@latest --junitfile unit-tests.xml --format pkgname
+
+      - name: Test Summary
+        uses: test-summary/action@v2
+        with:
+          paths: "unit-tests.xml"
+        if: always() && matrix.os != 'windows-latest'
+
+  pgo:
+    name: Generate PGO Profile
+    runs-on: ubuntu-latest
+    needs: [ test, testother ]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Set up Go
+        uses: actions/setup-go@v6
+        with:
+          go-version-file: go.mod
+          cache: true
+
+      - name: Generate Profile
+        env:
+          CGO_ENABLED: 0
+        run: |
+          # Build initial binary
+          go build -o sfvbrr
+
+          echo "Running profile workload 1: SFV..."
+          ./sfvbrr sfv ./test/sfv/TEST.FOLDER.v0.1.X64-GRP --cpuprofile=./cpu1.pprof
+
+          echo "Running profile workload 2: Validate..."
+          ./sfvbrr validate \
+            ./test/validate/01_1/App.Pro.v1.1.1.Linux.RPM.ARM64.Incl.Keymaker-GRP \
+            ./test/validate/01_2/Corporation.Program.v1.0.0.0.x64.Multilingual.Incl.Keymaker-GRP \
+            ./test/validate/02_1/First_Last_-_Title-AUDiOBOOK-WEB-EN-2025-GRP \
+            ./test/validate/02_2/Artist-Title-AUDiOBOOK-WEB-EN-2025-GRP \
+            ./test/validate/03_1/First.Last.The.Title.2025.RETAiL.ePub.eBook-GRP \
+            ./test/validate/04_1/Comics.-.Title.Vol.01.2025.Retail.Comic.eBook-GRP \
+            ./test/validate/05_1/Learning.-.Topic.UPDATED.November.2025.BOOKWARE-GRP \
+            ./test/validate/05_2/OREILLY_CLOUD-GRP \
+            ./test/validate/06_1/Show.S01E06.1080p.WEB.h264-GRP \
+            ./test/validate/06_2/TVShow.S10.E999.720p.BluRay.x264-GRP \
+            ./test/validate/07_1/Great.Game.Udate.v1.2.34.567890.incl.DLC-GRP \
+            ./test/validate/08_1/Title.No.100.2025.GERMAN.HYBRID.MAGAZINE.eBook-GRP \
+            ./test/validate/09_1/The.Movie.2025.1080P.BLURAY.X264-GRP \
+            ./test/validate/10_1/First_Last_-_Title-WEB-CZ-2025-GRP \
+            ./test/validate/10_2/Artist-Title-WEB-2025-GRP \
+            ./test/validate/11_1/Show.Season.S01.COMPLETE.HDTV.x264-GRP \
+            ./test/validate/11_2/Show.S01.1080p.WEB.H264-GRP \
+            --cpuprofile=./cpu2.pprof
+
+          echo "Running profile workload 3: ZIP..."
+          ./sfvbrr zip ./test/zip/TEST.FOLDER.v0.1.X64-GRP --cpuprofile=./cpu3.pprof
+
+          echo "Merging profiles..."
+          if [ -f "cpu1.pprof" ] && [ -f "cpu2.pprof" ] && [ -f "cpu3.pprof" ]; then \
+            go tool pprof -proto cpu1.pprof cpu2.pprof cpu3.pprof> default.pgo; \
+            rm cpu1.pprof cpu2.pprof cpu3.pprof; \
+            echo "Profile generated at default.pgo"; \
+          else \
+            echo "Error: Profile files not generated correctly"; \
+            exit 1; \
+          fi
+
+      - name: Upload pprof
+        uses: actions/upload-artifact@v5
+        with:
+          name: pprof
+          path: default.pgo
+
+  goreleaserbuild:
+    name: Build distribution binaries
+    runs-on: ubuntu-latest
+    needs: [ pgo ]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Set up Go
+        uses: actions/setup-go@v6
+        with:
+          go-version-file: go.mod
+          cache: true
+
+      - name: Download pprof
+        uses: actions/download-artifact@v6
+        with:
+          name: pprof
+          path: .
 
       - name: Run GoReleaser build
         if: github.event_name == 'pull_request'
@@ -109,7 +217,7 @@ jobs:
           BUILDER: ${{ github.actor }}@github-actions
 
       - name: Upload assets
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v5
         with:
           name: sfvbrr
           path: |
@@ -118,129 +226,141 @@ jobs:
             dist/*.deb
             dist/*.rpm
 
-  # docker:
-  #   name: Build Docker images
-  #   runs-on: ubuntu-latest
-  #   needs: [test]
-  #   strategy:
-  #     fail-fast: true
-  #     matrix:
-  #       platform:
-  #         - linux/amd64
-  #         - linux/amd64/v2
-  #         - linux/amd64/v3
-  #         - linux/arm/v6
-  #         - linux/arm/v7
-  #         - linux/arm64
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v6
-  #       with:
-  #         fetch-depth: 0
+  docker:
+    name: Build Docker images
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        platform:
+          - linux/386
+          - linux/amd64
+          - linux/amd64/v2
+          - linux/amd64/v3
+          - linux/arm/v6
+          - linux/arm/v7
+          - linux/arm64
+          # - linux/mips64le
+          # - linux/mips64
+          - linux/ppc64le
+          # - linux/riscv64
+          - linux/s390x
+    needs: [ pgo, test ]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
 
-  #     - name: Login to GitHub Container Registry
-  #       uses: docker/login-action@v3
-  #       with:
-  #         registry: ${{ env.REGISTRY }}
-  #         username: ${{ github.repository_owner }}
-  #         password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Download pprof profile
+        uses: actions/download-artifact@v6
+        with:
+          name: pprof
 
-  #     - name: Extract metadata
-  #       id: meta
-  #       uses: docker/metadata-action@v5
-  #       with:
-  #         images: ${{ env.REGISTRY_IMAGE }}
-  #         tags: |
-  #           type=semver,pattern={{version}},prefix=v
-  #           type=semver,pattern={{major}}.{{minor}},prefix=v
-  #           type=ref,event=branch
-  #           type=ref,event=pr
-  #         flavor: |
-  #           latest=auto
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
-  #     - name: Set up QEMU
-  #       uses: docker/setup-qemu-action@v3
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY_IMAGE }}
+          tags: |
+            type=semver,pattern={{version}},prefix=v
+            type=semver,pattern={{major}}.{{minor}},prefix=v
+            type=ref,event=branch
+            type=ref,event=pr
+          flavor: |
+            latest=auto
 
-  #     - name: Set up Docker Buildx
-  #       uses: docker/setup-buildx-action@v3
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
 
-  #     - name: Build and publish image
-  #       id: docker_build
-  #       uses: docker/build-push-action@v6
-  #       with:
-  #         context: .
-  #         file: ./ci.Dockerfile
-  #         platforms: ${{ matrix.platform }}
-  #         outputs: type=image,name=${{ env.REGISTRY_IMAGE }},push-by-digest=true,name-canonical=true,push=${{ (github.event.pull_request.head.repo.full_name == github.repository || github.event_name != 'pull_request') && 'true' || 'false' }}
-  #         labels: ${{ steps.meta.outputs.labels }}
-  #         build-args: |
-  #           BUILDTIME=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.created'] }}
-  #           VERSION=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.version'] }}
-  #           REVISION=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.revision'] }}
-  #           BUILDER=${{ github.actor }}@github-actions
-  #           GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
-  #         cache-from: type=gha
-  #         cache-to: type=gha,mode=max
-  #         provenance: false
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
 
-  #     - name: Export image digest
-  #       id: digest-prep
-  #       run: |
-  #         mkdir -p /tmp/digests
-  #         digest="${{ steps.docker_build.outputs.digest }}"
-  #         echo "manifest-hash=${digest#sha256:}" >> "$GITHUB_OUTPUT"
-  #         touch "/tmp/digests/${digest#sha256:}"
+      - name: Supported Architectures
+        run: docker buildx ls
 
-  #     - name: Upload image digest
-  #       uses: actions/upload-artifact@v6
-  #       with:
-  #         name: docker-digests-${{ steps.digest-prep.outputs.manifest-hash }}
-  #         path: /tmp/digests/*
-  #         if-no-files-found: error
-  #         retention-days: 1
+      - name: Build and publish image
+        id: docker_build
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: './ci.Dockerfile'
+          platforms: ${{ matrix.platform }}
+          outputs: type=image,name=${{ env.REGISTRY_IMAGE }},push-by-digest=true,name-canonical=true,push=${{ (github.event.pull_request.head.repo.full_name == github.repository || github.event_name != 'pull_request') && 'true' || 'false' }}
+          labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            BUILDTIME=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.created'] }}
+            VERSION=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.version'] }}
+            REVISION=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.revision'] }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          provenance: false
 
-  # docker-merge:
-  #   name: Publish Docker multi-arch manifest
-  #   if: ${{ github.event.pull_request.head.repo.full_name == github.repository || github.event_name != 'pull_request' }}
-  #   runs-on: ubuntu-latest
-  #   needs: [docker]
-  #   steps:
-  #     - name: Download image digests
-  #       uses: actions/download-artifact@v6
-  #       with:
-  #         path: /tmp/digests
-  #         pattern: docker-digests-*
-  #         merge-multiple: true
+      - name: Export image digest
+        id: digest-prep
+        run: |
+          mkdir -p /tmp/digests
+          digest="${{ steps.docker_build.outputs.digest }}"
+          echo "manifest-hash=${digest#sha256:}" >> "$GITHUB_OUTPUT"
+          touch "/tmp/digests/${digest#sha256:}"
 
-  #     - name: Set up Docker Buildx
-  #       uses: docker/setup-buildx-action@v3
+      - name: Upload image digest
+        uses: actions/upload-artifact@v5
+        with:
+          name: docker-digests-${{ steps.digest-prep.outputs.manifest-hash }}
+          path: /tmp/digests/*
+          if-no-files-found: error
+          retention-days: 1
 
-  #     - name: Login to GitHub Container Registry
-  #       uses: docker/login-action@v3
-  #       with:
-  #         registry: ${{ env.REGISTRY }}
-  #         username: ${{ github.repository_owner }}
-  #         password: ${{ secrets.GITHUB_TOKEN }}
+  docker-merge:
+    name: Publish Docker multi-arch manifest
+    if: ${{ github.event.pull_request.head.repo.full_name == github.repository || github.event_name != 'pull_request' }}
+    runs-on: ubuntu-latest
+    needs: [ docker ]
+    steps:
+      - name: Download image digests
+        uses: actions/download-artifact@v6
+        with:
+          path: /tmp/digests
+          pattern: docker-digests-*
+          merge-multiple: true
 
-  #     - name: Extract metadata
-  #       id: meta
-  #       uses: docker/metadata-action@v5
-  #       with:
-  #         images: ${{ env.REGISTRY_IMAGE }}
-  #         tags: |
-  #           type=semver,pattern={{version}},prefix=v
-  #           type=semver,pattern={{major}}.{{minor}},prefix=v
-  #           type=ref,event=branch
-  #           type=ref,event=pr
-  #         flavor: |
-  #           latest=auto
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
 
-  #     - name: Create manifest list and push
-  #       working-directory: /tmp/digests
-  #       run: |
-  #         docker buildx imagetools create $(jq -cr '.tags | map("-t " + .) | join(" ")' <<< "$DOCKER_METADATA_OUTPUT_JSON") \
-  #           $(printf '${{ env.REGISTRY_IMAGE }}@sha256:%s ' *)
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
-  #     - name: Inspect image
-  #       run: |
-  #         docker buildx imagetools inspect ${{ env.REGISTRY_IMAGE }}:${{ steps.meta.outputs.version }}
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY_IMAGE }}
+          tags: |
+            type=semver,pattern={{version}},prefix=v
+            type=semver,pattern={{major}}.{{minor}},prefix=v
+            type=ref,event=branch
+            type=ref,event=pr
+          flavor: |
+            latest=auto
+
+      - name: Create manifest list and push
+        working-directory: /tmp/digests
+        run: |
+          docker buildx imagetools create $(jq -cr '.tags | map("-t " + .) | join(" ")' <<< "$DOCKER_METADATA_OUTPUT_JSON") \
+            $(printf '${{ env.REGISTRY_IMAGE }}@sha256:%s ' *)
+
+      - name: Inspect image
+        run: |
+          docker buildx imagetools inspect ${{ env.REGISTRY_IMAGE }}:${{ steps.meta.outputs.version }}

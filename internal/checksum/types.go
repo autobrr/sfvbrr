@@ -4,6 +4,15 @@ import (
 	"path/filepath"
 )
 
+// OutputFormat represents the output format type
+type OutputFormat string
+
+const (
+	OutputFormatText OutputFormat = "text"
+	OutputFormatJSON OutputFormat = "json"
+	OutputFormatYAML OutputFormat = "yaml"
+)
+
 // SFVEntry represents a single entry in an SFV file
 type SFVEntry struct {
 	Filename string
@@ -28,31 +37,33 @@ type SFVFile struct {
 
 // ValidationResult represents the overall result of SFV validation
 type ValidationResult struct {
-	SFVFile    SFVFile
-	Results    []SFVResult
-	TotalFiles int
-	ValidFiles int
+	SFVFile      SFVFile
+	Results      []SFVResult
+	TotalFiles   int
+	ValidFiles   int
 	InvalidFiles int
 	MissingFiles int
-	Errors     []error
+	Errors       []error
 }
 
 // Options contains configuration options for SFV validation
 type Options struct {
-	Workers     int    // Number of parallel workers (0 = auto)
-	BufferSize  int    // Buffer size for file reading (0 = auto)
-	Verbose     bool   // Verbose output
-	Quiet       bool   // Quiet mode (minimal output)
-	Recursive   bool   // Recursive mode - search subdirectories
+	Workers      int          // Number of parallel workers (0 = auto)
+	BufferSize   int          // Buffer size for file reading (0 = auto)
+	Verbose      bool         // Verbose output
+	Quiet        bool         // Quiet mode (minimal output)
+	Recursive    bool         // Recursive mode - search subdirectories
+	OutputFormat OutputFormat // Output format: text, json, or yaml
 }
 
 // DefaultOptions returns default options for SFV validation
 func DefaultOptions() Options {
 	return Options{
-		Workers:    0, // Auto-detect
-		BufferSize: 0, // Auto-detect
-		Verbose:    false,
-		Quiet:      false,
+		Workers:      0, // Auto-detect
+		BufferSize:   0, // Auto-detect
+		Verbose:      false,
+		Quiet:        false,
+		OutputFormat: OutputFormatText,
 	}
 }
 
@@ -60,4 +71,3 @@ func DefaultOptions() Options {
 func (e *SFVEntry) JoinPath(dir string) {
 	e.Path = filepath.Join(dir, e.Filename)
 }
-

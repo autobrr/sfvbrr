@@ -9,12 +9,14 @@ import (
 )
 
 var (
-	zipWorkers    int
-	zipBufferSize int
-	zipVerbose    bool
-	zipQuiet      bool
-	zipRecursive  bool
-	zipCPUProfile string
+	zipWorkers     int
+	zipBufferSize  int
+	zipVerbose     bool
+	zipQuiet       bool
+	zipRecursive   bool
+	zipCPUProfile  string
+	zipOutputJSON  bool
+	zipOutputYAML  bool
 )
 
 var zipCmd = &cobra.Command{
@@ -46,12 +48,20 @@ Examples:
 		}
 		defer cleanup()
 
+		outputFormat := checksum.OutputFormatText
+		if zipOutputJSON {
+			outputFormat = checksum.OutputFormatJSON
+		} else if zipOutputYAML {
+			outputFormat = checksum.OutputFormatYAML
+		}
+
 		opts := checksum.Options{
-			Workers:    zipWorkers,
-			BufferSize: zipBufferSize,
-			Verbose:    zipVerbose,
-			Quiet:      zipQuiet,
-			Recursive:  zipRecursive,
+			Workers:      zipWorkers,
+			BufferSize:   zipBufferSize,
+			Verbose:      zipVerbose,
+			Quiet:        zipQuiet,
+			Recursive:    zipRecursive,
+			OutputFormat: outputFormat,
 		}
 
 		if err := checksum.ValidateZIPFolders(args, opts); err != nil {
@@ -70,4 +80,7 @@ func init() {
 	zipCmd.Flags().BoolVarP(&zipQuiet, "quiet", "q", false, "Quiet mode - only show errors")
 	zipCmd.Flags().BoolVarP(&zipRecursive, "recursive", "r", false, "Recursively search for ZIP files in subdirectories")
 	zipCmd.Flags().StringVar(&zipCPUProfile, "cpuprofile", "", "Write CPU profile to file")
+	zipCmd.Flags().BoolVar(&zipOutputJSON, "json", false, "Output results in JSON format")
+	zipCmd.Flags().BoolVar(&zipOutputYAML, "yaml", false, "Output results in YAML format")
+	zipCmd.MarkFlagsMutuallyExclusive("json", "yaml")
 }

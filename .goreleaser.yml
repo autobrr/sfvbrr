@@ -11,7 +11,7 @@ builds:
       - CGO_ENABLED=0
       - BUILDER
     flags:
-      - -pgo=cpu.pprof
+      - -pgo=default.pgo
     goos:
       - linux
       - windows
@@ -44,7 +44,7 @@ builds:
 archives:
   - format_overrides:
       - goos: windows
-        format: zip
+        formats: [ 'zip' ]
     name_template: >-
       {{ .ProjectName }}_
       {{- .Version }}_
@@ -82,7 +82,7 @@ nfpms:
   - package_name: sfvbrr
     maintainer: autobrr
     description: |-
-      sfvbrr is a tool for creating, inspecting and modifying .torrent files.
+      sfvbrr is a Golang tool to validate scene releases.
     formats:
       - apk
       - deb

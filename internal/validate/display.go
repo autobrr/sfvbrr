@@ -19,6 +19,15 @@ var (
 // DisplayResult displays the validation results to the user
 // Returns true if validation failed (has invalid rules)
 func DisplayResult(result *ValidationResult, opts Options) bool {
+	// Handle JSON/YAML output
+	if opts.OutputFormat != OutputFormatText {
+		if err := OutputValidationResult(result, opts.OutputFormat); err != nil {
+			fmt.Fprintf(os.Stderr, "Error: failed to output result: %v\n", err)
+			return true
+		}
+		return !result.Valid
+	}
+
 	if opts.Quiet {
 		// In quiet mode, only show errors
 		if !result.Valid {
