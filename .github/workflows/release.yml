@@ -168,22 +168,29 @@ jobs:
 
           echo "Merging profiles..."
           if [ -f "cpu1.pprof" ] && [ -f "cpu2.pprof" ] && [ -f "cpu3.pprof" ]; then \
-            # Verify profile files are valid and have content
+            # Check file sizes (simple validation)
             ls -lh cpu*.pprof; \
-            go tool pprof -top cpu1.pprof > /dev/null 2>&1 || (echo "cpu1.pprof is invalid" && exit 1); \
-            go tool pprof -top cpu2.pprof > /dev/null 2>&1 || (echo "cpu2.pprof is invalid" && exit 1); \
-            go tool pprof -top cpu3.pprof > /dev/null 2>&1 || (echo "cpu3.pprof is invalid" && exit 1); \
             # Merge profiles step by step to preserve all metadata
-            go tool pprof -proto -output=merged12.pgo cpu1.pprof cpu2.pprof; \
-            go tool pprof -proto -output=default.pgo merged12.pgo cpu3.pprof; \
-            # Verify the final profile
-            go tool pprof -top default.pgo > /dev/null 2>&1 || (echo "default.pgo is invalid" && exit 1); \
+            go tool pprof -proto -output=merged12.pgo cpu1.pprof cpu2.pprof || (echo "Failed to merge cpu1 and cpu2" && exit 1); \
+            go tool pprof -proto -output=default.pgo merged12.pgo cpu3.pprof || (echo "Failed to merge with cpu3" && exit 1); \
+            # Verify the final profile exists and has reasonable size
+            if [ ! -f "default.pgo" ] || [ ! -s "default.pgo" ]; then \
+              echo "Error: default.pgo was not created or is empty"; \
+              exit 1; \
+            fi; \
+            echo "Profile size: $(ls -lh default.pgo | awk '{print $5}')"; \
             rm cpu1.pprof cpu2.pprof cpu3.pprof merged12.pgo; \
             echo "Profile generated at default.pgo"; \
           else \
             echo "Error: Profile files not generated correctly"; \
             exit 1; \
           fi
+
+      - name: Upload pprof
+        uses: actions/upload-artifact@v5
+        with:
+          name: pprof
+          path: default.pgo
 
   goreleaserbuild:
     name: Build distribution binaries
