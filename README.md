@@ -314,7 +314,7 @@ The `pattern` field specifies what files or directories to match. It supports 3 
 - [Regex patterns](#regex-patterns), when `regex: true` is set: The pattern is treated as a regular expression
 - [Nested patterns](#nested-patterns): Patterns with `/` to match files inside directories
 
-The `deny_unexpected` option is a **required** boolean flag (bu default `true`) for each pattern that controls strictness - only files/directories that match at least one rule pattern are allowed. Any file or directory that doesn't match any rule will cause validation to fail.
+The `deny_unexpected` option is a **required** boolean flag (by default `true`) for each pattern that controls strictness - only files/directories that match at least one rule pattern are allowed. Any file or directory that doesn't match any rule will cause validation to fail.
 
 Minimum/Maximum is another **required** field for each pattern (it has no default - `0`). If specified, the count of matching files/directories must be **greater than or equal** (min) / **less than or equal** (max) to this value.
 
