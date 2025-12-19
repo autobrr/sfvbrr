@@ -9,11 +9,12 @@ import (
 )
 
 var (
-	validatePresetPath       string
-	validateVerbose          bool
-	validateQuiet            bool
-	validateRecursive        bool
+	validatePresetPath        string
+	validateVerbose           bool
+	validateQuiet             bool
+	validateRecursive         bool
 	validateOverwriteCategory string
+	validateCPUProfile        string
 )
 
 var validateCmd = &cobra.Command{
@@ -44,11 +45,18 @@ Examples:
   sfvbrr validate --overwrite app /path/to/release`,
 	Args: cobra.MinimumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
+		cleanup, err := setupProfiling(validateCPUProfile)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "Error: %v\n", err)
+			os.Exit(1)
+		}
+		defer cleanup()
+
 		opts := validate.Options{
-			PresetPath:       validatePresetPath,
-			Verbose:          validateVerbose,
-			Quiet:            validateQuiet,
-			Recursive:        validateRecursive,
+			PresetPath:        validatePresetPath,
+			Verbose:           validateVerbose,
+			Quiet:             validateQuiet,
+			Recursive:         validateRecursive,
 			OverwriteCategory: validateOverwriteCategory,
 		}
 
@@ -67,4 +75,5 @@ func init() {
 	validateCmd.Flags().BoolVarP(&validateQuiet, "quiet", "q", false, "Quiet mode - only show errors")
 	validateCmd.Flags().BoolVarP(&validateRecursive, "recursive", "r", false, "Recursively search for release folders in subdirectories")
 	validateCmd.Flags().StringVar(&validateOverwriteCategory, "overwrite", "", "Override category detection with specified category (bypasses automatic detection)")
+	validateCmd.Flags().StringVar(&validateCPUProfile, "cpuprofile", "", "Write CPU profile to file")
 }

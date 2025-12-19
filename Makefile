@@ -43,18 +43,39 @@ build-pgo:
 .PHONY: profile
 profile:
 	@echo "Generating PGO profile..."
-	@mkdir -p test_data
-	@dd if=/dev/urandom of=test_data/test1.bin bs=1M count=100
-	@dd if=/dev/urandom of=test_data/test2.bin bs=1M count=100
 	@go build -o ${BUILD_DIR}/${BINARY_NAME}
-	@echo "Running profile workload 1: Large file..."
-	@${BUILD_DIR}/${BINARY_NAME} create test_data/test1.bin --cpuprofile=./cpu1.pprof
-	@echo "Running profile workload 2: Multiple files..."
-	@${BUILD_DIR}/${BINARY_NAME} create test_data --cpuprofile=./cpu2.pprof
+
+	@echo "Running profile workload 1: SFV..."
+	@${BUILD_DIR}/${BINARY_NAME} sfv ./test/sfv/TEST.FOLDER.v0.1.X64-GRP --cpuprofile=./cpu1.pprof
+
+	@echo "Running profile workload 2: Validate..."
+	@${BUILD_DIR}/${BINARY_NAME} validate \
+		./test/validate/01_1/App.Pro.v1.1.1.Linux.RPM.ARM64.Incl.Keymaker-GRP \
+		./test/validate/01_2/Corporation.Program.v1.0.0.0.x64.Multilingual.Incl.Keymaker-GRP \
+		./test/validate/02_1/First_Last_-_Title-AUDiOBOOK-WEB-EN-2025-GRP \
+		./test/validate/02_2/Artist-Title-AUDiOBOOK-WEB-EN-2025-GRP \
+		./test/validate/03_1/First.Last.The.Title.2025.RETAiL.ePub.eBook-GRP \
+		./test/validate/04_1/Comics.-.Title.Vol.01.2025.Retail.Comic.eBook-GRP \
+		./test/validate/05_1/Learning.-.Topic.UPDATED.November.2025.BOOKWARE-GRP \
+		./test/validate/05_2/OREILLY_CLOUD-GRP \
+		./test/validate/06_1/Show.S01E06.1080p.WEB.h264-GRP \
+		./test/validate/06_2/TVShow.S10.E999.720p.BluRay.x264-GRP \
+		./test/validate/07_1/Great.Game.Udate.v1.2.34.567890.incl.DLC-GRP \
+		./test/validate/08_1/Title.No.100.2025.GERMAN.HYBRID.MAGAZINE.eBook-GRP \
+		./test/validate/09_1/The.Movie.2025.1080P.BLURAY.X264-GRP \
+		./test/validate/10_1/First_Last_-_Title-WEB-CZ-2025-GRP \
+		./test/validate/10_2/Artist-Title-WEB-2025-GRP \
+		./test/validate/11_1/Show.Season.S01.COMPLETE.HDTV.x264-GRP \
+		./test/validate/11_2/Show.S01.1080p.WEB.H264-GRP \
+		--cpuprofile=./cpu2.pprof
+
+	@echo "Running profile workload 3: ZIP..."
+	@${BUILD_DIR}/${BINARY_NAME} zip ./test/zip/TEST.FOLDER.v0.1.X64-GRP --cpuprofile=./cpu3.pprof
+
 	@echo "Merging profiles..."
-	@if [ -f "cpu1.pprof" ] && [ -f "cpu2.pprof" ]; then \
-		go tool pprof -proto cpu1.pprof cpu2.pprof > cpu.pprof; \
-		rm cpu1.pprof cpu2.pprof; \
+	@if [ -f "cpu1.pprof" ] && [ -f "cpu2.pprof" ] && [ -f "cpu3.pprof" ]; then \
+		go tool pprof -proto cpu1.pprof cpu2.pprof cpu3.pprof> cpu.pprof; \
+		rm cpu1.pprof cpu2.pprof cpu3.pprof; \
 		echo "Profile generated at cpu.pprof"; \
 	else \
 		echo "Error: Profile files not generated correctly"; \
