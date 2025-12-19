@@ -127,6 +127,7 @@ jobs:
           CGO_ENABLED: 0
         run: |
           # Build initial binary
+          go version
           go build -o sfvbrr
 
           echo "Running profile workload 1: SFV..."
@@ -158,8 +159,9 @@ jobs:
 
           echo "Merging profiles..."
           if [ -f "cpu1.pprof" ] && [ -f "cpu2.pprof" ] && [ -f "cpu3.pprof" ]; then \
-            go tool pprof -proto -output=default.pgo cpu1.pprof cpu2.pprof cpu3.pprof; \
-            rm cpu1.pprof cpu2.pprof cpu3.pprof; \
+            go tool pprof -output=merged.pprof cpu1.pprof cpu2.pprof cpu3.pprof \
+            go tool pprof -proto -output=default.pgo merged.pprof \
+            rm cpu1.pprof cpu2.pprof cpu3.pprof merged.pprof \
             echo "Profile generated at default.pgo"; \
           else \
             echo "Error: Profile files not generated correctly"; \
