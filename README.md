@@ -719,9 +719,21 @@ Flags:
 
 ## Integration with [Qui](https://github.com/autobrr/qui)
 
-An example of the validation process:
+In Qui, go to "Settings" -> "External Programs" -> "Create External Program" and add the following:
 
 ![qui_screenshot](.github/assets/qui_screenshot.png)
+
+The `sfvbrr_wrapper.sh` could look something like this:
+
+
+```bash
+#!/bin/bash
+
+# 1 - method (sfv, validate, zip)
+# 2 - content path
+
+/usr/bin/sfvbrr ${1} ${2} 2>&1 | logger -t sfvbrr
+```
 
 ## Testing
 
