@@ -177,7 +177,7 @@ jobs:
           file default.pgo || true
 
       - name: Upload pprof
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: pprof
           path: default.pgo
@@ -199,7 +199,7 @@ jobs:
           cache: true
 
       - name: Download pprof
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v7
         with:
           name: pprof
           path: .
@@ -238,7 +238,7 @@ jobs:
           BUILDER: ${{ github.actor }}@github-actions
 
       - name: Upload assets
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: sfvbrr
           path: |
@@ -274,7 +274,7 @@ jobs:
           fetch-depth: 0
 
       - name: Download pprof profile
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v7
         with:
           name: pprof
 
@@ -333,7 +333,7 @@ jobs:
           touch "/tmp/digests/${digest#sha256:}"
 
       - name: Upload image digest
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: docker-digests-${{ steps.digest-prep.outputs.manifest-hash }}
           path: /tmp/digests/*
@@ -347,7 +347,7 @@ jobs:
     needs: [ docker ]
     steps:
       - name: Download image digests
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v7
         with:
           path: /tmp/digests
           pattern: docker-digests-*
